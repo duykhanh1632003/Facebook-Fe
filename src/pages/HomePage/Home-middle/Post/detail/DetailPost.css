@@ -1,0 +1,18 @@
+/* Other existing styles */
+
+
+  .comment-list-container {
+    transition: height 0.3s ease;
+    overflow: auto;
+    max-height: 570px;
+
+  }
+  
+  textarea {
+    box-sizing: border-box;
+    resize: none;
+    overflow: hidden;
+    border: none;
+    outline: none;
+  }
+  

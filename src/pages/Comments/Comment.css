@@ -1,0 +1,133 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: flex-start;
+}
+
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-info {
+  background-color: #f0f2f5;
+  padding: 10px;
+  border-radius: 12px;
+  flex: 1;
+}
+
+.comment-user {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment-message {
+  margin: 0;
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-left: 50px; /* to align with the avatar */
+}
+
+.comment-action {
+  margin-right: 10px;
+  cursor: pointer;
+  color: #65676b;
+  font-size: 12px;
+}
+
+.comment-action.liked {
+  color: #1877f2; /* Facebook blue color for liked comments */
+}
+
+.comment-time {
+  margin-right: 15px;
+  color: #65676b;
+  font-size: 12px;
+}
+
+.comment-likes {
+  margin-left: 10px;
+  color: #65676b;
+  font-size: 12px;
+}
+
+.child-comments {
+  margin-left: 0px; /* align nested comments */
+  margin-top: 10px;
+}
+
+.reply-input-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.reply-avatar {
+  margin-right: 10px;
+}
+
+.reply-input {
+  position: relative;
+  flex: 1;
+  background-color: #f0f2f5;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  background: none;
+  overflow: hidden;
+}
+
+.comment.level-0 {
+  margin-left: 0;
+}
+
+.comment.level-1 {
+  margin-left: 50px;
+}
+
+.comment.level-2 {
+  margin-left: 50px;
+}
+
+.comment.level-3 {
+  margin-left: 0px;
+}
+.comment.level-4 {
+  margin-left: 0px;
+}
+.comment.level-5 {
+  margin-left: 0px;
+}
+.comment.level-6 {
+  margin-left: 0px;
+}
+
+.comment.level-7 {
+  margin-left: 0px;
+}
+.comment.level-8 {
+  margin-left: 0px;
+}
+.comment.level-9 {
+  margin-left: 0px;
+}
+
+/* Add more levels if needed, adjust accordingly */

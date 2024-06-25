@@ -1,0 +1,90 @@
+.friend-request-card {
+  height: 361px;
+  width: 210px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-container {
+  height: 210px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.info {
+  padding: 16px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.confirm-button,
+.delete-button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.avatar-profile {
+  width: 30px !important;
+  height: 30px !important;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.avatar-profile img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-group-profile {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.avatar-group-profile.rtl {
+  direction: rtl;
+}
+
+.avatar-group-profile .avatar-profile {
+  margin-left: -5px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}

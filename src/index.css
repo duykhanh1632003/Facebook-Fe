@@ -1,0 +1,147 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500;1,900&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+html,
+:root {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.leftheader{
+  z-index: 3;
+}
+
+.homepage{
+  z-index: 1;
+}
+
+.slick-prev:before{
+  font-size: 49px;
+  position: absolute;
+  margin-left: 29px;
+  margin-top: 8px;
+  z-index: 100;
+}
+
+
+.slick-next:before {
+  font-size: 49px !important;
+  position: absolute;
+  margin-right: 102px !important;
+  margin-top: 8px;
+  z-index: 2;
+}
+
+.slick-arrow .slick-next{
+  position: absolute;
+  margin-right: 102px !important;
+
+}
+
+.img-carousel{
+  z-index: 1 !important;
+  height: 300px;
+  width: 500px;
+}
+.slick-slide .slick-active .slick-current{
+  height: 100px;
+  width: 500px;
+}
+
+
+.react-multiple-carousel__arrow::before{
+  background: #FFFFFF;
+  width: 50px;
+  height: 50px;
+  border-radius:100%;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  
+}
+
+.main-carousel{
+  height: 250px;
+  width: 140px;
+  border-radius: 100%;
+  z-index: 1;
+  position: relative;
+  
+}
+
+.img-carousel{
+  position: relative;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.img-ca{
+  object-fit: cover;
+  width: 142px;
+  height: 250px;
+  border-radius: 5%;
+  z-index: 1;
+}
+
+.text-carousel{
+  font-size: 100px;
+  position: absolute;
+  z-index: 3;
+}
+
+.card{
+  height: 250px;
+  border-radius: 5%;
+  width: 141px;
+}
+
+.img-card{
+  object-fit: fill;
+}
+
+.modal-header{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+
+@layer utilities{
+  .item-header-middle{
+    @apply w-[107px] ml-[4px] flex items-center justify-center mb-[10px] cursor-pointer h-full hover:bg-gray-100 hover:bg-opacity-90 hover:rounded-lg hover:mb-1 active:text-blue-500
+  }
+  .icon-header-text-middle-not-active{
+    @apply text-black text-3xl
+  }
+
+  .icon-header-text-middle-active{
+    @apply text-blue-600 text-3xl
+  }
+  .middle-header-box{
+    @apply ml-[145px] w-[590px] flex justify-between mr-[264px]
+  }
+
+  .box-right-top-bar-item{
+    @apply w-[38px] h-[38px] rounded-full flex items-center justify-center bg-gray-100 mr-[8px] cursor-pointer
+  }
+  .avatar-topbar{
+    @apply text-2xl rounded-full relative
+  }
+  .box-left-bar-item{
+    @apply flex flex-col ml-[16px] pl-1 pb-1 hover:bg-gray-200 hover:bg-opacity-50 hover:rounded-2xl cursor-pointer
+  }
+}
