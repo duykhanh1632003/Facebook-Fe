@@ -16,21 +16,31 @@ import FavofriteIcon from "../../../../img/FavofriteIcon";
 import HahaIcon from "../../../../img/HahaIcon";
 import LikeIcon from "../../../../img/LikeIcon";
 import WowIcon from "../../../../img/WowIcon";
+import { axiosHaveAuth } from "../../../../util/axios";
 
-const CommentLikeShare = ({ postId, likes }) => {
+const CommentLikeShare = ({
+  postId,
+  likes: initialLikes = [],
+  comments = [],
+  share = [],
+}) => {
   const [showEmojis, setShowEmojis] = useState(false);
   const [reaction, setReaction] = useState(null);
-
+  const [likes, setLikes] = useState(initialLikes);
+  const instance = axiosHaveAuth();
   const { authUser } = useAuthContext();
-
+  const [lengthLike, setLengthLike] = useState(0);
   useEffect(() => {
-    const userLike = likes.find((like) => like.user._id === authUser.id);
+    const userLike = likes?.find(
+      (like) => like.userId._id === authUser.user._id
+    );
+    setLengthLike(likes?.length);
     if (userLike) {
       setReaction(userLike.type);
     } else {
       setReaction(null);
     }
-  }, [likes, authUser]);
+  }, []);
 
   const handleMouseEnter = () => {
     setShowEmojis(true);
@@ -41,13 +51,68 @@ const CommentLikeShare = ({ postId, likes }) => {
   };
 
   const handlePostFeel = async (typeFeel) => {
-    // Assuming you have a function to update the user's reaction on the server
-    // Replace with your actual logic to update user's reaction
+    if (!reaction) {
+      try {
+        setLengthLike(lengthLike + 1);
+
+        setReaction(typeFeel); // Update local state after successful update
+
+        const { data } = await instance.post("/api/post/feelingPost", {
+          userId: authUser.user._id,
+          postId: postId,
+          type: typeFeel,
+        });
+
+        setLikes(data.likes); // Update likes state with the new likes array from the server
+        setShowEmojis(false);
+      } catch (error) {
+        console.error("Failed to update reaction:", error);
+        // Handle error gracefully
+      }
+    } else {
+      try {
+        setReaction(typeFeel); // Update local state after successful update
+        const { data } = await instance.post("/api/post/feelingPost", {
+          userId: authUser.user._id,
+          postId: postId,
+          type: typeFeel,
+        });
+
+        setLikes(data.likes); // Update likes state with the new likes array from the server
+        setShowEmojis(false);
+      } catch (error) {
+        console.error("Failed to update reaction:", error);
+        // Handle error gracefully
+      }
+    }
+  };
+
+  const handleLikePost = async () => {
     try {
-      // Example asynchronous function
-      // await updateUserReaction(typeFeel);
-      setReaction(typeFeel); // Update local state after successful update
-      setShowEmojis(false);
+      if (!reaction) {
+        setReaction("like"); // Update local state after successful update
+        setLengthLike(lengthLike + 1);
+        const { data } = await instance.post("/api/post/feelingPost", {
+          userId: authUser.user._id,
+          postId: postId,
+          type: "like",
+        });
+
+        setLikes(data.likes); // Update likes state with the new likes array from the server
+        setShowEmojis(false);
+      } else {
+        setLengthLike(lengthLike - 1);
+
+        const { data } = await instance.post("/api/post/feelingPost", {
+          userId: authUser.user._id,
+          postId: postId,
+          type: "like",
+        });
+
+        setReaction(null); // Update local state after successful update
+        setLikes(data.likes); // Update likes state with the new likes array from the server
+        setShowEmojis(false);
+      }
     } catch (error) {
       console.error("Failed to update reaction:", error);
       // Handle error gracefully
@@ -88,68 +153,88 @@ const CommentLikeShare = ({ postId, likes }) => {
   const { icon, text, color } = getReactionIconAndText();
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div
-        className="reaction-container"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="reaction-button">
-          <div className={`text-2xl ${color}`}>{icon}</div>
-          <div className={`ml-2 font-medium mr-2 ${color}`}>{text}</div>
+    <div>
+      <div className="flex justify-between items-center text-[#77797C] pl-[16px] pr-[16px] pt-[12px]">
+        <div className="flex">
+          <LikeIcon />
+          <div className="text-[13px] font-normal text-[#65676B]">
+            {lengthLike} like
+          </div>
         </div>
-        {showEmojis && (
-          <div className="emoji-bar justify-between w-[250px] h-[50px]">
-            <div
-              onClick={() => handlePostFeel("like")}
-              className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
-            >
-              <Like />
+        <div className="text-[13px] font-normal text-[#65676B]">
+          {comments?.length || 0} comments
+        </div>
+        <div className="text-[13px] font-normal text-[#65676B]">
+          {share?.length || 0} share
+        </div>
+      </div>
+      <div className="pl-[8px] pr-[8px] pt-[8px] pb-[8px] mt-[4px]">
+        <div className="w-full h-full flex items-center justify-center">
+          <div
+            className="reaction-container"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div onClick={handleLikePost} className="reaction-button">
+              <div className={`text-2xl ${color}`}>{icon}</div>
+              <div className={`ml-2 font-medium mr-2 ${color}`}>{text}</div>
             </div>
-            <div
-              onClick={() => handlePostFeel("favourite")}
-              className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
-            >
-              <Love />
+            {showEmojis && (
+              <div className="emoji-bar justify-between w-[250px] h-[50px]">
+                <div
+                  onClick={() => handlePostFeel("like")}
+                  className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
+                >
+                  <Like />
+                </div>
+                <div
+                  onClick={() => handlePostFeel("favourite")}
+                  className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
+                >
+                  <Love />
+                </div>
+                <div
+                  onClick={() => handlePostFeel("smile")}
+                  className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
+                >
+                  <Haha />
+                </div>
+                <div
+                  onClick={() => handlePostFeel("wow")}
+                  className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
+                >
+                  <Wow />
+                </div>
+                <div
+                  onClick={() => handlePostFeel("cry")}
+                  className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
+                >
+                  <Cry />
+                </div>
+                <div
+                  onClick={() => handlePostFeel("angry")}
+                  className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
+                >
+                  <Phanno />
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="reaction-button">
+            <div className="text-[#757779]">
+              <FaRegComment className="text-2xl" />
             </div>
-            <div
-              onClick={() => handlePostFeel("smile")}
-              className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
-            >
-              <Haha />
-            </div>
-            <div
-              onClick={() => handlePostFeel("wow")}
-              className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
-            >
-              <Wow />
-            </div>
-            <div
-              onClick={() => handlePostFeel("cry")}
-              className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
-            >
-              <Cry />
-            </div>
-            <div
-              onClick={() => handlePostFeel("angry")}
-              className="w-5 h-5 mr-1 hover:scale-[1.3] flex items-center justify-center"
-            >
-              <Phanno />
+            <div className="ml-2 text-[#757779] font-medium mr-2">
+              Bình luận
             </div>
           </div>
-        )}
-      </div>
-      <div className="reaction-button">
-        <div className="text-[#757779]">
-          <FaRegComment className="text-2xl" />
+          <div className="reaction-button">
+            <div className="text-[#757779]">
+              <RiShareForwardLine className="text-2xl" />
+            </div>
+            <div className="ml-2 text-[#757779] font-medium mr-2">Chia sẻ</div>
+          </div>
         </div>
-        <div className="ml-2 text-[#757779] font-medium mr-2">Bình luận</div>
-      </div>
-      <div className="reaction-button">
-        <div className="text-[#757779]">
-          <RiShareForwardLine className="text-2xl" />
-        </div>
-        <div className="ml-2 text-[#757779] font-medium mr-2">Chia sẻ</div>
       </div>
     </div>
   );

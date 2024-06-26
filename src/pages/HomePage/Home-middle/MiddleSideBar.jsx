@@ -30,14 +30,16 @@ const MiddleSideBar = () => {
   }, []);
 
   return (
-    <div
-      className="w-[587px] mt-10 sticky h-screen max-h-screen middlesidebar pt-4 ml-[458px]"
-      ref={middleRef}
-    >
-      <SlickCarousel />
-      <Status />
-      <Posted />
-      <div className="h-[100px] w-full mt-5 items-center flex justify-center"></div>
+    <div className="w-screen max-h-[10000000px] bg-[#F0F2F5]">
+      <div
+        className="w-[587px] z-2 h-full bg-[#F0F2F5] mt-10 sticky max-h-screen middlesidebar pt-4 ml-[458px]"
+        ref={middleRef}
+      >
+        <SlickCarousel />
+        <Status />
+        <Posted />
+        <div className="h-[100px] w-full mt-5 items-center flex justify-center"></div>
+      </div>
     </div>
   );
 };

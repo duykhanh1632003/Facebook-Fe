@@ -135,23 +135,7 @@ const Posted = () => {
                   />
                 </div>
               )}
-              <div className="flex justify-between items-center text-[#77797C] pl-[16px] pr-[16px] pt-[12px]">
-                <div className="flex">
-                  <div className="w-[19px] h-[19px] rounded-full mr-1 mt-[1px]">
-                    <LikeIcon />
-                  </div>
 
-                  <div className="text-[13px] font-normal text-[#65676B]">
-                    {likes.length} like
-                  </div>
-                </div>
-                <div className="text-[13px] font-normal text-[#65676B]">
-                  {comments.length} comments
-                </div>
-                <div className="text-[13px] font-normal text-[#65676B]">
-                  {share.length} share
-                </div>
-              </div>
               <div className="pl-[8px] pr-[8px] pt-[8px] pb-[8px] mt-[4px]">
                 <CommentLikeShare postId={post._id} likes={likes} />
               </div>
@@ -207,23 +191,13 @@ const Posted = () => {
                   />
                 </div>
               )}
-              <div className="flex justify-between items-center text-[#77797C] pl-[16px] pr-[16px] pt-[12px]">
-                <div className="flex">
-                  <LikeIcon />
-                  <div className="text-[13px] font-normal text-[#65676B]">
-                    {likes.length} like
-                  </div>
-                </div>
-                <div className="text-[13px] font-normal text-[#65676B]">
-                  {comments.length} comments
-                </div>
-                <div className="text-[13px] font-normal text-[#65676B]">
-                  {share.length} share
-                </div>
-              </div>
-              <div className="pl-[8px] pr-[8px] pt-[8px] pb-[8px] mt-[4px]">
-                <CommentLikeShare postId={post._id} likes={likes} />
-              </div>
+
+              <CommentLikeShare
+                postId={post._id}
+                comments={comments}
+                share={share}
+                likes={likes}
+              />
             </div>
           );
         }
