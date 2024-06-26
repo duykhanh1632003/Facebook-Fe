@@ -4,7 +4,6 @@ import {
   fetchPostsStart,
   fetchPostsSuccess,
   fetchPostsFailure,
-  addPost,
   likePostSuccess,
   likePostFailure,
 } from "./postsSlice";

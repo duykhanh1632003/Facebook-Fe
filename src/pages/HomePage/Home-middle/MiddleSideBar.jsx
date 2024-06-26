@@ -31,7 +31,7 @@ const MiddleSideBar = () => {
 
   return (
     <div
-      className="w-[587px] sticky h-screen overflow-y-auto max-h-screen middlesidebar pt-4"
+      className="w-[587px] mt-10 sticky h-screen max-h-screen middlesidebar pt-4 ml-[458px]"
       ref={middleRef}
     >
       <SlickCarousel />

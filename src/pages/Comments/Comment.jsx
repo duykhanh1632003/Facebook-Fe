@@ -76,7 +76,9 @@ const Comment = ({ id, message, user, likes, level = 0 }) => {
           {likeCount > 0 && (
             <div className="flex text-sm">
               <span className="comment-likes mr-1">{likeCount}</span>
-              <LikeIcon />
+              <div className="w-[19px] h-[19px] rounded-full mr-1 mt-[1px]">
+                <LikeIcon />
+              </div>
             </div>
           )}
         </div>

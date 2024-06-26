@@ -4,9 +4,10 @@ import { createNewPost, likePost } from "./postsThunks";
 const postsSlice = createSlice({
   name: "posts",
   initialState: {
-    list: [],
     status: "idle",
     error: null,
+    page: 1,
+    hasMore: true,
   },
   reducers: {
     fetchPostsStart(state) {
@@ -14,21 +15,20 @@ const postsSlice = createSlice({
     },
     fetchPostsSuccess(state, action) {
       state.status = "succeeded";
-      state.list = action.payload;
+      state.page += 1;
+      state.hasMore = action.payload.length > 0;
     },
     fetchPostsFailure(state, action) {
       state.status = "failed";
       state.error = action.payload;
     },
-    addPost(state, action) {
-      state.list.unshift(action.payload);
+    resetPosts(state) {
+      state.page = 1;
+      state.hasMore = true;
     },
     likePostSuccess(state, action) {
       const { postId, userId } = action.payload;
-      const post = state.list.find((post) => post._id === postId);
-      if (post) {
-        post.likes.push(userId);
-      }
+      // Logic cho việc like post
     },
     likePostFailure(state, action) {
       state.error = action.payload;
@@ -36,7 +36,7 @@ const postsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(createNewPost.fulfilled, (state, action) => {
-      state.list.unshift(action.payload);
+      // Logic thêm bài viết mới
     });
   },
 });
@@ -45,7 +45,6 @@ export const {
   fetchPostsStart,
   fetchPostsSuccess,
   fetchPostsFailure,
-  addPost,
   likePostSuccess,
   likePostFailure,
 } = postsSlice.actions;
