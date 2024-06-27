@@ -22,24 +22,30 @@ const CommentPost = ({ postId }) => {
     error,
     comments,
   } = usePostContext();
+
   const handleTextareaChange = (e) => {
     setCommentsInput(e.target.value);
   };
 
   const handleCreateNewComment = async () => {
     if (commentsInput.trim() === "") return;
-    console.log("check post id", {
-      message: commentsInput,
-      postId: postId,
-      userId: authUser.user._id,
-    });
-    const response = instance.post("/api/new/commentPost", {
-      message: commentsInput.toString(),
-      postId: postId,
-      userId: authUser.user._id,
-    });
-    if (response) {
-      createLocalComment(response.data);
+
+    try {
+      const response = await instance.post("/api/new/commentPost", {
+        message: commentsInput.toString(),
+        postId: postId,
+        userId: authUser.user._id,
+      });
+
+      console.log("Check response comments", response);
+      console.log("Check res comments", response.data);
+
+      if (response.data) {
+        createLocalComment(response.data.metadata);
+        setCommentsInput(""); // Clear the input field after creating a new comment
+      }
+    } catch (error) {
+      console.error("Error creating new comment:", error);
     }
   };
 
@@ -58,13 +64,14 @@ const CommentPost = ({ postId }) => {
       textareaRef.current.focus();
     }, 0);
   };
+
   return (
     <div>
       <div className="flex pl-[14px] pr-[11px] h-[76px] pt-[8px]">
         <div className="w-[33px] h-[33px] rounded-full">
           <img
-            className="w-[33px] h-[33px] rounded-full"
-            src="/src/assets/328619176_717087896492083_6413426032507387658_n.jpg"
+            className="w-[33px] h-[33px] rounded-full object-cover"
+            src={authUser.user.avatar}
             alt="avt"
           />
         </div>

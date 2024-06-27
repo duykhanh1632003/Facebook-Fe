@@ -8,6 +8,7 @@ import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import { CiFaceSmile } from "react-icons/ci";
 import { useAuthContext } from "../../context/AuthContext";
+import moment from "moment";
 
 const Comment = ({ id, message, userId, likes, level = 0 }) => {
   const { getReplies } = usePostContext();
@@ -29,7 +30,14 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
     textareaRef.current.style.height = "auto";
     textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
   };
-
+  const timeFromNow = (date) => {
+    const now = moment();
+    const postDate = moment(date);
+    if (now.diff(postDate, "days") >= 7) {
+      return postDate.format("MMM Do YYYY");
+    }
+    return postDate.fromNow();
+  };
   const handleEmojiSelect = (emoji) => {
     const cursorPosition = textareaRef.current.selectionStart;
     const textBeforeCursor = replyInput.substring(0, cursorPosition);
@@ -62,7 +70,7 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
         </div>
       </div>
       <div className="comment-actions">
-        <span className="comment-time">Just now</span>
+        <span className="comment-time">{timeFromNow(userId.createdAt)}</span>
 
         <span
           className={`comment-action ${liked ? "liked" : ""}`}
