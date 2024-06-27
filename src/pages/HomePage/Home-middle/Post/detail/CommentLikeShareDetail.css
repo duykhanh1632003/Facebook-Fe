@@ -1,0 +1,35 @@
+.reaction-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .reaction-button {
+    width: 115px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reaction-button:hover {
+    background-color: #f0f2f5;
+  }
+  
+  .emoji-bar {
+    position: absolute;
+    top: -3rem;
+    left: 8rem;
+    background: white;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+  

@@ -7,6 +7,7 @@ import Send from "@mui/icons-material/Send";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import { CiFaceSmile } from "react-icons/ci";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Comment = ({ id, message, user, likes, level = 0 }) => {
   const { getReplies } = usePostContext();
@@ -17,7 +18,7 @@ const Comment = ({ id, message, user, likes, level = 0 }) => {
   const [replyInput, setReplyInput] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const textareaRef = useRef(null);
-
+  const { authUser } = useAuthContext();
   const handleLike = () => {
     setLiked(!liked);
     setLikeCount(likeCount + (liked ? -1 : 1));
