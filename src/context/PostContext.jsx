@@ -25,12 +25,18 @@ export const PostContextProvider = ({ children }) => {
 
   const commentsByParentId = useMemo(() => {
     const group = {};
-    comments.forEach((comment) => {
+    (comments ?? []).forEach((comment) => {
       group[comment.parentId] ||= [];
       group[comment.parentId].push(comment);
     });
     return group;
   }, [comments]);
+
+  function createLocalComment(comment) {
+    setComments((prevComments) => {
+      return [comment, ...prevComments];
+    });
+  }
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -38,9 +44,9 @@ export const PostContextProvider = ({ children }) => {
       setError(null);
       try {
         const response = await instance.get(`/api/get/detailPost/${postId}`);
+        console.log("check res", response);
         setPostDetail(response.data.metadata.postDetail);
         setComments(response.data.metadata.comments);
-        console.log("Check res", response);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -54,7 +60,7 @@ export const PostContextProvider = ({ children }) => {
   }, [postId]);
 
   function getReplies(parentId) {
-    return commentsByParentId[parentId];
+    return commentsByParentId[parentId] || [];
   }
 
   return (
@@ -62,11 +68,13 @@ export const PostContextProvider = ({ children }) => {
       value={{
         postId,
         postDetail,
-        rootComments: commentsByParentId[null],
+        comments,
+        rootComments: commentsByParentId[null] || [],
         getReplies,
         setPostDetail,
         setPostId,
         setComments,
+        createLocalComment,
         loading,
         error,
       }}

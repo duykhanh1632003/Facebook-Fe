@@ -9,7 +9,7 @@ import data from "@emoji-mart/data";
 import { CiFaceSmile } from "react-icons/ci";
 import { useAuthContext } from "../../context/AuthContext";
 
-const Comment = ({ id, message, user, likes, level = 0 }) => {
+const Comment = ({ id, message, userId, likes, level = 0 }) => {
   const { getReplies } = usePostContext();
   const childComments = getReplies(id);
   const [likeCount, setLikeCount] = useState(likes || 0);
@@ -50,13 +50,13 @@ const Comment = ({ id, message, user, likes, level = 0 }) => {
     <div className={`comment level-${level}`}>
       <div className="comment-header">
         <img
-          src={user.avatar} // Assuming user object has an avatar property
-          alt={`${user.firstName} ${user.lastName}`}
-          className="comment-avatar"
+          src={userId.avatar} // Assuming user object has an avatar property
+          alt={`${userId.firstName} ${userId.lastName}`}
+          className="comment-avatar object-cover"
         />
         <div className="comment-info">
           <div className="comment-user">
-            {user.firstName} {user.lastName}
+            {userId.firstName} {userId.lastName}
           </div>
           <div className="comment-message">{message}</div>
         </div>

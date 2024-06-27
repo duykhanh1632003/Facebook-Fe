@@ -21,7 +21,6 @@ const Posted = () => {
   const error = useSelector((state) => state.posts.error);
   const page = useSelector((state) => state.posts.page);
   const hasMore = useSelector((state) => state.posts.hasMore);
-
   const instance = axiosHaveAuth();
 
   const observer = useRef();
@@ -187,13 +186,16 @@ const Posted = () => {
                 {content}
               </div>
               {image && (
-                <div className="w-[588px] object-contain max-h-[584px]">
+                <Link
+                  to={`/photo/${post._id}`}
+                  className="w-[588px] object-contain max-h-[584px]"
+                >
                   <img
                     className="w-[588px] max-h-[584px] object-cover"
                     src={image}
                     alt="image"
                   />
-                </div>
+                </Link>
               )}
 
               <CommentLikeShare

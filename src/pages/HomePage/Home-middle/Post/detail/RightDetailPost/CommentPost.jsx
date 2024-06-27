@@ -5,16 +5,18 @@ import data from "@emoji-mart/data";
 import { CiFaceSmile } from "react-icons/ci";
 import { usePostContext } from "../../../../../../context/PostContext";
 import { axiosHaveAuth } from "../../../../../../util/axios";
+import { useAuthContext } from "../../../../../../context/AuthContext";
 
-const CommentPost = () => {
+const CommentPost = ({ postId }) => {
   const [commentsInput, setCommentsInput] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const textareaRef = useRef(null);
   const instance = axiosHaveAuth();
+  const { authUser } = useAuthContext();
   const {
-    postId,
     rootComments,
     setPostDetail,
+    createLocalComment,
     postDetail,
     loading,
     error,
@@ -24,10 +26,22 @@ const CommentPost = () => {
     setCommentsInput(e.target.value);
   };
 
-  // handleCreateNewComment = async () => {
-  //   if (commentsInput.trim() === "") return;
-  //   const response = instance.get("")
-  // };
+  const handleCreateNewComment = async () => {
+    if (commentsInput.trim() === "") return;
+    console.log("check post id", {
+      message: commentsInput,
+      postId: postId,
+      userId: authUser.user._id,
+    });
+    const response = instance.post("/api/new/commentPost", {
+      message: commentsInput.toString(),
+      postId: postId,
+      userId: authUser.user._id,
+    });
+    if (response) {
+      createLocalComment(response.data);
+    }
+  };
 
   const handleEmojiSelect = (emoji) => {
     const cursorPosition = textareaRef.current.selectionStart;
@@ -74,7 +88,7 @@ const CommentPost = () => {
                 onClick={() => setShowEmojiPicker(!showEmojiPicker)}
               />
             </div>
-            <div className="text-lg">
+            <div className="text-lg" onClick={handleCreateNewComment}>
               {commentsInput ? (
                 <Send style={{ color: "#1167C9" }} fontSize="small" />
               ) : (

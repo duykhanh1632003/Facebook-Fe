@@ -19,10 +19,9 @@ const DetailPost = () => {
     error,
     comments,
   } = usePostContext();
-  console.log("Check detail", postDetail);
+
   useEffect(() => {
     if (postDetail) {
-      console.log("Check detail", postDetail);
       setPostDetail(postDetail);
     }
   }, [postDetail, setPostDetail]);
@@ -62,7 +61,7 @@ const DetailPost = () => {
           <CommentLikeShareDetail
             postId={postDetail._id}
             likes={likes}
-            comments={comments}
+            comments={comments ?? []}
             share={share}
           />
           <div className="w-[331px] pt-[6px]">
@@ -78,7 +77,7 @@ const DetailPost = () => {
             <CommentList comments={rootComments ?? []} />
           </div>
         </div>
-        <CommentPost />
+        <CommentPost postId={postId} />
       </div>
     </div>
   );
