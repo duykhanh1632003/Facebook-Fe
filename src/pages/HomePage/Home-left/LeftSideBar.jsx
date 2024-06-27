@@ -11,8 +11,8 @@ import { useAuthContext } from "../../../context/AuthContext";
 const LeftSideBar = () => {
   const { authUser } = useAuthContext();
   return (
-    <div className="w-[348px] custom-scrollbar fixed pt-[14px] bg-[#F0F2F5] mr-[112px] overflow-auto flex flex-col h-screen">
-      <div className="flex fixed h-[48px]  items-center hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg cursor-pointer">
+    <div className="w-[348px] mt-16 custom-scrollbar fixed pt-[14px] bg-[#F0F2F5] mr-[112px] overflow-auto flex flex-col h-screen">
+      <div className="flex fixed w-[348px] h-[48px]  items-center hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg cursor-pointer">
         <div className="w-[36px] h-[36px] rounded-full bg-slate-800 flex items-center justify-center ml-[16px] mr-[12px]">
           <img
             className="rounded-full w-full h-full object-cover"
@@ -22,14 +22,14 @@ const LeftSideBar = () => {
         </div>
         <Link
           to={`/profile/${authUser.user._id}`}
-          className="flex items-center justify-center font-medium"
+          className="flex items-center justify-center font-medium mb-9 pt-4"
         >
           {authUser.user.firstName} {authUser.user.lastName}
         </Link>
       </div>
       <Link
         to={"/friend"}
-        className="flex h-[48px]   hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg hover:bg-opacity-90"
+        className="flex mt-12 h-[48px]   hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg hover:bg-opacity-90"
       >
         <FaUserFriends className="w-[36px] h-[36px] rounded-full text-blue-400 flex items-center justify-center ml-[16px] mr-[12px]" />
         <div className="flex items-center justify-center font-medium">
