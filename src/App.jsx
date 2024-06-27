@@ -12,6 +12,7 @@ import DetailPost from "./pages/HomePage/Home-middle/Post/detail/DetailPost";
 import FriendLayout from "./pages/Friends/FriendLayout";
 import ProfileLayout from "./pages/Profile/ProfileLayout";
 import HomeProfile from "./pages/Profile/HomeProfile";
+import { PostContextProvider } from "./context/PostContext.jsx";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -37,7 +38,15 @@ function App() {
         </Route>
         <Route
           path="/photo/:id"
-          element={authUser ? <DetailPost /> : <Navigate to="/login" />}
+          element={
+            authUser ? (
+              <PostContextProvider>
+                <DetailPost />
+              </PostContextProvider>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
         <Route element={authUser ? <FriendLayout /> : <Navigate to="/login" />}>
           <Route

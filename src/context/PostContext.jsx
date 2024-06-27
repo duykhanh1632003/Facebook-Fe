@@ -17,17 +17,11 @@ export const usePostContext = () => {
 export const PostContextProvider = ({ children }) => {
   const instance = axiosHaveAuth();
   const { id } = useParams();
-  const [postId, setPostId] = useState(null);
+  const [postId, setPostId] = useState(id);
   const [postDetail, setPostDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
-  const [author, setAuthor] = useState(null);
-  const [createdAt, setCreatedAt] = useState(null);
-  const [content, setContent] = useState(null);
-  const [image, setImage] = useState(null);
-  const [likes, setLikes] = useState(null);
-  const [share, setShare] = useState(null);
 
   const commentsByParentId = useMemo(() => {
     const group = {};
@@ -46,6 +40,7 @@ export const PostContextProvider = ({ children }) => {
         const response = await instance.get(`/api/get/detailPost/${postId}`);
         setPostDetail(response.data.metadata.postDetail);
         setComments(response.data.metadata.comments);
+        console.log("Check res", response);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -58,20 +53,6 @@ export const PostContextProvider = ({ children }) => {
     }
   }, [postId]);
 
-  useEffect(() => {
-    // Example of handling postDetail change
-    if (postDetail) {
-      console.log("PostDetail updated:", postDetail);
-      const { author, createdAt, content, image, likes, share } = postDetail;
-      setAuthor(author);
-      setCreatedAt(createdAt);
-      setContent(content);
-      setImage(image);
-      setLikes(likes);
-      setShare(share);
-    }
-  }, [postDetail]);
-
   function getReplies(parentId) {
     return commentsByParentId[parentId];
   }
@@ -79,17 +60,15 @@ export const PostContextProvider = ({ children }) => {
   return (
     <PostContext.Provider
       value={{
+        postId,
         postDetail,
         rootComments: commentsByParentId[null],
         getReplies,
         setPostDetail,
         setPostId,
-        author,
-        createdAt,
-        content,
-        image,
-        likes,
-        share,
+        setComments,
+        loading,
+        error,
       }}
     >
       {children}

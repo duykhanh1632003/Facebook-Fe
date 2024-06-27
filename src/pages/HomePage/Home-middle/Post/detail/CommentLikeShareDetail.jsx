@@ -179,11 +179,11 @@ const CommentLikeShareDetail = ({
       </div>
       <div className="w-full h-full flex items-center justify-center mt-1">
         <div
-          className="reaction-container"
+          className="reaction-containerD"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div onClick={handleLikePost} className="reaction-button">
+          <div onClick={handleLikePost} className="reaction-buttonDetail ">
             <div className={`text-2xl ${color}`}>{icon}</div>
             <div className={`ml-2 font-medium mr-2 ${color}`}>{text}</div>
           </div>
@@ -228,13 +228,13 @@ const CommentLikeShareDetail = ({
             </div>
           )}
         </div>
-        <div className="reaction-button">
+        <div className="reaction-buttonDetail">
           <div className="text-[#757779]">
             <FaRegComment className="text-2xl" />
           </div>
           <div className="ml-2 text-[#757779] font-medium mr-2">Comment</div>
         </div>
-        <div className="reaction-button">
+        <div className="reaction-buttonDetail">
           <div className="text-[#757779]">
             <RiShareForwardLine className="text-2xl" />
           </div>

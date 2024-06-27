@@ -3,15 +3,31 @@ import Send from "@mui/icons-material/Send";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import { CiFaceSmile } from "react-icons/ci";
+import { usePostContext } from "../../../../../../context/PostContext";
+import { axiosHaveAuth } from "../../../../../../util/axios";
 
 const CommentPost = () => {
   const [commentsInput, setCommentsInput] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const textareaRef = useRef(null);
-
+  const instance = axiosHaveAuth();
+  const {
+    postId,
+    rootComments,
+    setPostDetail,
+    postDetail,
+    loading,
+    error,
+    comments,
+  } = usePostContext();
   const handleTextareaChange = (e) => {
     setCommentsInput(e.target.value);
   };
+
+  // handleCreateNewComment = async () => {
+  //   if (commentsInput.trim() === "") return;
+  //   const response = instance.get("")
+  // };
 
   const handleEmojiSelect = (emoji) => {
     const cursorPosition = textareaRef.current.selectionStart;

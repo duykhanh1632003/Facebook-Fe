@@ -1,11 +1,11 @@
-.reaction-container {
+.reaction-containerD {
     position: relative;
     display: flex;
     align-items: center;
   }
   
-  .reaction-button {
-    width: 115px;
+  .reaction-buttonDetail {
+    width: 115px !important;
     display: flex;
     align-items: center;
     cursor: pointer;

@@ -12,6 +12,7 @@ import {
   fetchPostsFailure,
 } from "../../../../redux/post/postsSlice";
 import LikeIcon from "../../../../img/LikeIcon";
+import { Link } from "react-router-dom";
 
 const Posted = () => {
   const [posts, setPosts] = useState([]);
@@ -127,13 +128,16 @@ const Posted = () => {
                 {content}
               </div>
               {image && (
-                <div className="w-[588px] object-contain max-h-[584px]">
+                <Link
+                  to={`/photo/${post._id}`}
+                  className="w-[588px] object-contain max-h-[584px]"
+                >
                   <img
                     className="w-[588px] max-h-[584px] object-cover"
                     src={image}
                     alt="image"
                   />
-                </div>
+                </Link>
               )}
 
               <div className="pl-[8px] pr-[8px] pt-[8px] pb-[8px] mt-[4px]">

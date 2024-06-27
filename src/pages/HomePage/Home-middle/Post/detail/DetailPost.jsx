@@ -5,50 +5,41 @@ import CommentList from "../../../../Comments/CommentList";
 import "./DetailPost.css";
 import { useEffect } from "react";
 import { usePostContext } from "../../../../../context/PostContext";
-import { useParams } from "react-router-dom";
-import { axiosHaveAuth } from "../../../../../util/axios";
 import LeftDetailPost from "./LeftDetail/LeftDetailPost";
 import TopAvtDetailPost from "./RightDetailPost/TopAvtDetailPost";
 import CommentPost from "./RightDetailPost/CommentPost";
 
 const DetailPost = () => {
-  const instance = axiosHaveAuth();
-  const { id } = useParams();
   const {
-    post,
+    postId,
     rootComments,
-    setPostId,
-    author,
-    createdAt,
     setPostDetail,
-    content,
-    image,
-    likes,
-    share,
+    postDetail,
+    loading,
+    error,
+    comments,
   } = usePostContext();
-
+  console.log("Check detail", postDetail);
   useEffect(() => {
-    if (id) {
-      setPostId(id); // Update postId in context
-      instance
-        .get(`/api/get/detailPost/${id}`)
-        .then((res) => {
-          const postData = res.data.metadata.postDetail;
-          setPostDetail(postData); // Update post in context
-        })
-        .catch((err) => {
-          console.error("Error fetching post:", err);
-        });
+    if (postDetail) {
+      console.log("Check detail", postDetail);
+      setPostDetail(postDetail);
     }
-  }, [id, setPostId, setPostDetail]); // Include setPostId and setPost in dependency array
+  }, [postDetail, setPostDetail]);
 
-  useEffect(() => {
-    console.log("post", post);
-  }, [post]); // Include setPostId and setPost in dependency array
-
-  if (!post) {
+  if (loading) {
     return <div>Loading...</div>;
   }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!postDetail) {
+    return null;
+  }
+
+  const { author, createdAt, content, image, likes, share } = postDetail;
 
   return (
     <div className="flex overflow-hidden">
@@ -69,9 +60,9 @@ const DetailPost = () => {
             content={content}
           />
           <CommentLikeShareDetail
-            postId={post._id}
+            postId={postDetail._id}
             likes={likes}
-            comments={rootComments} // Use rootComments instead of comments
+            comments={comments}
             share={share}
           />
           <div className="w-[331px] pt-[6px]">
@@ -84,7 +75,7 @@ const DetailPost = () => {
             </div>
           </div>
           <div className="w-[331px] pt-[6px] pb-3">
-            <CommentList comments={rootComments} />
+            <CommentList comments={rootComments ?? []} />
           </div>
         </div>
         <CommentPost />
