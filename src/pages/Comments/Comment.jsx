@@ -9,6 +9,7 @@ import data from "@emoji-mart/data";
 import { CiFaceSmile } from "react-icons/ci";
 import { useAuthContext } from "../../context/AuthContext";
 import moment from "moment";
+import { BsThreeDots } from "react-icons/bs";
 
 const Comment = ({ id, message, userId, likes, level = 0 }) => {
   const { getReplies } = usePostContext();
@@ -18,8 +19,12 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
   const [replying, setReplying] = useState(false);
   const [replyInput, setReplyInput] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editInput, setEditInput] = useState(message);
+  const [showDropdown, setShowDropdown] = useState(false);
   const textareaRef = useRef(null);
   const { authUser } = useAuthContext();
+
   const handleLike = () => {
     setLiked(!liked);
     setLikeCount(likeCount + (liked ? -1 : 1));
@@ -30,6 +35,7 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
     textareaRef.current.style.height = "auto";
     textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
   };
+
   const timeFromNow = (date) => {
     const now = moment();
     const postDate = moment(date);
@@ -38,6 +44,7 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
     }
     return postDate.fromNow();
   };
+
   const handleEmojiSelect = (emoji) => {
     const cursorPosition = textareaRef.current.selectionStart;
     const textBeforeCursor = replyInput.substring(0, cursorPosition);
@@ -54,20 +61,121 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
     }, 0);
   };
 
+  const handleEditChange = (e) => {
+    setEditInput(e.target.value);
+  };
+
+  const handleEditSubmit = () => {
+    // Logic for submitting the edited comment
+    setEditing(false);
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleEditComment = () => {
+    setEditing(true);
+    setShowDropdown(false);
+  };
+
+  const handleDeleteComment = () => {
+    // Logic for deleting comment
+    setShowDropdown(false);
+  };
+
+  const handleHideComment = () => {
+    // Logic for hiding comment
+    setShowDropdown(false);
+  };
+
+  const handleReportComment = () => {
+    // Logic for reporting comment
+    setShowDropdown(false);
+  };
+
   return (
     <div className={`comment level-${level}`}>
-      <div className="comment-header">
+      <div key={userId._id} className="comment-header">
         <img
           src={userId.avatar} // Assuming user object has an avatar property
           alt={`${userId.firstName} ${userId.lastName}`}
           className="comment-avatar object-cover"
         />
-        <div className="comment-info">
-          <div className="comment-user">
-            {userId.firstName} {userId.lastName}
+        <div className="flex ">
+          <div className="comment-info">
+            <div className="comment-user">
+              {userId.firstName} {userId.lastName}
+            </div>
+            {editing ? (
+              <div className="edit-input-container">
+                <textarea
+                  className="edit-input"
+                  value={editInput}
+                  onChange={handleEditChange}
+                />
+                <div className="flex ">
+                  {" "}
+                  <div className="emoji-picker">
+                    {showEmojiPicker && (
+                      <div className="absolute mt-[-430px] ml-[-350px]">
+                        {" "}
+                        <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+                      </div>
+                    )}
+                    <CiFaceSmile
+                      onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                    />
+                  </div>
+                  <Send onClick={handleEditSubmit} />
+                </div>
+              </div>
+            ) : (
+              <div className="comment-message">{message}</div>
+            )}
           </div>
-          <div className="comment-message">{message}</div>
+          <div
+            className="w-[24px] h-[24px] cursor-pointer rounded-full hover:bg-[#C2C6CC] flex items-center ml-2 justify-center mt-[20px]"
+            onClick={toggleDropdown}
+          >
+            <BsThreeDots />
+          </div>
         </div>
+        {showDropdown && (
+          <div className="absolute w-[354px] h-[84px] mt-[40px] rounded-md ml-[-147px] z-3 shadow-xl bg-white p-2">
+            {authUser.id === userId.id ? (
+              <>
+                <div
+                  className="w-full cursor-pointer  h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
+                  onClick={handleEditComment}
+                >
+                  Chỉnh sửa
+                </div>
+                <div
+                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
+                  onClick={handleDeleteComment}
+                >
+                  Xóa
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
+                  onClick={handleHideComment}
+                >
+                  Ẩn bình luận
+                </div>
+                <div
+                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
+                  onClick={handleReportComment}
+                >
+                  Báo cáo bình luận
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
       <div className="comment-actions">
         <span className="comment-time">{timeFromNow(userId.createdAt)}</span>

@@ -14,7 +14,7 @@
     transition: background-color 0.3s ease;
   }
   
-  .reaction-button:hover {
+  .reaction-buttonDetail:hover {
     background-color: #f0f2f5;
   }
   
