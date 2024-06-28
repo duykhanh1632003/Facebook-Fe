@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const LeftDetailPost = ({ image }) => {
   return (
     <div>
-      <div className="absolute">
-        <div className="w-[40px] h-[40px] rounded-full flex mt-2 ml-4">
+      <div className="absolute z-1">
+        <div className="w-[40px] h-[40px] rounded-full flex mt-2 ml-4 z-2">
           <Link
             to="/"
             className="h-[35px] w-[35px] cursor-pointer rounded-full text-[35px] mr-1"

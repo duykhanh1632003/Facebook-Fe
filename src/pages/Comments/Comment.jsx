@@ -12,10 +12,13 @@ import moment from "moment";
 import { BsThreeDots } from "react-icons/bs";
 import { axiosHaveAuth } from "../../util/axios";
 import { toast } from "react-toastify";
+import { PiArrowBendDownRightFill } from "react-icons/pi";
 
-const Comment = ({ _id, message, userId, likes, level = 0 }) => {
-  const { getReplies, updateLocalComment } = usePostContext();
-  const childComments = getReplies(_id);
+const Comment = ({ _id, message, userId, likes, level = 0, postId }) => {
+  const { getReplies, updateLocalComment, deleteLocalComment } =
+    usePostContext();
+  getReplies(_id);
+  const [childComments, setChildComments] = useState(getReplies(_id));
   const [likeCount, setLikeCount] = useState(likes || 0);
   const [liked, setLiked] = useState(false);
   const [replying, setReplying] = useState(false);
@@ -33,6 +36,7 @@ const Comment = ({ _id, message, userId, likes, level = 0 }) => {
     setLiked(!liked);
     setLikeCount(likeCount + (liked ? -1 : 1));
   };
+  const [showChildComments, setShowChildComments] = useState(false);
 
   const handleTextareaChange = (e) => {
     setReplyInput(e.target.value);
@@ -73,8 +77,41 @@ const Comment = ({ _id, message, userId, likes, level = 0 }) => {
     setShowDropdown(false);
   };
 
-  const handleDeleteComment = () => {
-    
+  const handlePostReply = async () => {
+    if (replyInput.trim === "") return;
+    try {
+      const response = await instance.post("/api/new/commentPost", {
+        message: replyInput,
+        postId: postId,
+        userId: authUser.user._id,
+        parentId: _id,
+      });
+
+      if (response) {
+        const childCommentNew = getReplies(_id);
+        setChildComments(childCommentNew);
+        updateLocalComment({ _id: _id, message: editInput });
+        toast.success("Comment thành công");
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    setReplying(false);
+  };
+
+  const handleDeleteComment = async () => {
+    try {
+      const response = await instance.post("/api/delete/commentPost", {
+        commentId: _id,
+      });
+
+      if (response) {
+        deleteLocalComment(_id);
+        toast.success("Xóa comment thành công");
+      }
+    } catch (e) {
+      console.error(e);
+    }
     setShowDropdown(false);
   };
 
@@ -135,7 +172,7 @@ const Comment = ({ _id, message, userId, likes, level = 0 }) => {
 
   return (
     <div className={`comment level-${level}`}>
-      <div key={userId._id} className="comment-header">
+      <div key={userId._id} className="comment-header relative z-4">
         <img
           src={userId.avatar} // Assuming user object has an avatar property
           alt={`${userId.firstName} ${userId.lastName}`}
@@ -187,8 +224,8 @@ const Comment = ({ _id, message, userId, likes, level = 0 }) => {
           </div>
         </div>
         {showDropdown && (
-          <div className="absolute w-[354px] h-[-84px] mt-[40px] rounded-md ml-[-147px] z-3 shadow-xl bg-white p-2">
-            {authUser.id === userId.id ? (
+          <div className="absolute w-[354px] h-[-84px] mt-[40px] rounded-md ml-[-10px] z-3 shadow-xl bg-white p-2">
+            {authUser.user._id === userId._id ? (
               <>
                 <div
                   className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
@@ -248,8 +285,8 @@ const Comment = ({ _id, message, userId, likes, level = 0 }) => {
         <div className={`reply-input-container level-${level + 1}`}>
           <div className="reply-avatar">
             <img
-              className="w-[33px] h-[33px] rounded-full"
-              src="/src/assets/328619176_717087896492083_6413426032507387658_n.jpg"
+              className="w-[33px] h-[33px] rounded-full object-cover"
+              src={authUser.user.avatar}
               alt="avatar"
             />
           </div>
@@ -278,7 +315,11 @@ const Comment = ({ _id, message, userId, likes, level = 0 }) => {
               </div>
               <div className="text-lg">
                 {replyInput ? (
-                  <Send style={{ color: "#1167C9" }} fontSize="small" />
+                  <Send
+                    onClick={handlePostReply}
+                    style={{ color: "#1167C9" }}
+                    fontSize="small"
+                  />
                 ) : (
                   <Send style={{ color: "#C2C6CC" }} fontSize="small" />
                 )}
@@ -287,9 +328,30 @@ const Comment = ({ _id, message, userId, likes, level = 0 }) => {
           </div>
         </div>
       )}
-      {childComments?.length > 0 && (
+      {childComments.length > 0 && (
         <div className="child-comments">
-          <CommentList comments={childComments} level={level + 1} />
+          <div
+            className="toggle-replies cursor-pointer"
+            onClick={() => setShowChildComments(!showChildComments)}
+          >
+            {!showChildComments && (
+              <div className="ml-12 flex text-sm font-medium text-[#6B6D71]">
+                <div className="text-lg mr-2">
+                  {" "}
+                  <PiArrowBendDownRightFill />
+                </div>
+                <div> Xem tất cả {childComments.length} phản hồi </div>
+              </div>
+            )}{" "}
+          </div>
+          {showChildComments && (
+            <CommentList
+              comments={childComments}
+              parentId={_id}
+              postId={postId}
+              level={level + 1}
+            />
+          )}
         </div>
       )}
     </div>

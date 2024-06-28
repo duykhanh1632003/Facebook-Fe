@@ -41,7 +41,7 @@ const DetailPost = () => {
   const { author, createdAt, content, image, likes, share } = postDetail;
 
   return (
-    <div className="flex overflow-hidden">
+    <div className="flex ">
       <div>
         <LeftDetailPost image={image} />
       </div>
@@ -74,7 +74,10 @@ const DetailPost = () => {
             </div>
           </div>
           <div className="w-[331px] pt-[6px] pb-3">
-            <CommentList comments={rootComments ?? []} />
+            <CommentList
+              postId={postDetail._id}
+              comments={rootComments ?? []}
+            />
           </div>
         </div>
         <CommentPost postId={postId} />

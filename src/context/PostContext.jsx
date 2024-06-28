@@ -74,6 +74,12 @@ export const PostContextProvider = ({ children }) => {
     return commentsByParentId[parentId] || [];
   }
 
+  function deleteLocalComment(_id) {
+    setComments((prevComments) => {
+      return prevComments.filter((comment) => comment._id !== _id);
+    });
+  }
+
   return (
     <PostContext.Provider
       value={{
@@ -83,6 +89,7 @@ export const PostContextProvider = ({ children }) => {
         rootComments: commentsByParentId[null] || [],
         getReplies,
         setPostDetail,
+        deleteLocalComment,
         setPostId,
         setComments,
         createLocalComment,
