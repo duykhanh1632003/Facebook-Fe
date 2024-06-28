@@ -37,6 +37,17 @@ export const PostContextProvider = ({ children }) => {
       return [comment, ...prevComments];
     });
   }
+  function updateLocalComment({ _id, message }) {
+    setComments((prevComments) => {
+      return prevComments.map((comment) => {
+        if (comment._id === _id) {
+          return { ...comment, message };
+        } else {
+          return comment;
+        }
+      });
+    });
+  }
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -77,6 +88,7 @@ export const PostContextProvider = ({ children }) => {
         createLocalComment,
         loading,
         error,
+        updateLocalComment,
       }}
     >
       {children}

@@ -37,9 +37,6 @@ const CommentPost = ({ postId }) => {
         userId: authUser.user._id,
       });
 
-      console.log("Check response comments", response);
-      console.log("Check res comments", response.data);
-
       if (response.data) {
         createLocalComment(response.data.metadata);
         setCommentsInput(""); // Clear the input field after creating a new comment

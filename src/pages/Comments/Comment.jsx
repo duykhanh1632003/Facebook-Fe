@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { usePostContext } from "../../context/PostContext";
 import CommentList from "./CommentList";
 import "./Comment.css"; // Import CSS for styling
@@ -10,21 +10,25 @@ import { CiFaceSmile } from "react-icons/ci";
 import { useAuthContext } from "../../context/AuthContext";
 import moment from "moment";
 import { BsThreeDots } from "react-icons/bs";
+import { axiosHaveAuth } from "../../util/axios";
+import { toast } from "react-toastify";
 
-const Comment = ({ id, message, userId, likes, level = 0 }) => {
-  const { getReplies } = usePostContext();
-  const childComments = getReplies(id);
+const Comment = ({ _id, message, userId, likes, level = 0 }) => {
+  const { getReplies, updateLocalComment } = usePostContext();
+  const childComments = getReplies(_id);
   const [likeCount, setLikeCount] = useState(likes || 0);
   const [liked, setLiked] = useState(false);
   const [replying, setReplying] = useState(false);
   const [replyInput, setReplyInput] = useState("");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [showReplyEmojiPicker, setShowReplyEmojiPicker] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editInput, setEditInput] = useState(message);
+  const [showEditEmojiPicker, setShowEditEmojiPicker] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const textareaRef = useRef(null);
+  const replyTextareaRef = useRef(null);
+  const editTextareaRef = useRef(null);
   const { authUser } = useAuthContext();
-
+  const instance = axiosHaveAuth();
   const handleLike = () => {
     setLiked(!liked);
     setLikeCount(likeCount + (liked ? -1 : 1));
@@ -32,41 +36,31 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
 
   const handleTextareaChange = (e) => {
     setReplyInput(e.target.value);
-    textareaRef.current.style.height = "auto";
-    textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
-  };
-
-  const timeFromNow = (date) => {
-    const now = moment();
-    const postDate = moment(date);
-    if (now.diff(postDate, "days") >= 7) {
-      return postDate.format("MMM Do YYYY");
-    }
-    return postDate.fromNow();
-  };
-
-  const handleEmojiSelect = (emoji) => {
-    const cursorPosition = textareaRef.current.selectionStart;
-    const textBeforeCursor = replyInput.substring(0, cursorPosition);
-    const textAfterCursor = replyInput.substring(cursorPosition);
-
-    const newText = textBeforeCursor + emoji.native + textAfterCursor;
-    setReplyInput(newText);
-
-    // Reposition the cursor
-    setTimeout(() => {
-      textareaRef.current.selectionStart = cursorPosition + emoji.native.length;
-      textareaRef.current.selectionEnd = cursorPosition + emoji.native.length;
-      textareaRef.current.focus();
-    }, 0);
+    replyTextareaRef.current.style.height = "auto";
+    replyTextareaRef.current.style.height =
+      replyTextareaRef.current.scrollHeight + "px";
   };
 
   const handleEditChange = (e) => {
     setEditInput(e.target.value);
   };
 
-  const handleEditSubmit = () => {
-    // Logic for submitting the edited comment
+  const handleEditSubmit = async () => {
+    if (editInput.trim === "") return;
+    try {
+      const response = await instance.post("/api/edit/commentPost", {
+        message: editInput,
+        commentId: _id,
+      });
+
+      if (response) {
+        updateLocalComment({ _id: _id, message: editInput });
+        toast.success("Sửa comment thành công");
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
     setEditing(false);
   };
 
@@ -80,7 +74,7 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
   };
 
   const handleDeleteComment = () => {
-    // Logic for deleting comment
+    
     setShowDropdown(false);
   };
 
@@ -94,6 +88,51 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
     setShowDropdown(false);
   };
 
+  const handleReplyEmojiSelect = (emoji) => {
+    const cursorPosition = replyTextareaRef.current.selectionStart;
+    const textBeforeCursor = replyInput.substring(0, cursorPosition);
+    const textAfterCursor = replyInput.substring(cursorPosition);
+
+    const newText = textBeforeCursor + emoji.native + textAfterCursor;
+    setReplyInput(newText);
+
+    // Reposition the cursor
+    setTimeout(() => {
+      replyTextareaRef.current.selectionStart =
+        cursorPosition + emoji.native.length;
+      replyTextareaRef.current.selectionEnd =
+        cursorPosition + emoji.native.length;
+      replyTextareaRef.current.focus();
+    }, 0);
+  };
+
+  const handleEditEmojiSelect = (emoji) => {
+    const cursorPosition = editTextareaRef.current.selectionStart;
+    const textBeforeCursor = editInput.substring(0, cursorPosition);
+    const textAfterCursor = editInput.substring(cursorPosition);
+
+    const newText = textBeforeCursor + emoji.native + textAfterCursor;
+    setEditInput(newText);
+
+    // Reposition the cursor
+    setTimeout(() => {
+      editTextareaRef.current.selectionStart =
+        cursorPosition + emoji.native.length;
+      editTextareaRef.current.selectionEnd =
+        cursorPosition + emoji.native.length;
+      editTextareaRef.current.focus();
+    }, 0);
+  };
+
+  const timeFromNow = (date) => {
+    const now = moment();
+    const postDate = moment(date);
+    if (now.diff(postDate, "days") >= 7) {
+      return postDate.format("MMM Do YYYY");
+    }
+    return postDate.fromNow();
+  };
+
   return (
     <div className={`comment level-${level}`}>
       <div key={userId._id} className="comment-header">
@@ -102,7 +141,7 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
           alt={`${userId.firstName} ${userId.lastName}`}
           className="comment-avatar object-cover"
         />
-        <div className="flex ">
+        <div className="flex">
           <div className="comment-info">
             <div className="comment-user">
               {userId.firstName} {userId.lastName}
@@ -110,21 +149,27 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
             {editing ? (
               <div className="edit-input-container">
                 <textarea
+                  ref={editTextareaRef}
                   className="edit-input"
                   value={editInput}
                   onChange={handleEditChange}
                 />
-                <div className="flex ">
-                  {" "}
+                <div className="flex">
                   <div className="emoji-picker">
-                    {showEmojiPicker && (
+                    {showEditEmojiPicker && (
                       <div className="absolute mt-[-430px] ml-[-350px]">
-                        {" "}
-                        <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+                        <Picker
+                          className="cursor-pointer"
+                          data={data}
+                          onEmojiSelect={handleEditEmojiSelect}
+                        />
                       </div>
                     )}
                     <CiFaceSmile
-                      onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        setShowEditEmojiPicker(!showEditEmojiPicker)
+                      }
                     />
                   </div>
                   <Send onClick={handleEditSubmit} />
@@ -142,11 +187,11 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
           </div>
         </div>
         {showDropdown && (
-          <div className="absolute w-[354px] h-[84px] mt-[40px] rounded-md ml-[-147px] z-3 shadow-xl bg-white p-2">
+          <div className="absolute w-[354px] h-[-84px] mt-[40px] rounded-md ml-[-147px] z-3 shadow-xl bg-white p-2">
             {authUser.id === userId.id ? (
               <>
                 <div
-                  className="w-full cursor-pointer  h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
+                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
                   onClick={handleEditComment}
                 >
                   Chỉnh sửa
@@ -179,7 +224,6 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
       </div>
       <div className="comment-actions">
         <span className="comment-time">{timeFromNow(userId.createdAt)}</span>
-
         <span
           className={`comment-action ${liked ? "liked" : ""}`}
           onClick={handleLike}
@@ -211,7 +255,7 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
           </div>
           <div className="reply-input">
             <textarea
-              ref={textareaRef}
+              ref={replyTextareaRef}
               onChange={handleTextareaChange}
               className="w-full resize-none bg-transparent outline-none pt-2 pl-1 text-sm"
               placeholder="Write a reply..."
@@ -219,24 +263,25 @@ const Comment = ({ id, message, userId, likes, level = 0 }) => {
             />
             <div className="h-[37px] flex w-full p-2 justify-between absolute mt-[-40px]">
               <div className="text-lg">
-                {showEmojiPicker && (
+                {showReplyEmojiPicker && (
                   <div className="absolute z-10 mt-[-460px] ml-[-70px]">
-                    <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+                    <Picker
+                      data={data}
+                      onEmojiSelect={handleReplyEmojiSelect}
+                    />
                   </div>
                 )}
                 <CiFaceSmile
                   className="text-[#7B8289] font-medium mt-1 cursor-pointer"
-                  onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                  onClick={() => setShowReplyEmojiPicker(!showReplyEmojiPicker)}
                 />
               </div>
               <div className="text-lg">
-                <div className="text-lg">
-                  {replyInput ? (
-                    <Send style={{ color: "#1167C9" }} fontSize="small" />
-                  ) : (
-                    <Send style={{ color: "#C2C6CC" }} fontSize="small" />
-                  )}
-                </div>
+                {replyInput ? (
+                  <Send style={{ color: "#1167C9" }} fontSize="small" />
+                ) : (
+                  <Send style={{ color: "#C2C6CC" }} fontSize="small" />
+                )}
               </div>
             </div>
           </div>

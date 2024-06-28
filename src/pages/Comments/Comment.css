@@ -145,6 +145,7 @@ textarea {
 
 .edit-input {
   min-height: 30px !important;
+  height: 30px;
   width: 100%;
   resize: none;
   padding: 10px;
