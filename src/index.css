@@ -109,9 +109,6 @@ html,
   width: 141px;
 }
 
-.img-card{
-  object-fit: fill;
-}
 
 .modal-header{
   display: flex !important;

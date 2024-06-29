@@ -13,6 +13,7 @@ import FriendLayout from "./pages/Friends/FriendLayout";
 import ProfileLayout from "./pages/Profile/ProfileLayout";
 import HomeProfile from "./pages/Profile/HomeProfile";
 import { PostContextProvider } from "./context/PostContext.jsx";
+import CreateStories from "./pages/HomePage/Home-middle/Story/CreateStories.jsx";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -58,10 +59,14 @@ function App() {
           element={authUser ? <ProfileLayout /> : <Navigate to="/login" />}
         >
           <Route
-            path="/profile/:id"
+            path="/profile/:id" 
             element={authUser ? <HomeProfile /> : <Navigate to="/login" />}
           />
         </Route>
+        <Route
+          path="/stories/create"
+          element={authUser ? <CreateStories /> : <Navigate to="/login" />}
+        />
       </Routes>
     </main>
   );

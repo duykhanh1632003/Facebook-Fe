@@ -64,9 +64,9 @@ const DetailPost = () => {
             comments={comments ?? []}
             share={share}
           />
-          <div className="w-[331px] pt-[6px]">
-            <div className="border-b border-gray-300 w-full"></div>
-          </div>
+            <div className="w-[331px] pt-[6px]">
+              <div className="border-b border-gray-300 w-full"></div>
+            </div>
           <div className="flex mr-3 items-center justify-end text-[#606770] font-medium cursor-pointer">
             <div className="">Tất cả bình luận</div>
             <div>

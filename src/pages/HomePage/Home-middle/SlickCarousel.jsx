@@ -1,7 +1,10 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { MdOutlineAdd } from "react-icons/md";
+import { useAuthContext } from "../../../context/AuthContext";
+import { Link } from "react-router-dom";
 export default function SlickCarousel() {
+  const { authUser } = useAuthContext();
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -22,7 +25,10 @@ export default function SlickCarousel() {
   return (
     <div className="bg-[#F0F2F5]">
       <Carousel responsive={responsive}>
-        <div className="card relative w-[250px] z-10 bg-white cursor-pointer ">
+        <Link
+          to={"/stories/create"}
+          className="card relative w-[250px] z-10 bg-white cursor-pointer "
+        >
           <div className="w-[40px] h-[40px] bg-white absolute rounded-full mt-[144px] ml-[54px]">
             <div className="bg-blue-500 absolute z-20 h-[37px] w-[37px] mt-10 rounded-full flex items-center justify-center text-4xl">
               <MdOutlineAdd className="text-3xl" />
@@ -31,13 +37,13 @@ export default function SlickCarousel() {
           <p className="absolute z-10 mt-[230px] ml-[50px] text-black text-sm font-medium ">
             Tạo tin
           </p>
-          <div className="h-[202px] rounded-lg relative">
+          <div className="h-[202px] rounded-lg relative object-contain">
             <img
-              className=" img-card object-fill rounded-lg h-[202px]"
-              src="/src/assets/406860438_1048481983054231_6833658113738926574_n.jpg"
+              className=" img-card object-cover rounded-lg h-full w-full "
+              src={authUser.user.avatar}
             />
           </div>
-        </div>
+        </Link>
         <div className="card relative w-[250px] z-10 cursor-pointer">
           <div className="absolute w-[39px] rounded-full p-1 bg-blue-600 z-10 mt-[11px] ml-[11px]">
             <img
