@@ -1,0 +1,25 @@
+.App {
+  text-align: center;
+}
+
+.container {
+  background: #000;
+  width: 942px;
+  height: 549px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  background-color: #f0f0f0;
+}
+
+.crop-box {
+  background: #000;
+  width: 100%;
+  height: 100%;
+  border: 1px solid white;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
