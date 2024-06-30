@@ -62,3 +62,68 @@ export const backGroundImage = () => {
     },
   ];
 };
+
+export const backGroundImageStr = () => {
+  return [
+    {
+      id: 1,
+      image:
+        "linear-gradient(135deg, rgb(84, 150, 255) 0%, rgb(5, 72, 179) 100%)",
+      name: "blue",
+    },
+    {
+      id: 2,
+      image:
+        "url('https://scontent.fh an15-1.fna.fbcdn.net/v/t39.10873-6/44079721_291719128109207_5500973612837896192_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeFA3wK4IqP_Cgn3HqdW6E_isepVSXSJAdqx6lVJdIkB2l0fzN8lqEqGuYw5bUwrKprkEyjw29oN3orGFftSjOQv&_nc_ohc=mQWN7ptnOV4Q7kNvgHOKsez&_nc_ht=scontent.fhan15-1.fna&oh=00_AYDd27CE3rJoEU85i_LHFLwO3UOlh9GX-eR3OX1KZz9S1A&oe=6687512C')",
+      name: "red-purple",
+    },  
+    {
+      id: 3,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/40345755_2163632403908042_6254610308791271424_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeGQWZ1qnU5F2JvwdGdxB96qVDbZ2YX5fLhUNtnZhfl8uFKdIvvvacKStP_UDk7p1Js7b5kximqPLJrQnsPwQ5jX&_nc_ohc=9vmWl2QXRw0Q7kNvgHEZMBA&_nc_ht=scontent.fhan15-1.fna&oh=00_AYBWRjnETuPcbrnBWRkW0xamz7bKqEFupF3YulmhOgoV5g&oe=66875050')",
+      name: "orange-yellow",
+    },
+    {
+      id: 4,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/40401945_525804511192473_6652321157959647232_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeHp3ssoBQIifURJIMhp4GsoTBDp3Ge6JfFMEOncZ7ol8QJSxsiudrb24CYORdDWPoecsv0-XEhYUETzxai4wAuT&_nc_ohc=WnBmqU_8VeMQ7kNvgG-aie-&_nc_ht=scontent.fhan15-1.fna&oh=00_AYDzt5jbAZ2Xp7bXRfS8cRKt8sRs2anWAcxjAk0h_R9OEg&oe=6687295B')",
+      name: "orange",
+    },
+    {
+      id: 5,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/51611230_1009318299261959_6271388972195250176_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeFLKUc5eo_0LFdpH7AafAwHEJYMUUKNCJsQlgxRQo0Im3YAAYiNCHRZb8J6WJay7skKkG5KufgjHo6WJOKPukIJ&_nc_ohc=Yu4PDamIyqgQ7kNvgFtoAjz&_nc_ht=scontent.fhan15-1.fna&oh=00_AYAb3Pfg3sDY9k1pJTwCI03sOPVbp3t0Z5OtsZ8StEyjxQ&oe=66874F90')",
+      name: "more-blue",
+    },
+    {
+      id: 6,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/40394085_452537138572518_4073248607300485120_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeGGuQk4ACLIuiF8E-x3bkqPXkOwd8qJ8S9eQ7B3yonxL6_DKO8Ji616qk9imooi03vNmBUM5pjetX3HstUkkWph&_nc_ohc=Q_RlBkbKpVkQ7kNvgEd7zdx&_nc_ht=scontent.fhan15-1.fna&oh=00_AYDarX6BbX1vDbZJISM1DnRAluMT410MrkR24oKYFYFKMA&oe=668734FA')",
+      name: "black",
+    },
+    {
+      id: 7,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/64502458_318989065695201_361648744678031360_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeG30oZ91MjgWL3lqvkiea7kskXcATg6sdOyRdwBODqx06rDasYA1gBW2O0ubLJtCuNPoDL812twj00Nit_-2Xxr&_nc_ohc=TFPTw5tABmAQ7kNvgGrOAkr&_nc_ht=scontent.fhan15-1.fna&oh=00_AYA9X1fnCWVcPlQozDVDyVqGy2GEseOxyUA5XuxbpA2wAg&oe=66872852')",
+      name: "pink-blue-yellow",
+    },
+    {
+      id: 8,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/51653719_241165293466285_9014132538842546176_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeEhCRp_HavsYKcvCDJKkfrUvcECXHhQ-vi9wQJceFD6-Ji-jUi0GWX3Iro9vZnKJxhsOdIu2g7BM74EZPterzdN&_nc_ohc=x3c_2xGwLikQ7kNvgF5tSZU&_nc_ht=scontent.fhan15-1.fna&oh=00_AYDkuBzy5y4gjV0uABuumJXpqiAagR-tTJKbYvivnFf_rA&oe=66872205')",
+      name: "green-purple-yellow",
+    },
+    {
+      id: 9,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/51689393_459530731251153_9085793668744347648_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeHDmQb2PumCMihRmdrdUaXwy4Wx0RFtS6XLhbHREW1LpfwKLSv2nZkm_hzlqCwcbK0-r-paTs4zWPxqfT8MBXi6&_nc_ohc=bpJdpecq9ggQ7kNvgGWpRlr&_nc_ht=scontent.fhan15-1.fna&oh=00_AYD3Tpa2mhIaHC9ES6mrQfIHwMxsciRzE4JrMfWDgEm5Ew&oe=66874918')",
+      name: "yellow-orange",
+    },
+    {
+      id: 10,
+      image:
+        "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/51624557_2173297946332595_8628355269191008256_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeEJmtsv-oH-5YtB3yghowMJQJcW5mOYzkBAlxbmY5jOQLVnu60s33F1Y4IvaRDqiM3x6_oq8GfRh18YufT9houn&_nc_ohc=SZzp-kpFtTQQ7kNvgF24XRr&_nc_ht=scontent.fhan15-1.fna&oh=00_AYCp3BNVv5YmiN27QkQTRQdes_onAxMwmLu4M4L190VAvg&oe=66874729')",
+      name: "white-pink",
+    },
+  ];
+};
