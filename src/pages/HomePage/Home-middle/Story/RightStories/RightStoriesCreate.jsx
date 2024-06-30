@@ -12,6 +12,7 @@ const RightStoriesCreate = ({
   buttonCreateText,
   setButtonCreateText,
   setCancel,
+  rightImageCrop,
 }) => {
   const [img, setImg] = useState(null);
   const fileInputRef = useRef();
@@ -61,6 +62,20 @@ const RightStoriesCreate = ({
     setRotate((prevRotate) => prevRotate + 90);
   };
 
+  const handleSave = async () => {
+    if (editorRef.current) {
+      const canvas = editorRef.current.getImage();
+      canvas.toBlob(async (blob) => {
+        if (blob) {
+          const file = new File([blob], "profile_picture.png", {
+            type: "image/png",
+          });
+          await dispatch(updateProfilePicture({ file, authUser, setAuthUser }));
+        }
+      });
+    }
+  };
+
   return (
     <div
       className="h-full w-full flex items-center justify-center"
@@ -96,48 +111,57 @@ const RightStoriesCreate = ({
           </div>
         )}
       </div>
+      {rightImageCrop && (
+        <div className="w-[1100px] h-[650px] rounded-lg bg-white  items-center  justify-center shadow-2xl p-4">
+          <div className="font-bold text-sm mb-2">Xem trước</div>
+          <div className="container ml-9">
+            <div className="crop-box">
+              {img && (
+                <AvatarEditor
+                  ref={editorRef}
+                  image={img.url}
+                  width={266}
+                  height={479}
+                  border={[400, 50, 400, 50]}
+                  color={[0, 0, 0, 0.6]} // RGBA
+                  scale={scale}
+                  rotate={rotate}
+                  borderRadius={10}
+                  backgroundColor={[255, 255, 255]}
+                  style={{
+                    maxWidth: "942px",
+                    maxHeight: "549px",
+                    backgroundColor: "black",
+                  }}
+                />
+              )}
+            </div>
+          </div>
 
-      <div className="w-[1100px] h-[650px] rounded-lg bg-white  items-center  justify-center shadow-2xl p-4">
-        <div className="font-bold text-sm mb-2">Xem trước</div>
-        <div className="container ml-9">
-          <div className="crop-box">
-            {img && (
-              <AvatarEditor
-                ref={editorRef}
-                image={img.url}
-                width={266}
-                height={479}
-                border={[400, 50, 400, 50]}
-                color={[0, 0, 0, 0.6]} // RGBA
-                scale={scale}
-                rotate={rotate}
-                borderRadius={10}
-                backgroundColor={[255, 255, 255]}
-                style={{
-                  maxWidth: "942px",
-                  maxHeight: "549px",
-                  backgroundColor: "black",
-                }}
-              />
-            )}
+          <div className="ml-[400px] flex mt-2">
+            <input
+              type="range"
+              min="1"
+              max="3.54"
+              step="0.01"
+              value={scale}
+              onChange={handleScaleChange}
+            />
+            <div
+              className="ml-2 Sh-[50px] w-[80px] bg-black rounded-lg items-center flex justify-center font-bold text-white cursor-pointer "
+              onClick={handleRotate}
+            >
+              <AiOutlineRotateRight className="mr-1" />
+              Xoay
+            </div>
           </div>
         </div>
-
-        <div className="ml-[400px] flex mt-2">
-          <input
-            type="range"
-            min="1"
-            max="3.54"
-            step="0.01"
-            value={scale}
-            onChange={handleScaleChange}
-          />
-          <div
-            className="ml-2 Sh-[50px] w-[80px] bg-black rounded-lg items-center flex justify-center font-bold text-white cursor-pointer "
-            onClick={handleRotate}
-          >
-            <AiOutlineRotateRight className="mr-1" />
-            Xoay
+      )}
+      <div>
+        <div className="w-[974px] h-[616px] rounded-lg">
+          <div className="font-bold">Xem trước</div>
+          <div className="w-[939px] h-[584px] rounded-lg flex items-center justify-center bg-[#18191A]">
+            <div className="h-525px] w-[294px] rounded-lg bg-white z-2"></div>
           </div>
         </div>
       </div>
