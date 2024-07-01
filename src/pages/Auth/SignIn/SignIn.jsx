@@ -38,7 +38,7 @@ const SignIn = () => {
           alt="logo"
         />
       </div>
-      <div className="w-[398px] h-[348px] bg-[#FFFFFF] mt-[130px] rounded-1 flex flex-col items-center">
+      <div className="w-[398px] h-[430px] bg-[#FFFFFF] mt-[130px] rounded-1 flex flex-col items-center">
         <form
           onSubmit={handleSubmitLogin}
           className="flex flex-col items-center"
@@ -82,10 +82,16 @@ const SignIn = () => {
         <Link to="/signup" className="register">
           Tạo tài khoản mới
         </Link>
+        <div className="google mt-3">
+          <div className="text-md mr-2">Đăng nhập với google</div>
+          <img
+            className="h-[20px] w-[20px]"
+            src="/src/assets/Remove-bg.ai_1719840154036.png"
+          />
+        </div>
       </div>
     </div>
   );
 };
 
 export default SignIn;
-  

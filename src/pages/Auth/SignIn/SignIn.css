@@ -30,6 +30,24 @@
   border-radius: 5px;
 }
 
+.google{
+  cursor: pointer;
+  display: flex;
+  width: 220px;
+  height: 46px;
+  margin-top: 5px;
+  background-color: #979e96 ;
+  box-shadow: black;
+  font-size: large;
+  color: #FFFFFF;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+
 .css-i4bv87-MuiSvgIcon-root{
   width: 15px !important;
     height: 15px !important;

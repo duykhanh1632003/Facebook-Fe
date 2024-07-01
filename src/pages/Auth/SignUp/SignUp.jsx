@@ -5,6 +5,8 @@ import HelpIcon from "@mui/icons-material/Help";
 import "../SignIn/SignIn.css";
 import { Link } from "react-router-dom";
 import useSignup from "../../../hooks/useSignUp";
+import { axiosNotHaveAuth } from "../../../util/axios";
+import axios from "axios";
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
@@ -31,6 +33,15 @@ const SignUp = () => {
     setPassword(e.target.value);
   };
 
+  const handleOnLoginGoogle = async () => {
+    try {
+      window.open("http://localhost:8000/auth/google/callback");
+    } catch (error) {
+      console.error("Google Login Error:", error);
+      // Handle Google login error
+    }
+  };
+
   return (
     <div className="flex pl-[272px] bg-[#F0F2F5] w-full h-screen">
       <div className="w-[250px] h-[70px] mt-[99px] mr-[332px]">
@@ -39,7 +50,7 @@ const SignUp = () => {
           alt="logo"
         />
       </div>
-      <div className="w-[398px] bg-[#FFFFFF] h-[541px] mt-[40px] rounded-1 flex flex-col items-center">
+      <div className="w-[398px] bg-[#FFFFFF] h-[570px] mt-[40px] rounded-1 flex flex-col items-center">
         <div>
           <div className="flex justify-between w-[366px]">
             <div className="relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[170px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[18px]">
@@ -141,6 +152,13 @@ const SignUp = () => {
           className="w-[364px] h-[52px] bg-[#0866FF] hover:bg-[#4889f1] rounded-lg cursor-pointer flex justify-center items-center text-[#FFFFFF] text-xl font-medium"
         >
           Đăng ký
+        </div>
+        <div onClick={handleOnLoginGoogle} className="google mt-3">
+          <div className="text-md mr-2">Đăng ký với google</div>
+          <img
+            className="h-[20px] w-[20px]"
+            src="/src/assets/Remove-bg.ai_1719840154036.png"
+          />
         </div>
         <div className="underline"> </div>
         <Link to={"/login"} className="register">

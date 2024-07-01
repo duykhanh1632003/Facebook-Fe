@@ -5,6 +5,9 @@ import AvatarEditor from "react-avatar-editor";
 import { AiOutlineRotateRight } from "react-icons/ai";
 import { backGroundImageStr } from "../../../../../util/background";
 import { fontFamily } from "./../../../../../util/background";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
+import { imageDb } from "../../../../../config/FireBaseUrl";
 
 const RightStoriesCreate = ({
   setLeftTextStr,
@@ -73,20 +76,6 @@ const RightStoriesCreate = ({
     setRotate((prevRotate) => prevRotate + 90);
   };
 
-  const handleSave = async () => {
-    if (editorRef.current) {
-      const canvas = editorRef.current.getImage();
-      canvas.toBlob(async (blob) => {
-        if (blob) {
-          const file = new File([blob], "profile_picture.png", {
-            type: "image/png",
-          });
-          await dispatch(updateProfilePicture({ file, authUser, setAuthUser }));
-        }
-      });
-    }
-  };
-
   const handleOnCreateImageText = () => {
     setButtonCreateImageText(false);
     setLeftTextStr(true);
@@ -95,7 +84,21 @@ const RightStoriesCreate = ({
 
   useEffect(() => {
     if (ham) {
-      alert("ham"); // Hiển thị alert khi ham là true
+      if (rightImageCrop) {
+        if (editorRef.current) {
+          const canvas = editorRef.current.getImage();
+          canvas.toBlob(async (blob) => {
+            if (blob) {
+              const file = new File([blob], "profile_picture.png", {
+                type: "image/png",
+              });
+              const imgRef = ref(imageDb, `avatars/${v4()}`);
+              const snapshot = await uploadBytes(imgRef, file);
+              const url = await getDownloadURL(snapshot.ref);
+            }
+          });
+        }
+      }
     }
   }, [ham]);
 
