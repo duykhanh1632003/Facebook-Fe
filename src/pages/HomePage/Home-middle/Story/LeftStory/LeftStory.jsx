@@ -7,7 +7,15 @@ import TextField from "@mui/material/TextField";
 import Select from "react-select";
 import { backGroundImage } from "../../../../../util/background";
 
-const LeftStory = ({ createImage, cancel, handleSave }) => {
+const LeftStory = ({
+  setNameValueFont,
+  createImage,
+  cancel,
+  handleSave,
+  nameValueBg,
+  setNameValueBg,
+  setValueInput,
+}) => {
   const { authUser } = useAuthContext();
   const backgroundImages = backGroundImage();
   const options = [
@@ -58,6 +66,17 @@ const LeftStory = ({ createImage, cancel, handleSave }) => {
     },
   ];
 
+  const handleSelectBackGround = (id) => {
+    setNameValueBg(id);
+  };
+
+  const handleOnChangeFont = (selectedOption) => {
+    setNameValueFont(selectedOption.value);
+  };
+
+  const handleOnChangInput = (e) => {
+    setValueInput(e.target.value);
+  };
   return (
     <div className="w-[360px] h-screen shadow-lg overflow-y-auto overflow-x-hidden">
       <div className="w-full h-[54px] flex mt-[4px] items-center">
@@ -134,11 +153,13 @@ const LeftStory = ({ createImage, cancel, handleSave }) => {
                 height: "187px",
               },
             }}
+            onChange={(e) => handleOnChangInput(e)}
           />
         </Box>
 
         <div className="mt-3 h-[56px]">
           <Select
+            onChange={handleOnChangeFont}
             className="h-[56px]"
             options={options}
             defaultValue={options[0]}
@@ -150,6 +171,7 @@ const LeftStory = ({ createImage, cancel, handleSave }) => {
             {backgroundImages.map((item, index) => (
               <div
                 key={index}
+                onClick={() => handleSelectBackGround(item.id)}
                 className="w-[25px] cursor-pointer h-[25px] rounded-full m-1"
               >
                 <img

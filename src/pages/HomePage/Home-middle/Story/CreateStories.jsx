@@ -9,13 +9,26 @@ const CreateStories = () => {
   const [rightImageCrop, setRightImageCrop] = useState(false);
   const [backGroundStr, setBackGroundStr] = useState(null);
   const [cancel, setCancel] = useState(false);
+  const [nameValueBg, setNameValueBg] = useState(1);
+  const [nameValueFont, setNameValueFont] = useState(1);
+  const [valueInput, setValueInput] = useState("");
+
   return (
     <div className="flex">
       <div>
-        <LeftStory createImage={createImage} cancel={cancel} />
+        <LeftStory
+          setValueInput={setValueInput}
+          createImage={createImage}
+          cancel={cancel}
+          nameValueBg={nameValueBg}
+          setNameValueBg={setNameValueBg}
+          setNameValueFont={setNameValueFont}
+        />
       </div>
       <div className="h-screen w-full">
         <RightStoriesCreate
+          nameValueBg={nameValueBg}
+          nameValueFont={nameValueFont}
           setCreatImage={setCreatImage}
           createImage={createImage}
           buttonCreateImage={buttonCreateImage}
@@ -25,6 +38,7 @@ const CreateStories = () => {
           cancel={cancel}
           setCancel={setCancel}
           rightImageCrop={rightImageCrop}
+          valueInput={valueInput}
         />
       </div>
     </div>

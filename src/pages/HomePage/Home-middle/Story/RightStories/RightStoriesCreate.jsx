@@ -3,8 +3,12 @@ import { IoMdPhotos } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import AvatarEditor from "react-avatar-editor";
 import { AiOutlineRotateRight } from "react-icons/ai";
+import { backGroundImageStr } from "../../../../../util/background";
+import { fontFamily } from "./../../../../../util/background";
 
 const RightStoriesCreate = ({
+  nameValueFont,
+  nameValueBg,
   setCreatImage,
   createImage,
   buttonCreateImage,
@@ -13,6 +17,7 @@ const RightStoriesCreate = ({
   setButtonCreateText,
   setCancel,
   rightImageCrop,
+  valueInput,
 }) => {
   const [img, setImg] = useState(null);
   const fileInputRef = useRef();
@@ -76,6 +81,8 @@ const RightStoriesCreate = ({
     }
   };
 
+  const backGroundImageStrs = backGroundImageStr();
+  const fontFamilys = fontFamily();
   return (
     <div
       className="h-full w-full flex items-center justify-center bg-[#F0F2F5]"
@@ -161,16 +168,59 @@ const RightStoriesCreate = ({
         <div className="w-[974px] h-[616px] rounded-lg shadow-2xl bg-[#FFFFFF] p-3">
           <div className="font-bold">Xem trước</div>
           <div className="w-[939px] h-[584px] rounded-lg flex items-center justify-center bg-[#18191A]">
-            <div
-              className="h-[525px] items-center justify-center flex w-[294px] rounded-lg z-2 font-bold text-xl text-[#FFFFFF] p-4"
-              style={{
-                backgroundImage:
-                  "url('https://scontent.fhan15-1.fna.fbcdn.net/v/t39.10873-6/44079721_291719128109207_5500973612837896192_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=427b5c&_nc_eui2=AeFA3wK4IqP_Cgn3HqdW6E_isepVSXSJAdqx6lVJdIkB2l0fzN8lqEqGuYw5bUwrKprkEyjw29oN3orGFftSjOQv&_nc_ohc=mQWN7ptnOV4Q7kNvgHOKsez&_nc_ht=scontent.fhan15-1.fna&oh=00_AYDd27CE3rJoEU85i_LHFLwO3UOlh9GX-eR3OX1KZz9S1A&oe=6687512C')",
-              }}
-            >
-              hi my name is Khanh hi my name is Khanh hi my name is Khanh hi my
-              name is Khanh hi my name is Khanh
-            </div>
+            {nameValueBg === 1 ? (
+              <div
+                className="h-[525px] items-center justify-center flex w-[294px] rounded-lg z-2 font-bold text-xl text-[#FFFFFF] p-4"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, rgb(84, 150, 255) 0%, rgb(5, 72, 179) 100%)",
+                }}
+              >
+                {!valueInput ? (
+                  <div className="text-[#92B4E9] text-2xl">Bắt đầu nhập</div>
+                ) : (
+                  <div
+                    className="h-[525px] items-center justify-center flex w-[294px]"
+                    style={{
+                      fontFamily: `${
+                        fontFamilys[nameValueFont - 1].fontFamily
+                      }`,
+                      wordBreak: "break-word",
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {valueInput}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div
+                className="h-[525px] items-center justify-center flex w-[294px] rounded-lg z-2 font-bold text-xl text-[#FFFFFF] p-4"
+                style={{
+                  backgroundImage: `${
+                    backGroundImageStrs[nameValueBg - 1].image
+                  }`,
+                  color: `${backGroundImageStrs[nameValueBg - 1].color}`,
+                }}
+              >
+                {!valueInput ? (
+                  <div className="text-[#92B4E9] text-2xl">Bắt đầu nhập</div>
+                ) : (
+                  <div
+                    className="h-[525px] items-center justify-center flex w-[294px] p-4"
+                    style={{
+                      fontFamily: `${
+                        fontFamilys[nameValueFont - 1].fontFamily
+                      }`,
+                      wordBreak: "break-word",
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {valueInput}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
