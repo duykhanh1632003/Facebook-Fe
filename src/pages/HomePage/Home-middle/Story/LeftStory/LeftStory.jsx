@@ -8,6 +8,7 @@ import Select from "react-select";
 import { backGroundImage } from "../../../../../util/background";
 
 const LeftStory = ({
+  leftTextStr,
   setNameValueFont,
   createImage,
   cancel,
@@ -15,6 +16,11 @@ const LeftStory = ({
   nameValueBg,
   setNameValueBg,
   setValueInput,
+  setHam,
+  setButtonCreateImageText,
+  setCancel,
+  setLeftTextStr,
+  setRightImageCrop,
 }) => {
   const { authUser } = useAuthContext();
   const backgroundImages = backGroundImage();
@@ -77,6 +83,17 @@ const LeftStory = ({
   const handleOnChangInput = (e) => {
     setValueInput(e.target.value);
   };
+
+  const handleChangeNoi = () => {
+    setHam(true);
+  };
+
+  const handleCancel = () => {
+    setButtonCreateImageText(true);
+    setRightImageCrop(false);
+    setLeftTextStr(false);
+    setCancel(false);
+  };
   return (
     <div className="w-[360px] h-screen shadow-lg overflow-y-auto overflow-x-hidden">
       <div className="w-full h-[54px] flex mt-[4px] items-center">
@@ -118,72 +135,78 @@ const LeftStory = ({
       {createImage && <div>hello</div>}
       {cancel && (
         <div className="w-[360px] items-center mt-[410px] h-[73px] fixed shadow-lg flex">
-          <div className="font-medium w-[124px] ml-3 mr-2 h-[36px] rounded-md bg-[#D8DADF] flex items-center justify-center">
+          <div
+            onClick={handleCancel}
+            className="font-medium w-[124px] ml-3 mr-2 h-[36px] cursor-pointer rounded-md bg-[#D8DADF] flex items-center justify-center"
+          >
             Bỏ
           </div>
           <div
-            className="bg-[#0861F2] font-medium text-white w-[193px] h-[36px] rounded-md flex items-center justify-center"
+            className="bg-[#0861F2] font-medium text-white cursor-pointer w-[193px] h-[36px] rounded-md flex items-center justify-center"
             onClick={handleSave}
           >
             Chia sẻ lên tin
           </div>
         </div>
       )}
-
-      <div className="w-full h-full p-3">
-        <Box
-          sx={{
-            color: "success.main",
-          }}
-          width={333}
-          height={187}
-          component="form"
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="outlined-basic"
-            width={333}
-            height={187}
-            className="w-full h-[187px]"
-            label="Bắt đầu nhập"
-            variant="outlined"
-            InputProps={{
-              style: {
-                height: "187px",
-              },
+      {leftTextStr && (
+        <div className="w-full h-full p-3">
+          <Box
+            sx={{
+              color: "success.main",
             }}
-            onChange={(e) => handleOnChangInput(e)}
-          />
-        </Box>
+            width={300}
+            height={187}
+            component="form"
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="outlined-basic"
+              width={300}
+              height={187}
+              className="w-full h-[187px]"
+              label="Bắt đầu nhập"
+              variant="outlined"
+              InputProps={{
+                style: {
+                  height: "187px",
+                },
+              }}
+              onChange={(e) => handleOnChangInput(e)}
+            />
+          </Box>
 
-        <div className="mt-3 h-[56px]">
-          <Select
-            onChange={handleOnChangeFont}
-            className="h-[56px]"
-            options={options}
-            defaultValue={options[0]}
-          />
-        </div>
-        <div className="mt-3 w-full border-2 p-2">
-          <div>Phông nền</div>
-          <div className="flex flex-wrap">
-            {backgroundImages.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleSelectBackGround(item.id)}
-                className="w-[25px] cursor-pointer h-[25px] rounded-full m-1"
-              >
-                <img
-                  className="w-full h-full rounded-full object-cover"
-                  src={item.image}
-                  alt={item.name}
-                />
-              </div>
-            ))}
+          <div className="mt-3 h-[56px]">
+            <Select
+              onChange={handleOnChangeFont}
+              className="h-[56px]"
+              options={options}
+              defaultValue={options[0]}
+            />
+          </div>
+          <div className="mt-3 w-full border-2 p-2">
+            <div>Phông nền</div>
+            <div className="flex flex-wrap">
+              {backgroundImages.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleSelectBackGround(item.id)}
+                  className="w-[25px] cursor-pointer h-[25px] rounded-full m-1"
+                >
+                  <img
+                    className="w-full h-full rounded-full object-cover"
+                    src={item.image}
+                    alt={item.name}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
+      <div onClick={handleChangeNoi}> click vao day </div>
     </div>
   );
 };

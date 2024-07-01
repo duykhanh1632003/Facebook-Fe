@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { IoMdPhotos } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import AvatarEditor from "react-avatar-editor";
@@ -7,17 +7,19 @@ import { backGroundImageStr } from "../../../../../util/background";
 import { fontFamily } from "./../../../../../util/background";
 
 const RightStoriesCreate = ({
+  setLeftTextStr,
+  leftTextStr,
   nameValueFont,
   nameValueBg,
   setCreatImage,
   createImage,
-  buttonCreateImage,
-  setButtonCreateImage,
-  buttonCreateText,
-  setButtonCreateText,
+  setButtonCreateImageText,
+  buttonCreateImageText,
   setCancel,
   rightImageCrop,
   valueInput,
+  ham,
+  setRightImageCrop,
 }) => {
   const [img, setImg] = useState(null);
   const fileInputRef = useRef();
@@ -27,6 +29,9 @@ const RightStoriesCreate = ({
 
   const handleDrop = (e) => {
     e.preventDefault();
+    setButtonCreateImageText(false);
+    setRightImageCrop(true);
+    setCancel(true);
     const file = e.dataTransfer.files[0];
     if (file) {
       setImg({
@@ -47,14 +52,15 @@ const RightStoriesCreate = ({
 
   const handleOnChangeImage = (e) => {
     const file = e.target.files[0];
+
     if (file) {
       setImg({
         file: file,
         name: file.name,
         url: URL.createObjectURL(file),
       });
-      setButtonCreateImage(false);
-      setButtonCreateText(false);
+      setRightImageCrop(true);
+      setButtonCreateImageText(false);
       setCancel(true);
     }
   };
@@ -81,6 +87,18 @@ const RightStoriesCreate = ({
     }
   };
 
+  const handleOnCreateImageText = () => {
+    setButtonCreateImageText(false);
+    setLeftTextStr(true);
+    setCancel(true);
+  };
+
+  useEffect(() => {
+    if (ham) {
+      alert("ham"); // Hiển thị alert khi ham là true
+    }
+  }, [ham]);
+
   const backGroundImageStrs = backGroundImageStr();
   const fontFamilys = fontFamily();
   return (
@@ -90,7 +108,7 @@ const RightStoriesCreate = ({
       onDragOver={handleDragOver}
     >
       <div className="flex">
-        {buttonCreateImage && (
+        {buttonCreateImageText && (
           <div
             onClick={() => fileInputRef.current.click()}
             className="w-[219px] h-[331px] cursor-pointer bg-[url('/src/assets/bg-left.png')] pt-[136px] pl-[70px] mr-4 shadow-md rounded-lg"
@@ -107,8 +125,11 @@ const RightStoriesCreate = ({
             <div className="font-bold text-white">Tạo tin ảnh</div>
           </div>
         )}
-        {buttonCreateText && (
-          <div className="w-[219px] rounded-lg bg-[url('/src/assets/bg-right-new.png')] h-[331px] cursor-pointer pt-[136px] pl-[40px] mr-4 shadow-md">
+        {buttonCreateImageText && (
+          <div
+            onClick={handleOnCreateImageText}
+            className="w-[219px] rounded-lg bg-[url('/src/assets/bg-right-new.png')] h-[331px] cursor-pointer pt-[136px] pl-[40px] mr-4 shadow-md"
+          >
             <div className="bg-white w-[50px] h-[50px] rounded-full flex items-center justify-center text-2xl ml-10 mb-2">
               <IoText />
             </div>
@@ -164,66 +185,68 @@ const RightStoriesCreate = ({
           </div>
         </div>
       )}
-      <div>
-        <div className="w-[974px] h-[616px] rounded-lg shadow-2xl bg-[#FFFFFF] p-3">
-          <div className="font-bold">Xem trước</div>
-          <div className="w-[939px] h-[584px] rounded-lg flex items-center justify-center bg-[#18191A]">
-            {nameValueBg === 1 ? (
-              <div
-                className="h-[525px] items-center justify-center flex w-[294px] rounded-lg z-2 font-bold text-xl text-[#FFFFFF] p-4"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(135deg, rgb(84, 150, 255) 0%, rgb(5, 72, 179) 100%)",
-                }}
-              >
-                {!valueInput ? (
-                  <div className="text-[#92B4E9] text-2xl">Bắt đầu nhập</div>
-                ) : (
-                  <div
-                    className="h-[525px] items-center justify-center flex w-[294px]"
-                    style={{
-                      fontFamily: `${
-                        fontFamilys[nameValueFont - 1].fontFamily
-                      }`,
-                      wordBreak: "break-word",
-                      whiteSpace: "pre-wrap",
-                    }}
-                  >
-                    {valueInput}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div
-                className="h-[525px] items-center justify-center flex w-[294px] rounded-lg z-2 font-bold text-xl text-[#FFFFFF] p-4"
-                style={{
-                  backgroundImage: `${
-                    backGroundImageStrs[nameValueBg - 1].image
-                  }`,
-                  color: `${backGroundImageStrs[nameValueBg - 1].color}`,
-                }}
-              >
-                {!valueInput ? (
-                  <div className="text-[#92B4E9] text-2xl">Bắt đầu nhập</div>
-                ) : (
-                  <div
-                    className="h-[525px] items-center justify-center flex w-[294px] p-4"
-                    style={{
-                      fontFamily: `${
-                        fontFamilys[nameValueFont - 1].fontFamily
-                      }`,
-                      wordBreak: "break-word",
-                      whiteSpace: "pre-wrap",
-                    }}
-                  >
-                    {valueInput}
-                  </div>
-                )}
-              </div>
-            )}
+      {leftTextStr && (
+        <div>
+          <div className="w-[974px] h-[616px] rounded-lg shadow-2xl bg-[#FFFFFF] p-3">
+            <div className="font-bold">Xem trước</div>
+            <div className="w-[939px] h-[584px] rounded-lg flex items-center justify-center bg-[#18191A]">
+              {nameValueBg === 1 ? (
+                <div
+                  className="h-[525px] items-center justify-center flex w-[294px] rounded-lg z-2 font-bold text-xl text-[#FFFFFF] p-4"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(135deg, rgb(84, 150, 255) 0%, rgb(5, 72, 179) 100%)",
+                  }}
+                >
+                  {!valueInput ? (
+                    <div className="text-[#92B4E9] text-2xl">Bắt đầu nhập</div>
+                  ) : (
+                    <div
+                      className="h-[525px] items-center justify-center flex w-[294px]"
+                      style={{
+                        fontFamily: `${
+                          fontFamilys[nameValueFont - 1].fontFamily
+                        }`,
+                        wordBreak: "break-word",
+                        whiteSpace: "pre-wrap",
+                      }}
+                    >
+                      {valueInput}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div
+                  className="h-[525px] items-center justify-center flex w-[294px] rounded-lg z-2 font-bold text-xl text-[#FFFFFF] p-4"
+                  style={{
+                    backgroundImage: `${
+                      backGroundImageStrs[nameValueBg - 1].image
+                    }`,
+                    color: `${backGroundImageStrs[nameValueBg - 1].color}`,
+                  }}
+                >
+                  {!valueInput ? (
+                    <div className="text-[#92B4E9] text-2xl">Bắt đầu nhập</div>
+                  ) : (
+                    <div
+                      className="h-[525px] items-center justify-center flex w-[294px] p-4"
+                      style={{
+                        fontFamily: `${
+                          fontFamilys[nameValueFont - 1].fontFamily
+                        }`,
+                        wordBreak: "break-word",
+                        whiteSpace: "pre-wrap",
+                      }}
+                    >
+                      {valueInput}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
