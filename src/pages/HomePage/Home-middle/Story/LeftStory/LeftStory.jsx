@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Select from "react-select";
 import { backGroundImage } from "../../../../../util/background";
+import { Link, useNavigate } from "react-router-dom";
 
 const LeftStory = ({
   leftTextStr,
@@ -24,6 +25,7 @@ const LeftStory = ({
 }) => {
   const { authUser } = useAuthContext();
   const backgroundImages = backGroundImage();
+  const navigate = useNavigate();
   const options = [
     {
       value: "1",
@@ -94,18 +96,24 @@ const LeftStory = ({
     setLeftTextStr(false);
     setCancel(false);
   };
+  const handleGoBack = () => {
+    navigate(-1); // This navigates back to the previous page
+  };
   return (
     <div className="w-[360px] h-screen shadow-lg overflow-y-auto overflow-x-hidden">
       <div className="w-full h-[54px] flex mt-[4px] items-center">
-        <div className="ml-[15px] text-[#999999] text-5xl mr-1">
+        <div
+          onClick={handleGoBack}
+          className="ml-[15px] text-[#999999] text-5xl mr-1 cursor-pointer"
+        >
           <MdCancel />
         </div>
-        <div className="w-[41px] h-[41px]">
+        <Link to={"/"} className="w-[41px] h-[41px] cursor-pointer">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1200px-Facebook_Logo_%282019%29.png"
             alt="Facebook Logo"
           />
-        </div>
+        </Link>
       </div>
       <div className="w-full pt-[6px]">
         <div className="border-b border-gray-300 w-full"></div>
