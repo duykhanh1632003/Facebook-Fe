@@ -92,9 +92,12 @@ const SignIn = () => {
             Đăng nhập
           </button>
         </form>
-        <div className="mt-[18px] text-sm text-[#0899FF] cursor-pointer relative">
+        <Link
+          to={"/forgot"}
+          className="mt-[18px] text-sm text-[#0899FF] cursor-pointer relative"
+        >
           <span className="group">Quên mật khẩu?</span>
-        </div>
+        </Link>
         <div className="underline"></div>
         <Link to="/signup" className="register">
           Tạo tài khoản mới
