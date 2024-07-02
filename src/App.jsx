@@ -14,6 +14,7 @@ import ProfileLayout from "./pages/Profile/ProfileLayout";
 import HomeProfile from "./pages/Profile/HomeProfile";
 import { PostContextProvider } from "./context/PostContext.jsx";
 import CreateStories from "./pages/HomePage/Home-middle/Story/CreateStories.jsx";
+import GoogleSuccess from "./components/GoogleSuccess.jsx";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -24,6 +25,8 @@ function App() {
     <main>
       <Routes>
         {/* Public routes */}
+        <Route path="/auth/google/success" element={<GoogleSuccess />} />
+
         <Route
           path="/signup"
           element={!authUser ? <SignUp /> : <Navigate to="/" />}
@@ -59,7 +62,7 @@ function App() {
           element={authUser ? <ProfileLayout /> : <Navigate to="/login" />}
         >
           <Route
-            path="/profile/:id" 
+            path="/profile/:id"
             element={authUser ? <HomeProfile /> : <Navigate to="/login" />}
           />
         </Route>

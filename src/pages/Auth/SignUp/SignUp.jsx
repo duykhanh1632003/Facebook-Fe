@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import HelpIcon from "@mui/icons-material/Help";
 import "../SignIn/SignIn.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useSignup from "../../../hooks/useSignUp";
 import { axiosNotHaveAuth } from "../../../util/axios";
 import axios from "axios";
@@ -15,6 +15,8 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
+  const location = useLocation();
+
   const handleGenderClick = (gender) => {
     setGender(gender);
   };
@@ -33,14 +35,34 @@ const SignUp = () => {
     setPassword(e.target.value);
   };
 
-  const handleOnLoginGoogle = async () => {
+  const handleOnLoginGoogle = () => {
     try {
-      window.open("http://localhost:8000/auth/google/callback");
+      const googleLoginUrl =
+        "https://accounts.google.com/o/oauth2/v2/auth?" +
+        new URLSearchParams({
+          response_type: "code",
+          client_id:
+            "82844157331-qf8ut3n0n3dbdbigeddqmkv4kpuf8u0m.apps.googleusercontent.com",
+          redirect_uri: "http://localhost:8000/auth/google/callback",
+          scope: "email profile",
+        }).toString();
+      window.open(googleLoginUrl, "_self");
     } catch (error) {
       console.error("Google Login Error:", error);
-      // Handle Google login error
     }
   };
+
+  // Check for Google login success
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const user = query.get("user");
+    if (user) {
+      const parsedUser = JSON.parse(decodeURIComponent(user));
+      localStorage.setItem("user", JSON.stringify(parsedUser));
+      // Redirect to home or any other page after successful login
+      window.location.href = "/";
+    }
+  }, [location]);
 
   return (
     <div className="flex pl-[272px] bg-[#F0F2F5] w-full h-screen">

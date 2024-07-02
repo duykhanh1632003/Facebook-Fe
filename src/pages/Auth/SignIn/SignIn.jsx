@@ -30,6 +30,23 @@ const SignIn = () => {
     }
   };
 
+  const loginWithGoogle = () => {
+    try {
+      const googleLoginUrl =
+        "https://accounts.google.com/o/oauth2/v2/auth?" +
+        new URLSearchParams({
+          response_type: "code",
+          client_id:
+            "82844157331-qf8ut3n0n3dbdbigeddqmkv4kpuf8u0m.apps.googleusercontent.com",
+          redirect_uri: "http://localhost:8000/auth/google/callback",
+          scope: "email profile",
+        }).toString();
+      window.open(googleLoginUrl, "_self");
+    } catch (error) {
+      console.error("Google Login Error:", error);
+    }
+  };
+
   return (
     <div className="flex pl-[272px] bg-[#F0F2F5] w-full h-screen">
       <div className="w-[250px] h-[70px] mt-[99px] mr-[332px]">
@@ -82,7 +99,7 @@ const SignIn = () => {
         <Link to="/signup" className="register">
           Tạo tài khoản mới
         </Link>
-        <div className="google mt-3">
+        <div onClick={loginWithGoogle} className="google mt-3">
           <div className="text-md mr-2">Đăng nhập với google</div>
           <img
             className="h-[20px] w-[20px]"
