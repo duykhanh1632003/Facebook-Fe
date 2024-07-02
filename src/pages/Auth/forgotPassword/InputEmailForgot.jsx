@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Separate from "../../../components/Separate";
 import { axiosNotHaveAuth } from "../../../util/axios";
+import { Link } from "react-router-dom";
 
 const InputEmailForgot = ({ OTP, setOTP, setEmailLayout, email, setEmail }) => {
   const handleSearchEmail = async () => {
@@ -20,7 +21,7 @@ const InputEmailForgot = ({ OTP, setOTP, setEmailLayout, email, setEmail }) => {
               OTP: otp,
               recipient_email: email,
             })
-            .then(() => setEmailLayout(false))
+            .then(() => setEmailLayout("sendOTP"))
             .catch(console.log);
           return;
         }
@@ -50,12 +51,15 @@ const InputEmailForgot = ({ OTP, setOTP, setEmailLayout, email, setEmail }) => {
         </div>
         <Separate />
         <div className="w-full flex justify-end mt-4">
-          <div className="mr-2 w-[91px] h-[35px] rounded-lg bg-[#E4E6EB] flex items-center justify-center font-bold">
+          <Link
+            to={"/login"}
+            className="mr-2 cursor-pointer w-[91px] h-[35px] rounded-lg bg-[#E4E6EB] flex items-center justify-center font-bold"
+          >
             Cancel
-          </div>
+          </Link>
           <div
             onClick={handleSearchEmail}
-            className="w-[91px] h-[35px] rounded-lg bg-[#1877F2] flex items-center justify-center font-bold text-white"
+            className="w-[91px] cursor-pointer h-[35px] rounded-lg bg-[#1877F2] flex items-center justify-center font-bold text-white"
           >
             Tìm kiếm
           </div>
