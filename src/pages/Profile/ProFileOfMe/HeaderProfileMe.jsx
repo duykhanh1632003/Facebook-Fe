@@ -6,6 +6,7 @@ import { useAuthContext } from "../../../context/AuthContext";
 import AvatarEditModal from "./AvatarEditModal"; // Import modal component
 import { PiUserSquare } from "react-icons/pi";
 import { MdOutlinePhotoLibrary } from "react-icons/md";
+import NavBarOfProfile from "../NavBarOfProfile";
 
 const HeaderProfileMe = ({ id }) => {
   const { authUser } = useAuthContext();
@@ -119,6 +120,7 @@ const HeaderProfileMe = ({ id }) => {
           </div>
         </div>
         <div className="h-[0.5px] bg-black w-full"></div>
+        <NavBarOfProfile />
       </div>
 
       {/* Avatar Edit Modal */}
