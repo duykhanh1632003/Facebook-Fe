@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 
@@ -22,7 +21,7 @@ const NavBarOfProfile = () => {
   };
 
   return (
-    <div className="mt-2 flex">
+    <div className="mt-2 flex bg-white">
       {tabs.map((tab) => (
         <div key={tab.path} onClick={() => handleClick(tab.path)}>
           <div

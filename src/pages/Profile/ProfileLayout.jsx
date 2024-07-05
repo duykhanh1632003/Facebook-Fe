@@ -4,11 +4,11 @@ import HomeProfile from "./HomeProfile";
 
 const ProfileLayout = () => {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full bg-white">
       <div className="z-4">
         <Header />
       </div>
-      <div className="h-full w-full">
+      <div className="h-full overflow-y-auto w-full">
         <HomeProfile />
       </div>
     </div>

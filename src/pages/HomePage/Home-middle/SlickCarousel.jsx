@@ -23,7 +23,7 @@ export default function SlickCarousel() {
     },
   };
   return (
-    <div className="bg-[#F0F2F5]">
+    <div className="bg-[#F0F2F5] mb-[24px]">
       <Carousel responsive={responsive}>
         <Link
           to={"/stories/create"}
