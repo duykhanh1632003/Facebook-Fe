@@ -37,7 +37,7 @@ const MiddleSideBar = () => {
       >
         <SlickCarousel />
         <Status />
-        <Posted />
+        <Posted userId={""} />
         <div className="h-[100px] w-full mt-5 items-center flex justify-center"></div>
       </div>
     </div>

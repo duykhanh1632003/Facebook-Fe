@@ -22,7 +22,7 @@ const HomeProfile = () => {
       </div>
       <div className="flex overscroll-auto mt-[225px] bg-[#F0F2F5] w-full] ">
         <LeftPostOfUser />
-        <RightPostOfUser />
+        <RightPostOfUser userId={id} />
       </div>
       <div className="h-[500px]"></div>
     </div>
