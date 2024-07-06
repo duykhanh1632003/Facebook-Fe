@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdPhotos } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import AvatarEditor from "react-avatar-editor";
@@ -8,6 +8,9 @@ import { fontFamily } from "./../../../../../util/background";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { imageDb } from "../../../../../config/FireBaseUrl";
+import { useAuthContext } from "../../../../../context/AuthContext";
+import { axiosHaveAuth } from "../../../../../util/axios";
+import { useNavigate } from "react-router-dom";
 
 const RightStoriesCreate = ({
   setLeftTextStr,
@@ -21,7 +24,8 @@ const RightStoriesCreate = ({
   setCancel,
   rightImageCrop,
   valueInput,
-  ham,
+  runFuction,
+  setRunFuction,
   setRightImageCrop,
 }) => {
   const [img, setImg] = useState(null);
@@ -29,7 +33,9 @@ const RightStoriesCreate = ({
   const editorRef = useRef(null);
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
-
+  const { authUser } = useAuthContext();
+  const instance = axiosHaveAuth();
+  const navigate = useNavigate();
   const handleDrop = (e) => {
     e.preventDefault();
     setButtonCreateImageText(false);
@@ -83,24 +89,86 @@ const RightStoriesCreate = ({
   };
 
   useEffect(() => {
-    if (ham) {
-      if (rightImageCrop) {
-        if (editorRef.current) {
-          const canvas = editorRef.current.getImage();
-          canvas.toBlob(async (blob) => {
-            if (blob) {
-              const file = new File([blob], "profile_picture.png", {
-                type: "image/png",
-              });
-              const imgRef = ref(imageDb, `avatars/${v4()}`);
-              const snapshot = await uploadBytes(imgRef, file);
-              const url = await getDownloadURL(snapshot.ref);
-            }
-          });
-        }
+    const uploadImageAndCreateStory = async () => {
+      if (editorRef.current) {
+        const canvas = editorRef.current.getImage();
+        canvas.toBlob(async (blob) => {
+          if (blob) {
+            const file = new File([blob], "profile_picture.png", {
+              type: "image/png",
+            });
+            const imgRef = ref(imageDb, `avatars/${v4()}`);
+            const snapshot = await uploadBytes(imgRef, file);
+            const url = await getDownloadURL(snapshot.ref);
+
+            // API call to create image story
+            await createImageStory(authUser.user._id, url);
+          }
+        });
       }
+    };
+
+    if (runFuction) {
+      if (rightImageCrop) {
+        uploadImageAndCreateStory();
+      } else {
+        // API call to create text story
+        createTextStory(
+          authUser.user._id,
+          valueInput,
+          nameValueFont,
+          nameValueBg
+        );
+      }
+      setRunFuction(false);
     }
-  }, [ham]);
+  }, [
+    runFuction,
+    authUser.user._id,
+    rightImageCrop,
+    valueInput,
+    nameValueFont,
+    nameValueBg,
+    setRunFuction,
+  ]);
+
+  const createTextStory = async (userId, text, font, background) => {
+    try {
+      const response = await instance.post("/api/stories/text", {
+        userId,
+        text,
+        font,
+        background,
+      });
+
+      if (response.status !== 200) {
+        console.error("Failed to create text story");
+      } else {
+        console.log("Text story created successfully");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Failed to create text story", error);
+    }
+  };
+
+  const createImageStory = async (userId, imageUrl) => {
+    try {
+      const response = await instance.post("/api/stories/image", {
+        userId,
+        imageUrl,
+      });
+
+      if (response.status !== 200) {
+        console.error("Failed to create image story");
+      } else {
+        console.log("Image story created successfully");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Failed to create image story", error);
+    }
+  };
 
   const backGroundImageStrs = backGroundImageStr();
   const fontFamilys = fontFamily();
@@ -110,6 +178,7 @@ const RightStoriesCreate = ({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
+      <div></div>
       <div className="flex">
         {buttonCreateImageText && (
           <div

@@ -13,11 +13,9 @@ const LeftStory = ({
   setNameValueFont,
   createImage,
   cancel,
-  handleSave,
-  nameValueBg,
   setNameValueBg,
   setValueInput,
-  setHam,
+  setRunFunction,
   setButtonCreateImageText,
   setCancel,
   setLeftTextStr,
@@ -87,7 +85,7 @@ const LeftStory = ({
   };
 
   const handleChangeNoi = () => {
-    setHam(true);
+    setRunFunction(true);
   };
 
   const handleCancel = () => {
@@ -151,7 +149,7 @@ const LeftStory = ({
           </div>
           <div
             className="bg-[#0861F2] font-medium text-white cursor-pointer w-[193px] h-[36px] rounded-md flex items-center justify-center"
-            onClick={handleSave}
+            onClick={handleChangeNoi}
           >
             Chia sẻ lên tin
           </div>
@@ -213,8 +211,6 @@ const LeftStory = ({
           </div>
         </div>
       )}
-
-      <div onClick={handleChangeNoi}> click vao day </div>
     </div>
   );
 };

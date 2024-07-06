@@ -12,7 +12,7 @@ const CreateStories = () => {
   const [valueInput, setValueInput] = useState("");
   const [leftTextStr, setLeftTextStr] = useState(false);
 
-  const [ham, setHam] = useState(false);
+  const [runFuction, setRunFunction] = useState(false);
   return (
     <div className="flex">
       <div>
@@ -26,7 +26,7 @@ const CreateStories = () => {
           nameValueBg={nameValueBg}
           setNameValueBg={setNameValueBg}
           setNameValueFont={setNameValueFont}
-          setHam={setHam}
+          setRunFunction={setRunFunction}
           setRightImageCrop={setRightImageCrop}
           setButtonCreateImageText={setButtonCreateImageText}
         />
@@ -45,7 +45,7 @@ const CreateStories = () => {
           valueInput={valueInput}
           leftTextStr={leftTextStr}
           setRightImageCrop={setRightImageCrop}
-          ham={ham}
+          runFuction={runFuction}
           setLeftTextStr={setLeftTextStr}
         />
       </div>
