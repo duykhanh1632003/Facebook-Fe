@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaChevronDown, FaPen } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { IoCamera } from "react-icons/io5";
@@ -7,15 +7,11 @@ import AvatarEditModal from "./AvatarEditModal"; // Import modal component
 import { PiUserSquare } from "react-icons/pi";
 import { MdOutlinePhotoLibrary } from "react-icons/md";
 import NavBarOfProfile from "../NavBarOfProfile";
-import { axiosHaveAuth } from "../../../util/axios";
 
-const HeaderProfileMe = ({ id }) => {
+const HeaderProfileMe = ({ id, friends, numberOfFriends }) => {
   const { authUser } = useAuthContext();
   const [showDropdown, setShowDropdown] = useState(false); // State to control the dropdown menu
   const [showAvatarModal, setShowAvatarModal] = useState(false); // State to control avatar edit modal
-  const [numberOfFriends, setNumberOfFriends] = useState(0);
-  const [friends, setFriends] = useState([]);
-  const instance = axiosHaveAuth();
 
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
@@ -23,22 +19,6 @@ const HeaderProfileMe = ({ id }) => {
     setShowDropdown(false);
     setShowAvatarModal(true);
   };
-
-  useEffect(() => {
-    const fetchNumberOfFriends = async () => {
-      try {
-        const response = await instance.get(
-          `/api/number/friend/${authUser.user._id}`
-        );
-        console.log("Check data", response);
-        setNumberOfFriends(response.data.metadata.numberOfFriends);
-        setFriends(response.data.metadata.friends.slice(0, 8));
-      } catch (error) {
-        console.error("Failed to fetch number of friends", error);
-      }
-    };
-    fetchNumberOfFriends();
-  }, [authUser.user._id]);
 
   return (
     <div>

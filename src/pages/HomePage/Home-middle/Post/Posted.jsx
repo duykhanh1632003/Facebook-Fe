@@ -11,7 +11,6 @@ import {
   fetchPostsStart,
   fetchPostsFailure,
 } from "../../../../redux/post/postsSlice";
-import LikeIcon from "../../../../img/LikeIcon";
 import { Link } from "react-router-dom";
 
 const Posted = ({ userId }) => {

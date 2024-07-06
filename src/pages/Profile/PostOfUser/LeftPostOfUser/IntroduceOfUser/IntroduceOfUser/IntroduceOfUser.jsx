@@ -13,7 +13,7 @@ const IntroduceOfUser = () => {
         Chỉnh sửa tiểu sử
       </div>
       <div className="flex items-center w-full mt-3">
-        <div className="mr-2">
+        <div className="mr-2 text-lg text-[#8C939D]">
           <FaHouseChimney />
         </div>
         <div className="flex">
@@ -22,7 +22,7 @@ const IntroduceOfUser = () => {
         </div>
       </div>
       <div className="flex items-center w-full mt-3">
-        <div className="mr-2">
+        <div className="mr-2 text-lg text-[#8C939D]">
           <IoLocation />
         </div>
         <div className="flex">
