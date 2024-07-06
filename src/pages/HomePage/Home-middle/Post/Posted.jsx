@@ -11,7 +11,7 @@ import {
   fetchPostsStart,
   fetchPostsFailure,
 } from "../../../../redux/post/postsSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Posted = ({ userId }) => {
   const [posts, setPosts] = useState([]);
@@ -23,7 +23,7 @@ const Posted = ({ userId }) => {
   const instance = axiosHaveAuth();
 
   const observer = useRef();
-
+  const navigate = useNavigate();
   const lastPostElementRef = useCallback((node) => {
     if (status === "loading") return;
     if (observer.current) observer.current.disconnect();
@@ -82,6 +82,10 @@ const Posted = ({ userId }) => {
     console.log(error);
   }
 
+  const comeToProfile = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
   return (
     <div>
       {posts.map((post, index) => {
@@ -96,7 +100,10 @@ const Posted = ({ userId }) => {
           >
             <div className="flex justify-between pl-[16px] pr-[16px] pt-[10px]">
               <div className="flex">
-                <div className="w-[41px] h-[41px] rounded-full">
+                <div
+                  onClick={() => comeToProfile(author._id)}
+                  className="w-[41px] h-[41px] rounded-full"
+                >
                   <img
                     className="w-[41px] h-[41px] rounded-full object-cover"
                     src={author.avatar}

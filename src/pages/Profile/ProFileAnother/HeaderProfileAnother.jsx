@@ -3,21 +3,29 @@ import { FaFacebookMessenger, FaChevronDown } from "react-icons/fa";
 import { MdPersonAddAlt1, MdPersonRemoveAlt1 } from "react-icons/md";
 import { BsPersonCheckFill } from "react-icons/bs";
 import { axiosHaveAuth } from "../../../util/axios";
-const HeaderProfileAnother = ({ id }) => {
+import NavBarOfProfile from "../NavBarOfProfile";
+const HeaderProfileAnother = ({ id, friends, numberOfFriends }) => {
   const instance = axiosHaveAuth();
-
-  //   const [dataUser, setDataUser] = useState(null);
-
-  //   useEffect(() => {
-  //     const getDataOfUser = async () => {
-  //       const getDataUser = instance.get(`/getProfile/:${id}`);
-  //     };
-  //     getDataOfUser();
-  //   }, [id]);
-
+  const [userDetails, setUserDetails] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false); // State to control the dropdown menu
 
   const [friendStatus, setFriendStatus] = useState("none"); // Possible values: "none", "sent", "friends", "pending"
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await instance.get(`/api/detailUser/user/${id}`);
+        console.log("check ress", response);
+        setUserDetails(response.data.metadata.userDetails);
+        setFriendStatus(response.data.metadata.friendStatus);
+      } catch (error) {
+        console.error("Failed to fetch user details", error);
+      }
+    };
+
+    fetchUserDetails();
+  }, [id]);
+
   const handleSendRequest = () => setFriendStatus("sent");
   const handleCancelRequest = () => setFriendStatus("none");
   const handleAcceptRequest = () => setFriendStatus("friends");
@@ -39,29 +47,24 @@ const HeaderProfileAnother = ({ id }) => {
           <div className="ml-[36px] w-[170px] h-[170px] rounded-full absolute mt-[-28px] bg-white border-4 border-transparent">
             <img
               className="w-[169px] h-[169px] rounded-full object-cover"
-              src="/src/assets/anh-dai-dien.jpg"
+              src={userDetails?.avatar}
               alt="avt"
             />
           </div>
           <div className="ml-[220px] mt-[28px]">
-            <div className="text-3xl font-bold">Huyền Trang (Buns)</div>
+            <div className="text-3xl font-bold">
+              {userDetails?.firstName} {userDetails?.lastName}
+            </div>
             <div className="text-[#656770] text-sm font-medium mt-[5px] mb-[5px]">
-              1020 bạn bè
+              {numberOfFriends} bạn bè
             </div>
             <div className="h-[31px] w-[31px] flex">
               <div className="avatar-group-profile">
-                <div className="avatar-profile">
-                  <img
-                    src="/src/assets/328619176_717087896492083_6413426032507387658_n.jpg"
-                    alt="Avatar"
-                  />
-                </div>
-                <div className="avatar-profile">
-                  <img
-                    src="/src/assets/328619176_717087896492083_6413426032507387658_n.jpg"
-                    alt="Avatar"
-                  />
-                </div>
+                {friends?.map((friend) => (
+                  <div key={friend.id} className="avatar-profile">
+                    <img src={friend.avatar} alt="avatar" />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -133,6 +136,7 @@ const HeaderProfileAnother = ({ id }) => {
           </div>
         </div>
         <div className="h-[0.5px] bg-black w-full"></div>
+        <NavBarOfProfile />
       </div>
     </div>
   );

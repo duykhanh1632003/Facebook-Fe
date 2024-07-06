@@ -19,9 +19,7 @@ const HomeProfile = () => {
   useEffect(() => {
     const fetchNumberOfFriends = async () => {
       try {
-        const response = await instance.get(
-          `/api/number/friend/${authUser.user._id}`
-        );
+        const response = await instance.get(`/api/number/friend/${id}`);
         console.log("Check data", response);
         setNumberOfFriends(response.data.metadata.numberOfFriends);
         setFriends(response.data.metadata.friends.slice(0, 8));
@@ -42,7 +40,11 @@ const HomeProfile = () => {
             numberOfFriends={numberOfFriends}
           />
         ) : (
-          <HeaderProfileAnother id={id} />
+          <HeaderProfileAnother
+            id={id}
+            friends={friends}
+            numberOfFriends={numberOfFriends}
+          />
         )}
       </div>
       <div className="flex overscroll-auto mt-[225px] bg-[#F0F2F5] w-full] ">
