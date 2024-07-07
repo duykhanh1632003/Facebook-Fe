@@ -51,6 +51,6 @@ const CreateStories = () => {
       </div>
     </div>
   );
-};
+};  
 
 export default CreateStories;
