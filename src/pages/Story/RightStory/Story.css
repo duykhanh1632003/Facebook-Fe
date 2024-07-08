@@ -1,0 +1,40 @@
+
+  
+  .next-user-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .next-user-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* App.css */
+  .story-item{
+    height: 635px;
+    width: 366px;
+  }
+  
+  
+  .story-image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+ 
+  .navigation-buttons {
+    
+    position: absolute;
+  }
+  
+  .user-story {
+    position: relative;
+    align-items: center;
+    width: 366px;
+    height: 100%;
+  }
+  

@@ -17,6 +17,7 @@ import CreateStories from "./pages/HomePage/Home-middle/Story/CreateStories.jsx"
 import GoogleSuccess from "./components/GoogleSuccess.jsx";
 import ForgotPassWordLayout from "./pages/Auth/forgotPassword/ForgotpassWordLayout.jsx";
 import Test from "./test/Test.jsx";
+import StoryContainer from "./pages/Story/StoryContainer.jsx";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -34,6 +35,7 @@ function App() {
           path="/forgot"
           element={!authUser ? <ForgotPassWordLayout /> : <Navigate to="/" />}
         />
+
         <Route
           path="/signup"
           element={!authUser ? <SignUp /> : <Navigate to="/" />}
@@ -65,6 +67,10 @@ function App() {
             element={authUser ? <FriendContainer /> : <Navigate to="/login" />}
           />
         </Route>
+        <Route
+          path="/story"
+          element={authUser ? <StoryContainer /> : <Navigate to="/login" />}
+        />
         <Route
           element={authUser ? <ProfileLayout /> : <Navigate to="/login" />}
         >
