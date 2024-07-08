@@ -23,6 +23,13 @@ const RightStory = () => {
             "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg",
           createdAt: "2024-07-07T12:34:56.000Z",
         },
+        {
+          storyId: "story3",
+          type: "image",
+          image:
+            "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg",
+          createdAt: "2024-07-07T12:34:56.000Z",
+        },
         // {
         //   storyId: "story2",
         //   type: "text",

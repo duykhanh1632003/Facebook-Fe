@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
 import UserStory from "./UserStory";
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import Cry from "../../../../animation/animationComponent/cry";
+import Like from "../../../../animation/animationComponent/like";
+import Love from "../../../../animation/animationComponent/Love";
+import Haha from "../../../../animation/animationComponent/Haha";
+import Wow from "../../../../animation/animationComponent/wow";
+import Phanno from "../../../../animation/animationComponent/phanno";
 
 const StoryList = ({ users }) => {
   const [activeUserIndex, setActiveUserIndex] = useState(0);

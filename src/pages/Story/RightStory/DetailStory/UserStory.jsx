@@ -16,9 +16,19 @@ const UserStory = ({ user, swiperRef, setUserEnd, handleNext, handleBack }) => {
     };
   }, [swiperRef, setUserEnd]);
 
+  useEffect(() => {
+    const bullets = document.querySelectorAll(
+      `.swiper-pagination-${user.userId} .swiper-pagination-bullet`
+    );
+    const bulletWidth = 300 / user.stories.length;
+    bullets.forEach((bullet) => {
+      bullet.style.width = `${bulletWidth}px`;
+    });
+  }, [user]);
+
   return (
     <div className="user-story relative z-1">
-      <div className="flex absolute justify-between w-[549px] mt-[300px] ml-[310px]  z-5">
+      <div className="flex absolute justify-between w-[549px] mt-[300px] ml-[310px] z-5">
         <button
           className="w-[51px] h-[51px] rounded-full bg-[#999999] text-3xl flex items-center justify-center hover:bg-white cursor-pointer z-5"
           onClick={handleBack}
@@ -34,12 +44,18 @@ const UserStory = ({ user, swiperRef, setUserEnd, handleNext, handleBack }) => {
       </div>
 
       <div className="user-info absolute text-black z-2 ml-[420px] w-full h-[50px] mt-[20px] ">
-        <div className={`swiper-pagination-${user.userId} z-2`} />
+        {user.stories.length > 1 ? (
+          <div className={`swiper-pagination-${user.userId} z-2`}>
+            <div className="progress-bar"></div>
+          </div>
+        ) : (
+          <div className="w-[300px] h-[5px] bg-blue-500 mt-3 ml-3 mb-1"></div>
+        )}
         <div className="flex">
           <img
             src={user.avatar}
             alt={user.userName}
-            className="w-[40px] h-[40px] rounded-full absolute mt-2"
+            className="w-[40px] h-[40px] rounded-full mt-2"
           />
           <span className="user-name text-black font-medium text-md ml-2">
             {user.userName}
