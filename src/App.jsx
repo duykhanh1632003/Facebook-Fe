@@ -16,6 +16,7 @@ import { PostContextProvider } from "./context/PostContext.jsx";
 import CreateStories from "./pages/HomePage/Home-middle/Story/CreateStories.jsx";
 import GoogleSuccess from "./components/GoogleSuccess.jsx";
 import ForgotPassWordLayout from "./pages/Auth/forgotPassword/ForgotpassWordLayout.jsx";
+import Test from "./test/Test.jsx";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -26,6 +27,8 @@ function App() {
     <main>
       <Routes>
         {/* Public routes */}
+        <Route path="/test" element={<Test />} />
+
         <Route path="/auth/google/success" element={<GoogleSuccess />} />
         <Route
           path="/forgot"
