@@ -70,7 +70,7 @@ export default function SlickCarousel() {
             />
           </div>
         </Link>
-        {data.map((story, index) => (
+        {data?.map((story, index) => (
           <div
             key={index}
             className="card relative w-[250px] z-10 cursor-pointer"
@@ -78,29 +78,32 @@ export default function SlickCarousel() {
             <div className="absolute w-[39px] h-[39px] rounded-full p-1 bg-blue-600 z-10 mt-[11px] ml-[11px]">
               <img
                 className="rounded-full w-full h-full object-cover"
-                src={story.author.avatar}
+                src={story.avatar}
               />
             </div>
             <p className="absolute z-10 mt-[224px] ml-[13px] text-slate-50 text-sm font-medium">
-              {story.author.firstName} {story.author.lastName}
+              {story.uẻName}
             </p>
-            {story.type === "image" ? (
+            {story.stories[0].type === "image" ? (
               <div className="h-[250px] rounded-lg absolute">
                 <img
                   className="img-card object-fill rounded-lg h-[250px]"
-                  src={story.image}
+                  src={story.stories[0].image}
                 />
               </div>
             ) : (
               <div
                 className="h-[250px] w-full rounded-lg absolute flex items-center justify-center"
                 style={{
-                  background: backGroundImages[story.backGround - 1].image,
-                  color: backGroundImages[story.backGround - 1].color,
-                  fontFamily: fontFamilies[story.font - 1].fontFamily,
+                  background:
+                    backGroundImages[story.stories[0].backGround - 1].image,
+                  color:
+                    backGroundImages[story.stories[0].backGround - 1].color,
+                  fontFamily:
+                    fontFamilies[story.stories[0].font - 1].fontFamily,
                 }}
               >
-                <p className="text-center">{story.text}</p>
+                <p className="text-center">{story.stories[0].text}</p>
               </div>
             )}
           </div>

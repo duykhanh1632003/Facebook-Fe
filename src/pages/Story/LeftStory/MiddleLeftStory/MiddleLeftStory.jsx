@@ -4,7 +4,7 @@ import AllOfStory from "./AllOfStory/AllOfStory";
 
 const MiddleLeftStory = () => {
   return (
-    <div className="p-2 overflow-y-auto h-full fixed">
+    <div className="p-2 overflow-y-auto h-full">
       <div className="font-bold text-2xl p-1">Tin</div>
       <div className="flex m-1">
         <div className="text-blue-500 text-sm font-medium mr-1">

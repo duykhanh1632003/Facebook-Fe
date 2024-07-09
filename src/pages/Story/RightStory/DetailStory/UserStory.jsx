@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -55,7 +55,7 @@ const UserStory = ({ user, swiperRef, setUserEnd, handleNext, handleBack }) => {
           <img
             src={user.avatar}
             alt={user.userName}
-            className="w-[40px] h-[40px] rounded-full mt-2"
+            className="w-[40px] h-[40px] rounded-full mt-2 object-cover"
           />
           <span className="user-name text-black font-medium text-md ml-2">
             {user.userName}
@@ -73,6 +73,13 @@ const UserStory = ({ user, swiperRef, setUserEnd, handleNext, handleBack }) => {
         autoplay={{ delay: 60000 }}
         modules={[Pagination, Autoplay]}
         className="w-full h-full ml-[400px] pt-3 rounded-md"
+        onSlideChange={(swiper) => {
+          if (swiper.isEnd) {
+            setUserEnd(true);
+          } else {
+            setUserEnd(false);
+          }
+        }}
       >
         {user.stories.map((story) => (
           <SwiperSlide key={story.storyId}>
@@ -80,6 +87,11 @@ const UserStory = ({ user, swiperRef, setUserEnd, handleNext, handleBack }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="flex absolute mt-[100px]">
+        <div className="w-[303px] h-[42px] bg-black rounded-3xl border-2 border-zinc-50 text-[#ffffff5b] flex items-center p-2">
+          Trả lời.....
+        </div>
+      </div>
     </div>
   );
 };
