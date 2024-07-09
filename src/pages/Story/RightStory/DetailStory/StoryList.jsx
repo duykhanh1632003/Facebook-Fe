@@ -1,19 +1,23 @@
 import React, { useRef, useState, useEffect } from "react";
 import UserStory from "./UserStory";
 
-const StoryList = ({ users }) => {
-  const [activeUserIndex, setActiveUserIndex] = useState(0);
+const StoryList = ({ users, activeUserIndex }) => {
+  const [currentUserIndex, setCurrentUserIndex] = useState(activeUserIndex);
   const [isUserEnd, setIsUserEnd] = useState(false);
   const userSwiperRefs = useRef(users.map(() => React.createRef()));
 
+  useEffect(() => {
+    setCurrentUserIndex(activeUserIndex);
+  }, [activeUserIndex]);
+
   const handleNext = () => {
     const activeUserSwiper =
-      userSwiperRefs.current[activeUserIndex].current.swiper;
+      userSwiperRefs.current[currentUserIndex].current.swiper;
     if (activeUserSwiper.isEnd) {
-      if (activeUserIndex < users.length - 1) {
-        setActiveUserIndex(activeUserIndex + 1);
+      if (currentUserIndex < users.length - 1) {
+        setCurrentUserIndex(currentUserIndex + 1);
       } else {
-        setActiveUserIndex(0); // Loop back to the first user
+        setCurrentUserIndex(0); // Loop back to the first user
       }
       setIsUserEnd(false);
     } else {
@@ -23,12 +27,12 @@ const StoryList = ({ users }) => {
 
   const handleBack = () => {
     const activeUserSwiper =
-      userSwiperRefs.current[activeUserIndex].current.swiper;
+      userSwiperRefs.current[currentUserIndex].current.swiper;
     if (activeUserSwiper.isBeginning) {
-      if (activeUserIndex > 0) {
-        setActiveUserIndex(activeUserIndex - 1);
+      if (currentUserIndex > 0) {
+        setCurrentUserIndex(currentUserIndex - 1);
       } else {
-        setActiveUserIndex(users.length - 1);
+        setCurrentUserIndex(users.length - 1);
       }
     } else {
       activeUserSwiper.slidePrev();
@@ -37,16 +41,16 @@ const StoryList = ({ users }) => {
 
   useEffect(() => {
     const activeUserSwiper =
-      userSwiperRefs.current[activeUserIndex].current.swiper;
+      userSwiperRefs.current[currentUserIndex].current.swiper;
     activeUserSwiper.slideTo(0, 0);
-  }, [activeUserIndex]);
+  }, [currentUserIndex]);
 
   return (
     <div className="h-full w-full">
       {users.map((user, index) => (
         <div
           key={user.userId}
-          style={{ display: index === activeUserIndex ? "block" : "none" }}
+          style={{ display: index === currentUserIndex ? "block" : "none" }}
         >
           <UserStory
             handleNext={handleNext}

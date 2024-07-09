@@ -2,7 +2,7 @@ import React from "react";
 import { IoMdAdd } from "react-icons/io";
 import AllOfStory from "./AllOfStory/AllOfStory";
 
-const MiddleLeftStory = () => {
+const MiddleLeftStory = ({ user }) => {
   return (
     <div className="p-2 overflow-y-auto h-full">
       <div className="font-bold text-2xl p-1">Tin</div>
@@ -31,7 +31,7 @@ const MiddleLeftStory = () => {
           </div>
         </div>
       </div>
-      <AllOfStory />
+      <AllOfStory user={user} />
     </div>
   );
 };

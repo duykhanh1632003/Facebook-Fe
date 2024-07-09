@@ -1,3 +1,4 @@
+import { useActiveUserContext } from "../../context/StoryContext";
 import { axiosHaveAuth } from "../../util/axios";
 import LeftStory from "./LeftStory/LeftStory";
 import RightStory from "./RightStory/RightStory";
@@ -59,6 +60,9 @@ const StoryContainer = () => {
       ],
     },
   ]);
+
+  const { activeUserIndex } = useActiveUserContext();
+
   useEffect(() => {
     const fetchNumberOfFriends = async () => {
       try {
@@ -76,8 +80,8 @@ const StoryContainer = () => {
   }, []);
   return (
     <div className="h-screen w-full bg-white">
-      <LeftStory />
-      <RightStory user={user} />
+      <LeftStory user={user}  />
+      <RightStory user={user} activeUserIndex={activeUserIndex} />
     </div>
   );
 };

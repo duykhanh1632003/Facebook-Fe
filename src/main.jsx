@@ -8,13 +8,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
+import { ActiveUserProvider } from "./context/StoryContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
+        <ActiveUserProvider>
           <Provider store={store}>
             <App />
           </Provider>
+        </ActiveUserProvider>
+
         <ToastContainer />
       </AuthContextProvider>
     </BrowserRouter>

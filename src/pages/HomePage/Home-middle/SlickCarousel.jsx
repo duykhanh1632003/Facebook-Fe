@@ -2,15 +2,17 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { MdOutlineAdd } from "react-icons/md";
 import { useAuthContext } from "../../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { axiosHaveAuth } from "../../../util/axios";
 import { backGroundImageStr, fontFamily } from "./../../../util/background";
+import { useActiveUser } from "../../../context/StoryContext";
 
 export default function SlickCarousel() {
   const { authUser } = useAuthContext();
   const instance = axiosHaveAuth();
   const [data, setData] = useState([]);
+  const { setActiveUserIndex } = useActiveUser();
 
   const responsive = {
     desktop: {
@@ -47,6 +49,11 @@ export default function SlickCarousel() {
 
   const fontFamilies = fontFamily();
   const backGroundImages = backGroundImageStr();
+  const navigate = useNavigate();
+  const handleOnChangeRoute = (index) => {
+    setActiveUserIndex(index);
+    navigate("/story");
+  };
 
   return (
     <div className="bg-[#F0F2F5] mb-[24px]">
@@ -74,6 +81,7 @@ export default function SlickCarousel() {
           <div
             key={index}
             className="card relative w-[250px] z-10 cursor-pointer"
+            onClick={() => handleOnChangeRoute(index)}
           >
             <div className="absolute w-[39px] h-[39px] rounded-full p-1 bg-blue-600 z-10 mt-[11px] ml-[11px]">
               <img
@@ -87,7 +95,7 @@ export default function SlickCarousel() {
             {story.stories[0].type === "image" ? (
               <div className="h-[250px] rounded-lg absolute">
                 <img
-                  className="img-card object-fill rounded-lg h-[250px]"
+                  className="img-card object-cover rounded-lg h-[250px]"
                   src={story.stories[0].image}
                 />
               </div>

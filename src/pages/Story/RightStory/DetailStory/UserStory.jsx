@@ -7,7 +7,14 @@ import { Pagination, Autoplay } from "swiper/modules";
 import StoryItem from "./StoryItem";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
-const UserStory = ({ user, swiperRef, setUserEnd, handleNext, handleBack }) => {
+const UserStory = ({
+  user,
+  swiperRef,
+  setUserEnd,
+  handleNext,
+  handleBack,
+  currentUserIndex,
+}) => {
   useEffect(() => {
     const swiperInstance = swiperRef.current.swiper;
     swiperInstance.on("reachEnd", () => setUserEnd(true));
@@ -24,7 +31,7 @@ const UserStory = ({ user, swiperRef, setUserEnd, handleNext, handleBack }) => {
     bullets.forEach((bullet) => {
       bullet.style.width = `${bulletWidth}px`;
     });
-  }, [user]);
+  }, [user, handleNext, handleBack, swiperRef, setUserEnd, currentUserIndex]);
 
   return (
     <div className="user-story relative z-1">

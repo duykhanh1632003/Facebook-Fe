@@ -7,20 +7,23 @@ import TextField from "@mui/material/TextField";
 import Select from "react-select";
 import { backGroundImage } from "../../../../../util/background";
 import { Link, useNavigate } from "react-router-dom";
+import { useStoriesContext } from "../../../../../context/StoriesContext";
 
-const LeftStory = ({
-  leftTextStr,
-  setNameValueFont,
-  createImage,
-  cancel,
-  setNameValueBg,
-  setValueInput,
-  setRunFunction,
-  setButtonCreateImageText,
-  setCancel,
-  setLeftTextStr,
-  setRightImageCrop,
-}) => {
+const LeftStory = () => {
+  const {
+    leftTextStr,
+    setNameValueFont,
+    createImage,
+    cancel,
+    setNameValueBg,
+    setValueInput,
+    setRunFunction,
+    setButtonCreateImageText,
+    setCancel,
+    setLeftTextStr,
+    setRightImageCrop,
+  } = useStoriesContext();
+
   const { authUser } = useAuthContext();
   const backgroundImages = backGroundImage();
   const navigate = useNavigate();
@@ -94,9 +97,11 @@ const LeftStory = ({
     setLeftTextStr(false);
     setCancel(false);
   };
+
   const handleGoBack = () => {
     navigate(-1); // This navigates back to the previous page
   };
+
   return (
     <div className="w-[360px] h-screen shadow-lg overflow-y-auto overflow-x-hidden">
       <div className="w-full h-[54px] flex mt-[4px] items-center">

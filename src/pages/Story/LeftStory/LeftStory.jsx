@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Separate from "../../../components/Separate";
 import MiddleLeftStory from "./MiddleLeftStory/MiddleLeftStory";
 
-const LeftStory = () => {
+const LeftStory = ({ user }) => {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1); // This navigates back to the previous page
@@ -26,7 +26,7 @@ const LeftStory = () => {
       </div>
       <Separate />
       <div className="h-full w-full">
-        <MiddleLeftStory />
+        <MiddleLeftStory user={user} />
       </div>
     </div>
   );
