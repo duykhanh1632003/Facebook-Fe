@@ -17,10 +17,12 @@ const UserStory = ({
 }) => {
   useEffect(() => {
     const swiperInstance = swiperRef.current.swiper;
-    swiperInstance.on("reachEnd", () => setUserEnd(true));
-    return () => {
-      swiperInstance.off("reachEnd");
-    };
+    if (swiperInstance) {
+      swiperInstance.on("reachEnd", () => setUserEnd(true));
+      return () => {
+        swiperInstance.off("reachEnd");
+      };
+    }
   }, [swiperRef, setUserEnd]);
 
   useEffect(() => {

@@ -9,7 +9,7 @@ const AllOfStory = ({ user }) => {
       <div className="font-medium ml-2 overflow-y-auto">Tất cả tin</div>
       {user?.map((userData, index) => (
         <div
-          key={user.userId}
+          key={userData.userId}
           className="flex flex-col h-[78px] w-[327px] rounded-lg bg-red-200 justify-center pl-2 mb-2 cursor-pointer"
           onClick={() => setActiveUserIndex(index)}
         >

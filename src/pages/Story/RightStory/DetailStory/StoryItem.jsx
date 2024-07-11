@@ -3,7 +3,6 @@ import { backGroundImageStr, fontFamily } from "../../../../util/background";
 const StoryItem = ({ story }) => {
   const fontFamilies = fontFamily();
   const backGroundImages = backGroundImageStr();
-
   return (
     <div className="story-item rounded-md">
       {story.type === "image" ? (
