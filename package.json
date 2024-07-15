@@ -46,8 +46,11 @@
     "react-toastify": "^10.0.5",
     "react-zoom-pan-pinch": "^3.6.0",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.11",
     "swiper": "^11.1.4",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "video.js": "^8.16.1",
+    "videojs-playbackrate-adjuster": "^1.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

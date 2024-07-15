@@ -18,7 +18,8 @@ import GoogleSuccess from "./components/GoogleSuccess.jsx";
 import ForgotPassWordLayout from "./pages/Auth/forgotPassword/ForgotpassWordLayout.jsx";
 import Test from "./test/Test.jsx";
 import StoryContainer from "./pages/Story/StoryContainer.jsx";
-
+import WatchLayout from "./pages/watch/WatchLayout.jsx";
+import WatchContainer from "./pages/watch/WatchContainer.jsx";
 function App() {
   const { authUser } = useAuthContext();
   useEffect(() => {
@@ -65,6 +66,12 @@ function App() {
           <Route
             path="/friends"
             element={authUser ? <FriendContainer /> : <Navigate to="/login" />}
+          />
+        </Route>
+        <Route element={authUser ? <WatchLayout /> : <Navigate to="/login" />}>
+          <Route
+            path="/watch"
+            element={authUser ? <WatchContainer /> : <Navigate to="/login" />}
           />
         </Route>
         <Route

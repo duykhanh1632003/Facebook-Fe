@@ -1,16 +1,9 @@
-import { useEffect, useRef, useState } from "react";
 import { IoMdPhotos } from "react-icons/io";
 import { IoText } from "react-icons/io5";
 import AvatarEditor from "react-avatar-editor";
 import { AiOutlineRotateRight } from "react-icons/ai";
 import { backGroundImageStr } from "../../../../../util/background";
 import { fontFamily } from "./../../../../../util/background";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { v4 } from "uuid";
-import { imageDb } from "../../../../../config/FireBaseUrl";
-import { useAuthContext } from "../../../../../context/AuthContext";
-import { axiosHaveAuth } from "../../../../../util/axios";
-import { useNavigate } from "react-router-dom";
 import { useStoriesContext } from "../../../../../context/StoriesContext";
 
 const RightStoriesCreate = () => {
