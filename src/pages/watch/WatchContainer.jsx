@@ -6,6 +6,7 @@ const WatchContainer = () => {
     <div>
       <LeftWatch />
       <MiddleWatch />
+      <div className="h-[200px]"></div>
     </div>
   );
 };

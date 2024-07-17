@@ -1,13 +1,14 @@
 import { useState } from "react";
 import CreatePostVideo from "./CreatePostVideo/CreatePostVideo";
 import { useAuthContext } from "../../../context/AuthContext";
+import WatchVideo from "./WatchVideo/WatchVideo";
 
 const MiddleWatch = () => {
   const [showModal, setShowModal] = useState(false);
   const { authUser } = useAuthContext();
 
   return (
-    <div className="w-[1158px]  bg-blue-500 h-[500px] ml-[360px] overflow-y-auto">
+    <div className="w-[1158px] bg-blue-500 ml-[360px] overflow-y-auto">
       <div className="w-[822px] ml-[100px] mt-3">
         <div className="h-[67px] w-full bg-[#FFFFFF] flex items-center justify-start rounded-lg">
           <div className="w-[40px] h-[40px] rounded-full ml-[13px] mt-[10px]">
@@ -28,6 +29,8 @@ const MiddleWatch = () => {
         </div>
 
         <CreatePostVideo showModal={showModal} setShowModal={setShowModal} />
+        <WatchVideo />
+        <div className="h-[800px]"></div>
       </div>
     </div>
   );

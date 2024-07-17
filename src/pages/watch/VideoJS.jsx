@@ -37,7 +37,7 @@ const VideoJS = (props) => {
   }, [playerRef]);
 
   return (
-    <div data-vjs-player>
+    <div data-vjs-player className="max-h[437px] overflow-y-auto">
       <div ref={videoRef} />
     </div>
   );
