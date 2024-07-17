@@ -2,6 +2,9 @@ import React, { useState, useRef } from "react";
 import Button from "./Button";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
+import { axiosHaveAuth } from "../../../../util/axios";
+import { useAuthContext } from "../../../../context/AuthContext";
+import { toast } from "react-toastify";
 
 function CreatePostVideo({ setShowModal, showModal }) {
   const [video, setVideo] = useState(null);
@@ -10,10 +13,13 @@ function CreatePostVideo({ setShowModal, showModal }) {
   const [loading, setLoading] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const videoRef = useRef(null);
+  const { authUser } = useAuthContext();
 
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
+
+  const instance = axiosHaveAuth();
 
   const handleVideo = (e) => {
     const file = e.target.files[0];
@@ -29,13 +35,21 @@ function CreatePostVideo({ setShowModal, showModal }) {
       const formData = new FormData();
       formData.append("content", content);
       formData.append("video", video);
+      formData.append("author", authUser.user._id);
 
-      const res = await fetch("http://localhost:8000/api/upload", {
-        method: "POST",
-        body: formData,
-      });
+      try {
+        const res = await instance.post("/api/upload/video", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
-      console.log(res);
+        if (res.data) {
+          toast.success("Video uploaded successfully!");
+        }
+      } catch (error) {
+        toast.error("Upload failed. Please try again.");
+      }
     } else {
       alert("Add content");
     }
