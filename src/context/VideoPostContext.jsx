@@ -17,6 +17,7 @@ export const VideoPostProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await instance.get("/api/get/allVideo");
+      console.log("check res", response);
       setVideoPosts(response.data.metadata);
     };
 
@@ -34,7 +35,7 @@ export const VideoPostProvider = ({ children }) => {
 
     const formData = new FormData();
     formData.append("content", content);
-    formData.append("videoURL", videoURL);
+    formData.append("videoUrl", videoURL);
     formData.append("author", authUser.user._id);
 
     try {
@@ -42,7 +43,7 @@ export const VideoPostProvider = ({ children }) => {
 
       if (res.data) {
         toast.success("Video uploaded successfully!");
-        setVideoPosts((prevPosts) => [...prevPosts, res.data]);
+        setVideoPosts((prevPosts) => [...prevPosts, res.metadata]);
       }
     } catch (error) {
       toast.error("Upload failed. Please try again.");

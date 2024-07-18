@@ -1,11 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import CreatePostVideo from "./CreatePostVideo/CreatePostVideo";
 import { useAuthContext } from "../../../context/AuthContext";
 import WatchVideo from "./WatchVideo/WatchVideo";
+import { useVideoPostContext } from "../../../context/VideoPostContext";
 
 const MiddleWatch = () => {
   const [showModal, setShowModal] = useState(false);
   const { authUser } = useAuthContext();
+  const { videoPosts } = useVideoPostContext();
 
   return (
     <div className="w-[1158px] bg-blue-500 ml-[360px] overflow-y-auto">
@@ -29,7 +31,12 @@ const MiddleWatch = () => {
         </div>
 
         <CreatePostVideo showModal={showModal} setShowModal={setShowModal} />
-        <WatchVideo />
+
+        {videoPosts.length > 0 ? (
+          videoPosts.map((post) => <WatchVideo key={post._id} post={post} />)
+        ) : (
+          <p>No videos available</p>
+        )}
         <div className="h-[800px]"></div>
       </div>
     </div>
