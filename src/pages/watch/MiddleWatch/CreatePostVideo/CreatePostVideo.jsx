@@ -2,9 +2,8 @@ import React, { useState, useRef } from "react";
 import Button from "./Button";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
-import { axiosHaveAuth } from "../../../../util/axios";
-import { useAuthContext } from "../../../../context/AuthContext";
-import { toast } from "react-toastify";
+import { useVideoPostContext } from "../../../../context/VideoPostContext";
+import { LoadingRounded } from "../../../../Loading/LoadingRounded";
 
 function CreatePostVideo({ setShowModal, showModal }) {
   const [video, setVideo] = useState(null);
@@ -13,13 +12,11 @@ function CreatePostVideo({ setShowModal, showModal }) {
   const [loading, setLoading] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const videoRef = useRef(null);
-  const { authUser } = useAuthContext();
+  const { uploadVideoToFirebase } = useVideoPostContext();
 
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
-
-  const instance = axiosHaveAuth();
 
   const handleVideo = (e) => {
     const file = e.target.files[0];
@@ -31,34 +28,22 @@ function CreatePostVideo({ setShowModal, showModal }) {
     e.preventDefault();
     setLoading(true);
 
-    if (content) {
-      const formData = new FormData();
-      formData.append("content", content);
-      formData.append("video", video);
-      formData.append("author", authUser.user._id);
-
+    if (content && video) {
       try {
-        const res = await instance.post("/api/upload/video", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-
-        if (res.data) {
-          toast.success("Video uploaded successfully!");
-        }
+        await uploadVideoToFirebase(video, content);
+        setContent("");
+        setVideo(null);
+        setLabel("Upload your video...");
+        setShowModal(false);
       } catch (error) {
-        toast.error("Upload failed. Please try again.");
+        console.error("Error uploading video:", error);
+      } finally {
+        setLoading(false);
       }
     } else {
-      alert("Add content");
+      alert("Add content and select a video");
+      setLoading(false);
     }
-
-    setLoading(false);
-    setContent("");
-    setVideo(null);
-    setLabel("Upload your video...");
-    setShowModal(false);
   };
 
   const addEmoji = (emoji) => {
@@ -161,6 +146,11 @@ function CreatePostVideo({ setShowModal, showModal }) {
                 />
               </div>
             </form>
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 rounded-lg">
+                <LoadingRounded />
+              </div>
+            )}
             <button
               onClick={() => setShowModal(false)}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"

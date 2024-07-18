@@ -5,7 +5,7 @@ const WatchVideo = () => {
   return (
     <div className="w-full bg-white mt-2">
       <div className="flex justify-between">
-        <div className="flex">
+        <div className="flex items-center px-2 py-2">
           <div className="w-[49px] h-[49px] rounded-full">
             <img
               className="w-[49px] h-[49px] rounded-full object-cover"
@@ -14,10 +14,13 @@ const WatchVideo = () => {
             />
           </div>
           <div>
-            <div>Trâm anh 5 phút</div>
-            <div className="flex">
-              <div>25 tháng 3</div>
-              <div>Công khai</div>
+            <div className="ml-3">
+              <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                45 BLACK
+              </div>
+              <div className="text-xs text-zinc-500 dark:text-zinc-400">
+                Hôm qua lúc 17:41
+              </div>
             </div>
           </div>
         </div>
@@ -25,9 +28,16 @@ const WatchVideo = () => {
           <BsThreeDots />
         </div>
       </div>
-      <div>
-        Tổng Hợp Những Pha Highlight Hay Nhất Liên Quân | TikTok Liên Quân
-        Mobile 2024
+      <div className="px-2 font-bold">
+        <p className="text-sm text-zinc-900 dark:text-zinc-100">
+          Raze Is A Broken Agent
+        </p>
+        <p className="text-sm text-zinc-900 dark:text-zinc-100">
+          Raze Is A Broken Agent
+          <a href="#" className="text-blue-500 dark:text-blue-400">
+            Xem thêm
+          </a>
+        </p>
       </div>
       <div className="w-full max-h-[437px]">
         <Video />
