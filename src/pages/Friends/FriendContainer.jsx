@@ -1,7 +1,7 @@
 import FriendCanKnow from "./FriendCanKnow";
 import FriendRequest from "./FriendRequest";
 
-const FriendContainer = () => {
+const   FriendContainer = () => {
   return (
     <div className=" bg-[#EDEFF2] w-full">
       <div className="flex justify-between pt-[36px] pr-[36px] pl-[36px]">

@@ -15,7 +15,7 @@ const WatchVideo = ({ post }) => {
       : post.content.split(" ").slice(0, 10).join(" ") + "...";
 
   return (
-    <div className="w-full bg-white mt-2">
+    <div className="w-full bg-white mt-2 rounded-lg">
       <div key={post._id} className="mb-4">
         <div className="flex justify-between">
           <div className="flex items-center px-2 py-2">
