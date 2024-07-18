@@ -1,246 +1,201 @@
-import React from "react";
-import { useState } from "react";
-import "./CreateAccount.css";
+import React, { useState } from "react";
+import AvatarProfileTInder from "./AvatarProfile/AvatarProfileTInder";
+
 const CreateAccount = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    birthDate: { day: "", month: "", year: "" },
-    gender: "",
-    showGenderOnProfile: false,
-    interestedIn: "",
-    lookingFor: "",
-    hobbies: "",
-    sexualOrientation: "",
-    profilePictures: [],
+    email: "duykhanh1632003@gmail.com",
+    day: "",
+    month: "",
+    year: "",
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    date: "",
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+
+    if (id === "day" && value.length === 2) {
+      document.getElementById("month").focus();
+    }
+    if (id === "month" && value.length === 2) {
+      document.getElementById("year").focus();
+    }
+
+    validateField(id, value);
   };
 
-  const handleDateChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      birthDate: { ...formData.birthDate, [name]: value },
+  const validateField = (field, value) => {
+    let nameError = "";
+    let dateError = "";
+
+    if (field === "name" && (value.length < 1 || value.length > 22)) {
+      nameError = "Ô này phải chứa từ 1 đến 22 ký tự.";
+    }
+
+    const day = field === "day" ? value : formData.day;
+    const month = field === "month" ? value : formData.month;
+    const year = field === "year" ? value : formData.year;
+
+    if (field === "day" || field === "month" || field === "year") {
+      if (!isValidDate(day, month, year)) {
+        dateError = "Vui lòng nhập ngày hợp lệ";
+      }
+    }
+
+    setErrors({
+      ...errors,
+      name: nameError,
+      date: dateError,
     });
   };
 
-  const handleProfilePictureChange = (e) => {
-    // handle profile picture upload logic here
-  };
+  const isValidDate = (day, month, year) => {
+    const dayNum = parseInt(day, 10);
+    const monthNum = parseInt(month, 10);
+    const yearNum = parseInt(year, 10);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // handle form submission logic here
+    if (
+      isNaN(dayNum) ||
+      isNaN(monthNum) ||
+      isNaN(yearNum) ||
+      dayNum < 1 ||
+      dayNum > 31 ||
+      monthNum < 1 ||
+      monthNum > 12 ||
+      yearNum < 1900 ||
+      yearNum > new Date().getFullYear()
+    ) {
+      return false;
+    }
+    return true;
   };
 
   return (
-    <div className="form-container">
-      <h2>Tạo tài khoản</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Tên</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            maxLength="22"
-            required
-          />
+    <div className="w-full bg-[#111418] flex justify-center">
+      <div className="w-[901px]">
+        <div className="font-bold text-4xl text-white w-full flex justify-center mt-[60px]">
+          Tạo tài khoản
         </div>
-
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Sinh nhật</label>
-          <div className="date-inputs">
-            <input
-              type="text"
-              name="day"
-              value={formData.birthDate.day}
-              onChange={handleDateChange}
-              placeholder="DD"
-              required
-            />
-            <input
-              type="text"
-              name="month"
-              value={formData.birthDate.month}
-              onChange={handleDateChange}
-              placeholder="MM"
-              required
-            />
-            <input
-              type="text"
-              name="year"
-              value={formData.birthDate.year}
-              onChange={handleDateChange}
-              placeholder="YYYY"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>Giới tính</label>
-          <div className="gender-options">
-            <label>
+        <div className="flex">
+          <div className="w-[511px]">
+            <div className="w-[511px]">
+              <label
+                htmlFor="name"
+                className="block text-foreground font-semibold mb-1 text-white"
+              >
+                Tên
+              </label>
               <input
-                type="radio"
-                name="gender"
-                value="Nam"
-                checked={formData.gender === "Nam"}
+                id="name"
+                type="text"
+                placeholder="Tên"
+                value={formData.name}
                 onChange={handleInputChange}
-              />{" "}
-              Nam
-            </label>
-            <label>
+                className={`text-white w-full p-2 border ${
+                  errors.name ? "border-red-600" : "border-blue-500"
+                } text-foreground bg-background rounded focus:outline-none focus:ring-2 ${
+                  errors.name ? "focus:ring-red-600" : "focus:ring-blue-500"
+                } bg-black`}
+              />
+              {errors.name && (
+                <p className="mt-1 text-destructive text-red-600 font-bold">
+                  {errors.name}
+                </p>
+              )}
+            </div>
+            <div className="w-[511px]">
+              <label
+                htmlFor="email"
+                className="block text-foreground font-semibold mb-1 text-white"
+              >
+                Email
+              </label>
               <input
-                type="radio"
-                name="gender"
-                value="Nữ"
-                checked={formData.gender === "Nữ"}
-                onChange={handleInputChange}
-              />{" "}
-              Nữ
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="Khác"
-                checked={formData.gender === "Khác"}
-                onChange={handleInputChange}
-              />{" "}
-              Thêm
-            </label>
-          </div>
-          <label>
-            <input
-              type="checkbox"
-              name="showGenderOnProfile"
-              checked={formData.showGenderOnProfile}
-              onChange={() =>
-                setFormData({
-                  ...formData,
-                  showGenderOnProfile: !formData.showGenderOnProfile,
-                })
-              }
-            />{" "}
-            Hiển thị giới tính trên hồ sơ của tôi
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label>Quan tâm tới hồ sơ của</label>
-          <div className="interest-options">
-            <label>
-              <input
-                type="radio"
-                name="interestedIn"
-                value="Nam"
-                checked={formData.interestedIn === "Nam"}
-                onChange={handleInputChange}
-              />{" "}
-              Nam
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="interestedIn"
-                value="Nữ"
-                checked={formData.interestedIn === "Nữ"}
-                onChange={handleInputChange}
-              />{" "}
-              Nữ
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="interestedIn"
-                value="Mọi người"
-                checked={formData.interestedIn === "Mọi người"}
-                onChange={handleInputChange}
-              />{" "}
-              Mọi người
-            </label>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>Đang tìm kiếm</label>
-          <input
-            type="text"
-            name="lookingFor"
-            value={formData.lookingFor}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Sở Thích</label>
-          <input
-            type="text"
-            name="hobbies"
-            value={formData.hobbies}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>KHUYNH HƯỚNG TÍNH DỤC</label>
-          <input
-            type="text"
-            name="sexualOrientation"
-            value={formData.sexualOrientation}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group profile-picture">
-          <label>Ảnh hồ sơ</label>
-          <div className="profile-picture-container">
-            {formData.profilePictures.map((picture, index) => (
-              <div key={index} className="profile-picture-box">
-                <img src={picture} alt={`Profile ${index}`} />
-                <button
-                  type="button"
-                  onClick={() => handleProfilePictureChange(index)}
-                >
-                  X
-                </button>
+                id="email"
+                type="text"
+                placeholder="duykhanh1632003@gmail.com"
+                value={formData.email}
+                readOnly
+                className="w-full p-2 border border-blue-500 text-foreground bg-background rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-black cursor-not-allowed pointer-events-none"
+              />
+            </div>
+            <div className="w-[511px]">
+              <label
+                htmlFor="birthday"
+                className="block text-foreground font-semibold mb-1 text-white"
+              >
+                Sinh nhật
+              </label>
+              <div className="flex space-x-4">
+                <div className="">
+                  <label className="block text-foreground font-bold mb-1 text-white">
+                    Day
+                  </label>
+                  <input
+                    id="day"
+                    type="text"
+                    placeholder="DD"
+                    value={formData.day}
+                    onChange={handleInputChange}
+                    className={`w-16 h-10 text-center bg-card text-card-foreground border ${
+                      errors.date ? "border-red-600" : "border-blue-500"
+                    } rounded-md focus:outline-none focus:ring-2 ${
+                      errors.date ? "focus:ring-red-600" : "focus:ring-blue-500"
+                    } bg-black text-white`}
+                  />
+                </div>
+                <div className="">
+                  <label className="block text-foreground font-bold mb-1 text-white">
+                    Month
+                  </label>
+                  <input
+                    id="month"
+                    type="text"
+                    placeholder="MM"
+                    value={formData.month}
+                    onChange={handleInputChange}
+                    className={`w-16 h-10 text-center bg-card text-card-foreground border ${
+                      errors.date ? "border-red-600" : "border-blue-500"
+                    } rounded-md focus:outline-none focus:ring-2 ${
+                      errors.date ? "focus:ring-red-600" : "focus:ring-blue-500"
+                    } bg-black text-white`}
+                  />
+                </div>
+                <div className="">
+                  <label className="block text-foreground font-bold mb-1 text-white">
+                    Year
+                  </label>
+                  <input
+                    id="year"
+                    type="text"
+                    placeholder="YYYY"
+                    value={formData.year}
+                    onChange={handleInputChange}
+                    className={`w-20 h-10 text-center bg-card text-card-foreground border ${
+                      errors.date ? "border-red-600" : "border-blue-500"
+                    } rounded-md focus:outline-none focus:ring-2 ${
+                      errors.date ? "focus:ring-red-600" : "focus:ring-blue-500"
+                    } bg-black text-white`}
+                  />
+                </div>
               </div>
-            ))}
-            {[...Array(4 - formData.profilePictures.length)].map((_, index) => (
-              <div key={index} className="profile-picture-box empty">
-                <button type="button" onClick={handleProfilePictureChange}>
-                  +
-                </button>
-              </div>
-            ))}
+              {errors.date && (
+                <p className="mt-1 text-destructive text-red-600 font-bold">
+                  {errors.date}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="text-white ml-[53px]">
+            <AvatarProfileTInder />
           </div>
         </div>
-
-        <button type="submit" className="submit-btn">
-          Tiếp tục
-        </button>
-        <p>
-          Đã có tài khoản? <a href="/login">Đăng nhập</a>.
-        </p>
-      </form>
+      </div>
     </div>
   );
 };

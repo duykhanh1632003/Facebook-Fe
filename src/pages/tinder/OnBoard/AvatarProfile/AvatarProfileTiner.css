@@ -1,0 +1,30 @@
+/* AvatarProfileTiner.css */
+.dashed {
+    --b: 5px;  /* border thickness */
+    --s: 30px; /* size of the dashes */
+    --c1: #505965; /* first color */
+    --c2: #21262E; /* second color */
+    height: 141px;
+    width: 104px;
+    aspect-ratio: 1;
+    position: relative;
+    border-radius: 0.75rem; /* Added for rounded corners */
+  }
+  
+  .dashed::before {
+    border-radius: 5px;
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: var(--b);
+    background: 
+      repeating-conic-gradient(var(--c1) 0 25%, var(--c2) 0 50%) 
+      0 0/var(--s) var(--s) round;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;    
+    pointer-events: none;
+  }
+  
