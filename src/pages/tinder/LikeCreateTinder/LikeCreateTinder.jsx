@@ -80,6 +80,8 @@ const LikeCreateTinder = () => {
 
   return (
     <div className="w-[422px] text-white mt-4">
+      <div className="text-md font-bold mb-2">Sở thích</div>
+
       {selectedInterests.length > 0 ? (
         <button
           className="px-4 mr-2 w-[250px] flex items-center justify-center py-2 border-[2px]  border-border text-foreground rounded-full hover:bg-muted hover:text-muted-foreground font-bold"

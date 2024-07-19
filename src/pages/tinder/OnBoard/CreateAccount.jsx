@@ -19,6 +19,11 @@ const CreateAccount = () => {
         </div>
         <LikeCreateTinder />
         <TendSex />
+        <div className="w-ful justify-center flex mt-4">
+          <div className="w-[147px] h-[67px] rounded-3xl bg-[#3C444F] text-[#656E7B] text-xl font-bold items-center justify-center flex">
+            Tiếp tục
+          </div>
+        </div>
         <div className="h-[300px] "></div>
       </div>
     </div>

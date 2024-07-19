@@ -37,7 +37,8 @@ const TendSex = () => {
   };
 
   return (
-    <div className="w-[422px] text-white mt-4">
+    <div className="w-[422px] text-white">
+      <div className="text-md font-bold mb-2">KHUYNH HƯỚNG TÍNH DỤC</div>
       {selectedOptions.length > 0 ? (
         <button
           className="px-4 mr-2 w-[300px] flex items-center justify-center py-2 border border-border text-foreground rounded-full hover:bg-muted hover:text-muted-foreground font-bold"
