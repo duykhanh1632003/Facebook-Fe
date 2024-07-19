@@ -91,7 +91,7 @@ const NameEmailDateTinderCreate = () => {
             placeholder="Tên"
             value={formData.name}
             onChange={handleInputChange}
-            className={`text-white w-full p-2 border ${
+            className={`text-white w-full p-2 border-[2px]  ${
               errors.name ? "border-red-600" : "border-blue-500"
             } text-foreground bg-background rounded focus:outline-none focus:ring-2 ${
               errors.name ? "focus:ring-red-600" : "focus:ring-blue-500"
@@ -137,7 +137,7 @@ const NameEmailDateTinderCreate = () => {
                 placeholder="DD"
                 value={formData.day}
                 onChange={handleInputChange}
-                className={`w-16 h-10 text-center bg-card text-card-foreground border ${
+                className={`w-16 h-10 text-center bg-card text-card-foreground border-[2px]  ${
                   errors.date ? "border-red-600" : "border-blue-500"
                 } rounded-md focus:outline-none focus:ring-2 ${
                   errors.date ? "focus:ring-red-600" : "focus:ring-blue-500"
@@ -154,7 +154,7 @@ const NameEmailDateTinderCreate = () => {
                 placeholder="MM"
                 value={formData.month}
                 onChange={handleInputChange}
-                className={`w-16 h-10 text-center bg-card text-card-foreground border ${
+                className={`w-16 h-10 text-center bg-card text-card-foreground border-[2px]  ${
                   errors.date ? "border-red-600" : "border-blue-500"
                 } rounded-md focus:outline-none focus:ring-2 ${
                   errors.date ? "focus:ring-red-600" : "focus:ring-blue-500"
@@ -171,7 +171,7 @@ const NameEmailDateTinderCreate = () => {
                 placeholder="YYYY"
                 value={formData.year}
                 onChange={handleInputChange}
-                className={`w-20 h-10 text-center bg-card text-card-foreground border ${
+                className={`w-20 h-10 text-center bg-card text-card-foreground border-[2px]  ${
                   errors.date ? "border-red-600" : "border-blue-500"
                 } rounded-md focus:outline-none focus:ring-2 ${
                   errors.date ? "focus:ring-red-600" : "focus:ring-blue-500"

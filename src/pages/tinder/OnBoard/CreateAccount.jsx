@@ -1,4 +1,6 @@
+import LikeCreateTinder from "../LikeCreateTinder/LikeCreateTinder";
 import NameEmailDateTinderCreate from "./NameEmailDateTinderCreate/NameEmailDateTinderCreate";
+import TendSex from "./TendSex/TendSex";
 
 const CreateAccount = () => {
   return (
@@ -15,6 +17,8 @@ const CreateAccount = () => {
           </div>
           <div className="w-[412px] h-[1px] bg-[#3C444F]"></div>
         </div>
+        <LikeCreateTinder />
+        <TendSex />
         <div className="h-[300px] "></div>
       </div>
     </div>

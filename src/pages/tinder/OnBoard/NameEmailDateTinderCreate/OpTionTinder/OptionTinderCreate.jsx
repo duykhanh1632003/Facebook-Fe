@@ -48,7 +48,7 @@ const OptionTinderCreate = () => {
         </label>
         <div className="w-[511px] flex text-white">
           <button
-            className={`px-4 mr-2 w-[164px] py-2 border ${
+            className={`px-4 mr-2 w-[164px] py-2 border-[2px]  ${
               selectedGender === "Nam" ? "border-red-500" : "border-border"
             } text-foreground rounded-full hover:bg-muted hover:text-muted-foreground font-bold`}
             onClick={() => handleSelectGender("Nam")}
@@ -56,7 +56,7 @@ const OptionTinderCreate = () => {
             Nam
           </button>
           <button
-            className={`px-4 mr-2 w-[164px] py-2 border ${
+            className={`px-4 mr-2 w-[164px] py-2 border-[2px] -[2px]  ${
               selectedGender === "Nữ" ? "border-red-500" : "border-border"
             } text-foreground rounded-full hover:bg-muted hover:text-muted-foreground font-bold`}
             onClick={() => handleSelectGender("Nữ")}
@@ -64,7 +64,7 @@ const OptionTinderCreate = () => {
             Nữ
           </button>
           <button
-            className={`px-4 w-[164px] py-2 border ${
+            className={`px-4 w-[164px] py-2 border-[2px]  ${
               selectedGender === "Cả hai" ? "border-red-500" : "border-border"
             } text-foreground rounded-full hover:bg-muted hover:text-muted-foreground flex items-center justify-center font-bold`}
             onClick={() => handleSelectGender("Cả hai")}
@@ -98,7 +98,7 @@ const OptionTinderCreate = () => {
         </label>
         <div className="w-[511px] flex text-white">
           <button
-            className={`px-4 mr-2 w-[164px] py-2 border ${
+            className={`px-4 mr-2 w-[164px] py-2 border-[2px]  ${
               selectedInterest === "Nam" ? "border-red-500" : "border-border"
             } text-foreground rounded-full hover:bg-muted hover:text-muted-foreground font-bold`}
             onClick={() => handleSelectInterest("Nam")}
@@ -106,7 +106,7 @@ const OptionTinderCreate = () => {
             Nam
           </button>
           <button
-            className={`px-4 mr-2 w-[164px] py-2 border ${
+            className={`px-4 mr-2 w-[164px] py-2 border-[2px]  ${
               selectedInterest === "Nữ" ? "border-red-500" : "border-border"
             } text-foreground rounded-full hover:bg-muted hover:text-muted-foreground font-bold`}
             onClick={() => handleSelectInterest("Nữ")}
@@ -114,7 +114,7 @@ const OptionTinderCreate = () => {
             Nữ
           </button>
           <button
-            className={`px-4 w-[164px] py-2 border ${
+            className={`px-4 w-[164px] py-2 border-[2px]  ${
               selectedInterest === "Mọi người"
                 ? "border-red-500"
                 : "border-border"

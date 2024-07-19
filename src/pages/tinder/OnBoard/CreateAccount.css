@@ -104,7 +104,7 @@
     cursor: pointer;
   }
   
-  .submit-btn:disabled {
+  .submit-btn:disabled {  
     background-color: #888;
   }
   
