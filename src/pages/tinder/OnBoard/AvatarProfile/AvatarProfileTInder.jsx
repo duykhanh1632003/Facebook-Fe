@@ -17,6 +17,7 @@ const AvatarProfileTInder = () => {
   const [rotation, setRotation] = useState(0);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [images, setImages] = useState([]);
 
   const handleClick = () => {
     fileInputRef.current.click();
@@ -41,7 +42,7 @@ const AvatarProfileTInder = () => {
       croppedAreaPixels,
       rotation
     );
-    console.log(croppedImage);
+    setImages([...images, croppedImage]);
     setShowModal(false);
   };
 
@@ -53,6 +54,11 @@ const AvatarProfileTInder = () => {
     });
   };
 
+  const handleRemoveImage = (index) => {
+    const newImages = images.filter((_, i) => i !== index);
+    setImages(newImages);
+  };
+
   return (
     <div>
       <div className="font-medium text-white">Ảnh hồ sơ</div>
@@ -60,19 +66,36 @@ const AvatarProfileTInder = () => {
         {[...Array(6)].map((_, index) => (
           <div
             key={index}
-            className="relative dashed rounded-lg ml-2 mb-3 w-1/4 h-32 flex items-center justify-center cursor-pointer"
-            onClick={handleClick}
+            className={
+              !images[index]
+                ? "relative dashed rounded-lg ml-2 mb-3 w-1/4 h-32 flex items-center justify-center cursor-pointer"
+                : "relative rounded-lg ml-2 mb-3 w-1/4 h-32 flex items-center justify-center cursor-pointer"
+            }
+            onClick={!images[index] ? handleClick : undefined}
           >
-            {/* <div className="absolute mt-[120px] ml-[80px] w-[29px] h-[29px] bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center cursor-pointer">
-              <span className="text-white text-2xl flex items-center justify-center font-bold">
-                <IoMdAdd />
-              </span>
-            </div> */}
-            <div className="absolute mt-[120px] ml-[80px] w-[29px] h-[29px] bg-gradient-to-r bg-white border-[1px] border-b-light-2 rounded-full flex items-center justify-center cursor-pointer">
-              <span className="text-[#7C8591] text-2xl flex items-center justify-center font-semibold">
-                <FontAwesomeIcon icon={faXmark} />
-              </span>
-            </div>
+            {images[index] ? (
+              <>
+                <img
+                  src={images[index]}
+                  alt={`avatar-${index}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <div
+                  onClick={() => handleRemoveImage(index)}
+                  className="absolute mt-[120px] ml-[80px] w-[29px] h-[29px] bg-gradient-to-r bg-white border-[1px] border-b-light-2 rounded-full flex items-center justify-center cursor-pointer"
+                >
+                  <span className="text-[#7C8591] text-2xl flex items-center justify-center font-semibold">
+                    <FontAwesomeIcon icon={faXmark} />
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div className="absolute mt-[120px] ml-[80px] w-[29px] h-[29px] bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center cursor-pointer">
+                <span className="text-white text-2xl flex items-center justify-center font-bold">
+                  <IoMdAdd />
+                </span>
+              </div>
+            )}
           </div>
         ))}
       </div>
