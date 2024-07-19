@@ -166,4 +166,4 @@ const AvatarProfileTInder = () => {
   );
 };
 
-export default AvatarProfileTInder;
+export default AvatarProfileTInder; 

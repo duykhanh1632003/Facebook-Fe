@@ -8,7 +8,7 @@ const TinderLayout = () => {
       <div className="z-4">
         <Header />
       </div>
-      <div className="flex h-screen dark:bg-black bg-[rgb(240,242,245)] w-full  z-1">
+      <div className="flex dark:bg-black bg-[rgb(240,242,245)] w-full  z-1">
         <section className="flex h-full w-full mt-5">
           <Outlet />
         </section>
