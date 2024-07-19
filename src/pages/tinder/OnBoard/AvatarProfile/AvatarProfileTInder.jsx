@@ -1,11 +1,13 @@
 import React, { useState, useRef, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import { IoMdAdd } from "react-icons/io";
-import { MdRotateRight } from "react-icons/md";
-import { AiOutlineClose } from "react-icons/ai";
 import { Modal, Button } from "react-bootstrap";
 import { getCroppedImg } from "./cropImage"; // A helper function to get the cropped image
 import "./AvatarProfileTiner.css";
+import { FaRotate } from "react-icons/fa6";
+import { MdCancel } from "react-icons/md";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const AvatarProfileTInder = () => {
   const fileInputRef = useRef(null);
@@ -58,12 +60,17 @@ const AvatarProfileTInder = () => {
         {[...Array(6)].map((_, index) => (
           <div
             key={index}
-            className="relative dashed rounded-lg ml-2 mb-3 w-1/4 h-32 flex items-center justify-center"
+            className="relative dashed rounded-lg ml-2 mb-3 w-1/4 h-32 flex items-center justify-center cursor-pointer"
             onClick={handleClick}
           >
-            <div className="absolute mt-[120px] ml-[80px] w-[29px] h-[29px] bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center cursor-pointer">
+            {/* <div className="absolute mt-[120px] ml-[80px] w-[29px] h-[29px] bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center cursor-pointer">
               <span className="text-white text-2xl flex items-center justify-center font-bold">
                 <IoMdAdd />
+              </span>
+            </div> */}
+            <div className="absolute mt-[120px] ml-[80px] w-[29px] h-[29px] bg-gradient-to-r bg-white border-[1px] border-b-light-2 rounded-full flex items-center justify-center cursor-pointer">
+              <span className="text-[#7C8591] text-2xl flex items-center justify-center font-semibold">
+                <FontAwesomeIcon icon={faXmark} />
               </span>
             </div>
           </div>
@@ -77,14 +84,13 @@ const AvatarProfileTInder = () => {
       />
 
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-        <Modal.Header>
-          <Modal.Title>Chỉnh sửa Ảnh</Modal.Title>
-          <Button variant="close" onClick={() => setShowModal(false)}>
-            <AiOutlineClose size={24} />
-          </Button>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="relative w-[303px] h-[340px] bg-black mx-auto">
+        <Modal.Body className="bg-[#111418] rounded-lg">
+          <div className="flex ">
+            <div className="font-bold text-2xl text-white w-full items-center justify-center ml-[130px] mb-3  ">
+              Chỉnh sửa Ảnh
+            </div>
+          </div>
+          <div className="relative w-[303px] h-[340px] bg-black mx-auto rounded-lg">
             <Cropper
               image={imageSrc}
               crop={crop}
@@ -106,24 +112,32 @@ const AvatarProfileTInder = () => {
               step={0.1}
               value={zoom}
               onChange={(e) => setZoom(e.target.value)}
-              className="w-1/2"
+              className="slider"
+              id="myRange"
             />
-            <Button
-              variant="outline-light"
+
+            <button
+              className="text-white border-light-1 border-[1px] p-2 rounded-full hover:border-orange-500 hover:text-orange-500"
               onClick={() => setRotation((prev) => prev + 90)}
             >
-              <MdRotateRight size={24} />
-            </Button>
+              <FaRotate className="hover:text-orange-500" />
+            </button>
+          </div>
+          <div className="ml-[90px]">
+            <button
+              className="w-[302px] h-[53px] bg-[#FE5048] rounded-3xl font-bold text-xl text-white mt-4"
+              onClick={handleCrop}
+            >
+              Chọn
+            </button>
+            <button
+              className="w-[302px] h-[53px]  rounded-3xl font-bold text-xl text-white mt-2 hover:bg-[#272626]"
+              onClick={() => setShowModal(false)}
+            >
+              Hủy
+            </button>
           </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Hủy
-          </Button>
-          <Button variant="primary" onClick={handleCrop}>
-            Chọn
-          </Button>
-        </Modal.Footer>
       </Modal>
     </div>
   );

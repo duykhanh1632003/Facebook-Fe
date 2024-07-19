@@ -1,30 +1,63 @@
 /* AvatarProfileTiner.css */
 .dashed {
-    --b: 5px;  /* border thickness */
-    --s: 30px; /* size of the dashes */
-    --c1: #505965; /* first color */
-    --c2: #21262E; /* second color */
-    height: 141px;
-    width: 104px;
-    aspect-ratio: 1;
-    position: relative;
-    border-radius: 0.75rem; /* Added for rounded corners */
-  }
-  
-  .dashed::before {
-    border-radius: 5px;
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: var(--b);
-    background: 
-      repeating-conic-gradient(var(--c1) 0 25%, var(--c2) 0 50%) 
-      0 0/var(--s) var(--s) round;
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;    
-    pointer-events: none;
-  }
-  
+  --b: 5px;  /* border thickness */
+  --s: 30px; /* size of the dashes */
+  --c1: #505965; /* first color */
+  --c2: #21262E; /* second color */
+  height: 141px;
+  width: 104px;
+  aspect-ratio: 1;
+  position: relative;
+  border-radius: 0.75rem; /* Added for rounded corners */
+}
+
+.dashed::before {
+  border-radius: 5px;
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--b);
+  background: 
+    repeating-conic-gradient(var(--c1) 0 25%, var(--c2) 0 50%) 
+    0 0/var(--s) var(--s) round;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;    
+  pointer-events: none;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 50%;
+  height: 5px;
+  border-radius: 5px;
+  background: linear-gradient(to right, orange var(--value, 0), #d3d3d3 var(--value, 0));
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
