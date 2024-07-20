@@ -191,7 +191,7 @@ const OptionTinderCreate = () => {
               ].map((option, index) => (
                 <button
                   key={index}
-                  className={`flex items-center justify-center w-[200px] h-[100px] rounded-lg border ${
+                  className={`flex items-center justify-center w-[200px] h-[100px] rounded-lg border-[2px] ${
                     searching === option ? "border-red-500" : "border-gray-500"
                   } text-white`}
                   onClick={() => handleSelectPurpose(option)}

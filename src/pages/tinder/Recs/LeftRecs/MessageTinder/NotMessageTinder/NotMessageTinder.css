@@ -1,0 +1,48 @@
+/* NotCompatibles.css */
+
+.container-NotCompatibles {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Center text even when it wraps */
+  }
+  
+  .rotating-div-NotCompatibles {
+    background-color: #FE4951;
+    width: 119px;
+    height: 171px;
+    border-radius: 8px; /* Use the same value as rounded-lg */
+    animation: rotate 5s infinite;
+  }
+  
+  .title-NotCompatibles {
+    width: 219px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.5rem; /* 2xl */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .description-NotCompatibles {
+    width: 219px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Ensure text is centered when wrapping */
+  }
+  
+  @keyframes rotate {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(45deg);
+    }
+  }
+  

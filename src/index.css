@@ -10,12 +10,19 @@
 body {
   height: 100%;
 }
+.no-cursor {
+  user-select: none; /* Prevent text selection */
+  pointer-events: none; /* Prevent mouse events */
+  outline: none; /* Remove outline */
+}
 
 html,
 :root {
   height: 100%;
   font-family: 'Roboto', sans-serif;
   background-color: #F0F2F5;
+  user-select: none; /* Prevent text selection */
+  outline: none; 
 }
 
 
