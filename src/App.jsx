@@ -24,6 +24,7 @@ import { VideoPostProvider } from "./context/VideoPostContext.jsx";
 import TinderLayout from "./pages/tinder/TinderLayout.jsx";
 import TinderContainer from "./pages/tinder/TinderContainer.jsx";
 import CreateAccount from "./pages/tinder/OnBoard/CreateAccount.jsx";
+import Recs from "./pages/tinder/Recs/Recs.jsx";
 function App() {
   const { authUser } = useAuthContext();
   useEffect(() => {
@@ -72,11 +73,11 @@ function App() {
             element={authUser ? <FriendContainer /> : <Navigate to="/login" />}
           />
         </Route>
+        <Route
+          path="/tinder/recs"
+          element={authUser ? <Recs /> : <Navigate to="/login" />}
+        />
         <Route element={authUser ? <TinderLayout /> : <Navigate to="/login" />}>
-          <Route
-            path="/tinder"
-            element={authUser ? <TinderContainer /> : <Navigate to="/login" />}
-          />
           <Route
             path="/tinder/onBoard"
             element={authUser ? <CreateAccount /> : <Navigate to="/login" />}

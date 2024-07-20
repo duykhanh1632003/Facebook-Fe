@@ -1,4 +1,4 @@
-import LikeCreateTinder from "../LikeCreateTinder/LikeCreateTinder";
+import LikeCreateTinder from "./LikeCreateTinder/LikeCreateTinder";
 import NameEmailDateTinderCreate from "./NameEmailDateTinderCreate/NameEmailDateTinderCreate";
 import TendSex from "./TendSex/TendSex";
 
