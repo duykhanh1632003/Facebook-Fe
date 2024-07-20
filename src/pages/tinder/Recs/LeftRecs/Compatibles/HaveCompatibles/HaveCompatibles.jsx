@@ -18,7 +18,7 @@ const HaveCompatibles = () => {
       {users.map((user, index) => (
         <div
           key={index}
-          className="w-[104px] h-[122px] rounded-md bg-cover bg-center flex items-end justify-center text-white font-bold p-2 hover:scale-110 transform transition-transform"
+          className="w-[104px] h-[122px] cursor-pointer rounded-md bg-cover bg-center flex items-end justify-center text-white font-bold p-2 hover:scale-110 transform transition-transform"
           style={{ backgroundImage: `url('${user.image}')` }}
         >
           <div className="bg-black bg-opacity-50 px-2 py-1 rounded-md">
