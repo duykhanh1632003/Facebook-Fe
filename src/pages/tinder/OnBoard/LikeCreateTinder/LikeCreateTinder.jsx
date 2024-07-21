@@ -3,64 +3,13 @@ import { BsPencilFill } from "react-icons/bs";
 import { IoMdAdd } from "react-icons/io";
 import { FaTimes } from "react-icons/fa";
 import { Modal, Button } from "react-bootstrap";
+import { interestTiner } from "../../../../util/tinder";
+import { useTinderContext } from "../../../../context/TinderContext";
 
 const LikeCreateTinder = () => {
-  const [selectedInterests, setSelectedInterests] = useState([]);
   const [showModal, setShowModal] = useState(false);
-
-  const interests = [
-    "Thế Hệ 9x",
-    "Harry Potter",
-    "SoundCloud",
-    "Spa",
-    "Chăm sóc bản thân",
-    "Heavy Metal",
-    "Tiệc gia đình",
-    "Gin Tonic",
-    "Thể dục dụng cụ",
-    "Hot Yoga",
-    "Thiền",
-    "Sushi",
-    "Spotify",
-    "Hockey",
-    "Bóng rổ",
-    "Đấu thơ",
-    "Tập luyện tại nhà",
-    "Nhà hát",
-    "Trải nghiệm các quán cà phê",
-    "Thủy cung",
-    "Giày Sneaker",
-    "Instagram",
-    "Suối nước nóng",
-    "Đi dạo",
-    "Chạy bộ",
-    "Du lịch",
-    "Giao lưu ngôn ngữ",
-    "Phim ảnh",
-    "Chơi guitar",
-    "Phát triển xã hội",
-    "Tập gym",
-    "Mạng Xã hội",
-    "Hip Hop",
-    "Chăm sóc da",
-    "J-Pop",
-    "Shisha",
-    "Cricket",
-    "Phim truyền hình Hàn Quốc",
-    "Làm việc tự do",
-    "K-Pop",
-    "Trượt ván",
-    "Gospel",
-    "Group X",
-    "Potterhead",
-    "Thử những thứ mới",
-    "Nhiếp ảnh",
-    "Bollywood",
-    "Đọc sách",
-    "Hát",
-    "Thể thao",
-    "Thơ",
-  ];
+  const { selectedInterests, setSelectedInterests } = useTinderContext();
+  const interests = interestTiner();
 
   const handleSelectInterest = (interest) => {
     if (selectedInterests.includes(interest)) {

@@ -1,80 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import AvatarProfileTInder from "../AvatarProfile/AvatarProfileTInder";
 import OptionTinderCreate from "./OpTionTinder/OptionTinderCreate";
+import { useTinderContext } from "../../../../context/TinderContext";
 
 const NameEmailDateTinderCreate = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "duykhanh1632003@gmail.com",
-    day: "",
-    month: "",
-    year: "",
-  });
+  const { formData, errors, handleInputChange } = useTinderContext();
 
-  const [errors, setErrors] = useState({
-    name: "",
-    date: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-
-    if (id === "day" && value.length === 2) {
-      document.getElementById("month").focus();
-    }
-    if (id === "month" && value.length === 2) {
-      document.getElementById("year").focus();
-    }
-
-    validateField(id, value);
-  };
-
-  const validateField = (field, value) => {
-    let nameError = "";
-    let dateError = "";
-
-    if (field === "name" && (value.length < 1 || value.length > 22)) {
-      nameError = "Ô này phải chứa từ 1 đến 22 ký tự.";
-    }
-
-    const day = field === "day" ? value : formData.day;
-    const month = field === "month" ? value : formData.month;
-    const year = field === "year" ? value : formData.year;
-
-    if (field === "day" || field === "month" || field === "year") {
-      if (!isValidDate(day, month, year)) {
-        dateError = "Vui lòng nhập ngày hợp lệ";
-      }
-    }
-
-    setErrors({
-      ...errors,
-      name: nameError,
-      date: dateError,
-    });
-  };
-
-  const isValidDate = (day, month, year) => {
-    const dayNum = parseInt(day, 10);
-    const monthNum = parseInt(month, 10);
-    const yearNum = parseInt(year, 10);
-
-    if (
-      isNaN(dayNum) ||
-      isNaN(monthNum) ||
-      isNaN(yearNum) ||
-      dayNum < 1 ||
-      dayNum > 31 ||
-      monthNum < 1 ||
-      monthNum > 12 ||
-      yearNum < 1900 ||
-      yearNum > new Date().getFullYear()
-    ) {
-      return false;
-    }
-    return true;
-  };
   return (
     <div className="flex">
       <div className="w-[511px]">

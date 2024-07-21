@@ -5,20 +5,13 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./TendSex.css";
+import { optionTinder } from "../../../../util/tinder";
+import { useTinderContext } from "../../../../context/TinderContext";
 const TendSex = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isDisplayProfile, setIsDisplayProfile] = useState(false);
-
-  const options = [
-    "Dị tính",
-    "Đồng tính",
-    "Đồng tính nữ",
-    "Song tính",
-    "Vô tính",
-    "Á tính",
-    "Toàn tính",
-  ];
+  const { selectedOptions, setSelectedOptions } = useTinderContext();
+  const options = optionTinder();
 
   const handleSelectOption = (option) => {
     if (selectedOptions.includes(option)) {

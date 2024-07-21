@@ -25,6 +25,7 @@ import TinderLayout from "./pages/tinder/TinderLayout.jsx";
 import TinderContainer from "./pages/tinder/TinderContainer.jsx";
 import CreateAccount from "./pages/tinder/OnBoard/CreateAccount.jsx";
 import Recs from "./pages/tinder/Recs/Recs.jsx";
+import { TinderContextProvider } from "./context/TinderContext.jsx";
 function App() {
   const { authUser } = useAuthContext();
   useEffect(() => {
@@ -75,9 +76,28 @@ function App() {
         </Route>
         <Route
           path="/tinder/recs"
-          element={authUser ? <Recs /> : <Navigate to="/login" />}
+          element={
+            authUser ? (
+              <TinderContextProvider>
+                {" "}
+                <Recs />{" "}
+              </TinderContextProvider>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
-        <Route element={authUser ? <TinderLayout /> : <Navigate to="/login" />}>
+        <Route
+          element={
+            authUser ? (
+              <TinderContextProvider>
+                <TinderLayout />{" "}
+              </TinderContextProvider>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        >
           <Route
             path="/tinder/onBoard"
             element={authUser ? <CreateAccount /> : <Navigate to="/login" />}

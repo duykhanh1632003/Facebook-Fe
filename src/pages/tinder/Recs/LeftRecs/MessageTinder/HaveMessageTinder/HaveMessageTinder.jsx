@@ -24,7 +24,7 @@ const HaveMessageTinder = () => {
           key={index}
           className={`h-[100px] w-full flex items-center justify-between ${
             selected === index ? "bg-[#111418]" : ""
-          } cursor-pointer`}
+          } cursor-pointer`}  
           onClick={() => handleSelect(index)}
           onMouseEnter={() => handleSelect(index)}
           onMouseLeave={() => handleSelect(null)}

@@ -8,6 +8,7 @@ import { FaRotate } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useTinderContext } from "../../../../context/TinderContext";
 
 const AvatarProfileTInder = () => {
   const fileInputRef = useRef(null);
@@ -17,8 +18,7 @@ const AvatarProfileTInder = () => {
   const [rotation, setRotation] = useState(0);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [images, setImages] = useState([]);
-
+  const { images, setImages } = useTinderContext();
   const handleClick = () => {
     fileInputRef.current.click();
   };
@@ -166,4 +166,4 @@ const AvatarProfileTInder = () => {
   );
 };
 
-export default AvatarProfileTInder; 
+export default AvatarProfileTInder;
