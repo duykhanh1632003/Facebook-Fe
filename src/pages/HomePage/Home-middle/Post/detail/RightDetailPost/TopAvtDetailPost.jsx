@@ -25,26 +25,33 @@ const TopAvtDetailPost = ({ author, createdAt, content }) => {
             />
           </div>
           <div className="ml-[8px]">
-            <div className="text-md font-bold">
+            <div className="text-md font-bold dark:text-white">
               {author.firstName} {author.lastName}
             </div>
             <div className="flex">
-              <div className="text-[11px] font-medium pr-1 text-[#606770]">
+              <div className="text-[11px] font-medium pr-1 text-[#606770] dark:text-gray-400">
                 {timeFromNow(createdAt)}
               </div>
-              <div className="text-[#606770]">
+              <div className="text-[#606770] dark:text-gray-400">
                 <MdPublic />
               </div>
             </div>
           </div>
         </div>
         <div className="flex items-start justify-center h-[50px] mr-3">
-          <div className="h-[30px] cursor-pointer w-[30px] rounded-full mt-1 flex items-center justify-center hover:bg-[#eeeaea9f]">
-            <BsThreeDots className="text-2xl" />
+          <div className="h-[30px] cursor-pointer w-[30px] rounded-full mt-1 flex items-center justify-center hover:bg-[#eeeaea9f] dark:hover:bg-gray-700">
+            <BsThreeDots className="text-2xl dark:text-white" />
           </div>
+          <Link to="/">
+            <div className="h-[30px] cursor-pointer w-[30px] rounded-full mt-1 flex items-center justify-center hover:bg-[#eeeaea9f] dark:hover:bg-gray-700">
+              <MdCancel className="text-2xl dark:text-white" />
+            </div>
+          </Link>
         </div>
       </div>
-      <div className="text-sm">{content}</div>
+      <div className="text-[17px] text-justify mt-[10px] mb-[10px] dark:text-white">
+        {content}
+      </div>
     </div>
   );
 };

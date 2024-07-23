@@ -72,10 +72,10 @@ const CommentPost = ({ postId }) => {
             alt="avt"
           />
         </div>
-        <div className="ml-2 w-[289px] pr-[17px] bg-[#F0F2F5] rounded-2xl">
+        <div className="ml-2 w-[289px] pr-[17px] bg-[#F0F2F5] dark:bg-gray-800 rounded-2xl">
           <textarea
             onChange={handleTextareaChange}
-            className="w-full resize-none bg-transparent outline-none pt-2 pl-1 text-sm"
+            className="w-full resize-none bg-transparent outline-none pt-2 pl-1 text-sm dark:text-white"
             placeholder="Viết bình luận..."
             value={commentsInput}
             ref={textareaRef}
@@ -88,7 +88,7 @@ const CommentPost = ({ postId }) => {
                 </div>
               )}
               <CiFaceSmile
-                className="text-[#7B8289] font-medium mt-1 cursor-pointer"
+                className="text-[#7B8289] dark:text-gray-400 font-medium mt-1 cursor-pointer"
                 onClick={() => setShowEmojiPicker(!showEmojiPicker)}
               />
             </div>

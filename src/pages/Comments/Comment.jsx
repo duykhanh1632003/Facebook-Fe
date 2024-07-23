@@ -179,7 +179,7 @@ const Comment = ({ _id, message, userId, likes, level = 0, postId }) => {
           className="comment-avatar object-cover"
         />
         <div className="flex">
-          <div className="comment-info">
+          <div className="comment-info dark:bg-[#3A3B3C]">
             <div className="comment-user">
               {userId.firstName} {userId.lastName}
             </div>
@@ -224,38 +224,41 @@ const Comment = ({ _id, message, userId, likes, level = 0, postId }) => {
           </div>
         </div>
         {showDropdown && (
-          <div className="absolute w-[354px] h-[-84px] mt-[40px] rounded-md ml-[-10px] z-3 shadow-xl bg-white p-2">
-            {authUser.user._id === userId._id ? (
-              <>
-                <div
-                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
-                  onClick={handleEditComment}
-                >
-                  Chỉnh sửa
-                </div>
-                <div
-                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
-                  onClick={handleDeleteComment}
-                >
-                  Xóa
-                </div>
-              </>
-            ) : (
-              <>
-                <div
-                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
-                  onClick={handleHideComment}
-                >
-                  Ẩn bình luận
-                </div>
-                <div
-                  className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
-                  onClick={handleReportComment}
-                >
-                  Báo cáo bình luận
-                </div>
-              </>
-            )}
+          <div className="absolute w-[354px] h-[-84px] mt-[40px] rounded-md ml-[-10px] z-3 shadow-xl  dark:bg-[#3A3B3C]  bg-white">
+            <div className=" dark:bg-[#3A3B3C] hover:bg-[#C2C6CC] p-2 ">
+              {" "}
+              {authUser.user._id === userId._id ? (
+                <>
+                  <div
+                    className="w-full cursor-pointer h-1/2 p-2 font-medium  hover:bg-[#C2C6CC] dark:bg-[#3A3B3C]"
+                    onClick={handleEditComment}
+                  >
+                    Chỉnh sửa
+                  </div>
+                  <div
+                    className="w-full cursor-pointer h-1/2 p-2 font-medium  hover:bg-[#C2C6CC] dark:bg-[#3A3B3C]"
+                    onClick={handleDeleteComment}
+                  >
+                    Xóa
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
+                    onClick={handleHideComment}
+                  >
+                    Ẩn bình luận
+                  </div>
+                  <div
+                    className="w-full cursor-pointer h-1/2 p-2 font-medium rounded-md hover:bg-[#C2C6CC]"
+                    onClick={handleReportComment}
+                  >
+                    Báo cáo bình luận
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -270,7 +273,7 @@ const Comment = ({ _id, message, userId, likes, level = 0, postId }) => {
         <span className="comment-action" onClick={() => setReplying(!replying)}>
           Reply
         </span>
-        <div className="like flex bg-white shadow-lg rounded-xl">
+        <div className="like flex dark:bg-[#3A3B3C] bg-white shadow-lg rounded-xl">
           {likeCount > 0 && (
             <div className="flex text-sm">
               <span className="comment-likes mr-1">{likeCount}</span>
