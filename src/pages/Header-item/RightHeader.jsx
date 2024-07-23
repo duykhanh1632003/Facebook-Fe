@@ -6,19 +6,19 @@ import HeaderAvatar from "./HeaderAvatar/HeaderAvatar";
 
 const RightHeader = () => {
   return (
-    <div className=" flex z-10">
-      <div className="box-right-top-bar-item">
+    <div className=" flex z-10 dark:bg-[#242526]">
+      <div className="box-right-top-bar-item dark:bg-[#242526]">
         <div>
           <ChangeDarkMode />
         </div>
       </div>
-      <div className="box-right-top-bar-item">
+      <div className="box-right-top-bar-item dark:bg-[#3A3B3C]  dark:text-white">
         <BsGrid3X3GapFill className="text-xl" />
       </div>
-      <div className="box-right-top-bar-item">
+      <div className="box-right-top-bar-item dark:bg-[#3A3B3C]  dark:text-white">
         <FaFacebookMessenger className="text-xl" />
       </div>
-      <div className="box-right-top-bar-item">
+      <div className="box-right-top-bar-item dark:bg-[#3A3B3C]  dark:text-white">
         <IoMdNotifications className="text-2xl" />
       </div>
       <HeaderAvatar />

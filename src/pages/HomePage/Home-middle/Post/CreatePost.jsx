@@ -112,15 +112,15 @@ const CreatePost = ({ show, onHide, setModalShow }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <div className="ml-[160px] flex text-xl font-semibold">
+      <Modal.Header closeButton className="dark:bg-[#242526]">
+        <div className="ml-[160px] flex text-xl font-semibold dark:text-white">
           Tạo bài viết
         </div>
       </Modal.Header>
-      <Modal.Body>
-        <div className="bg-[#FFFFFF] flex flex-col">
+      <Modal.Body className="dark:bg-[#242526] dark:text-white">
+        <div className="bg-[#FFFFFF] flex flex-col dark:bg-[#242526] dark:text-white">
           <div className="flex">
-            <div className="rounded-full h-[42px] w-[42px] mr-[11px]">
+            <div className="rounded-full h-[42px] w-[42px] mr-[11px] dark:bg-[#242526]">
               <img
                 className="rounded-full object-cover h-full w-full"
                 src={authUser.user.avatar}
@@ -128,18 +128,20 @@ const CreatePost = ({ show, onHide, setModalShow }) => {
               />
             </div>
             <div className="h-full">
-              <div className="text-sm font-medium">
+              <div className="text-sm font-medium dark:text-white">
                 {authUser.user.firstName} {authUser.user.lastName}
               </div>
-              <div className="rounded-lg h-[23px] bg-[#E4E6EB] flex items-center text-xs justify-center cursor-pointer font-semibold mb-[16px]">
-                <FaEarthAmericas className="text-xs" />
-                <div className="text-xs ml-[3px] mr-[3px]">Công khai</div>
-                <FaCaretDown className="text-xs" />
+              <div className="rounded-lg h-[23px] bg-[#E4E6EB] dark:bg-[#3A3B3C] flex items-center text-xs justify-center cursor-pointer font-semibold mb-[16px]">
+                <FaEarthAmericas className="text-xs dark:text-white" />
+                <div className="text-xs ml-[3px] mr-[3px] dark:text-white">
+                  Công khai
+                </div>
+                <FaCaretDown className="text-xs dark:text-white" />
               </div>
             </div>
           </div>
           <div
-            className="parent"
+            className="parent dark:bg-[#242526]"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
@@ -148,17 +150,17 @@ const CreatePost = ({ show, onHide, setModalShow }) => {
               onChange={handleChange}
               onKeyPress={handleKeyPress}
               placeholder={`${authUser.user.lastName} ơi bạn đang nghĩ gì thế?`}
-              className="w-full bg-transparent outline-none resize-none text-sm input-textarea"
+              className="w-full bg-transparent outline-none resize-none text-sm input-textarea dark:text-white"
               cols="30"
               rows="2"
             ></textarea>
-            <div className="emoji-color">
+            <div className="emoji-color dark:bg-[#242526]">
               <div className="w-[34px] h-[34px] cursor-pointer">
                 <img src="https://www.facebook.com/images/composer/SATP_Aa_square-2x.png" />
               </div>
-              <div className="w-[23px] h-[24px] cursor-pointer">
+              <div className="w-[23px] h-[24px] cursor-pointer dark:bg-[#242526]">
                 <BsEmojiSmile
-                  className="w-[23px] h-[23px]"
+                  className="w-[23px] h-[23px] dark:text-white"
                   onClick={() => {
                     setIsOpenEmoji(!isOpenEmoji);
                   }}
@@ -178,20 +180,20 @@ const CreatePost = ({ show, onHide, setModalShow }) => {
             </div>
           </div>
           {isOpenCancel && (
-            <div className="cancel" onClick={handleCancel}>
+            <div className="cancel dark:text-white" onClick={handleCancel}>
               <MdOutlineCancel />
             </div>
           )}
           {isOpenAddImage && !isOpenImage && (
             <div
-              className="create-image"
+              className="create-image dark:bg-[#242526]"
               onClick={() => fileInputRef.current.click()}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
             >
-              <div className="create-image-child">
-                <div className="add-button">
-                  <div className="icon-tifolder text-2xl">
+              <div className="create-image-child dark:bg-[#242526]">
+                <div className="add-button dark:bg-[#242526]">
+                  <div className="icon-tifolder text-2xl dark:text-white">
                     <TiFolderAdd className="TiFolderAdd" />
                   </div>
                   <input
@@ -200,14 +202,18 @@ const CreatePost = ({ show, onHide, setModalShow }) => {
                     hidden
                     onChange={handleOnChangeImage}
                   />
-                  <div className="add-image">Thêm ảnh/video</div>
-                  <div className="pull-image">hoặc kéo và thả</div>
+                  <div className="add-image dark:text-white">
+                    Thêm ảnh/video
+                  </div>
+                  <div className="pull-image dark:text-white">
+                    hoặc kéo và thả
+                  </div>
                 </div>
               </div>
             </div>
           )}
           {!isOpenAddImage && isOpenImage && img && (
-            <div className="create-image">
+            <div className="create-image dark:bg-[#242526]">
               <img
                 className="create-image-image"
                 src={img.url}
@@ -215,8 +221,10 @@ const CreatePost = ({ show, onHide, setModalShow }) => {
               />
             </div>
           )}
-          <div className="add-post">
-            <div className="add-post-text">Thêm vào bài viết của bạn</div>
+          <div className="add-post dark:bg-[#242526]">
+            <div className="add-post-text dark:text-white">
+              Thêm vào bài viết của bạn
+            </div>
             <div className="add-post-photo" onClick={handleOnChangePostPhoto}>
               <img src="https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/Ivw7nhRtXyo.png?_nc_eui2=AeGWfZPpqbXYHP17Ocs9DLBFPL4YoeGsw5I8vhih4azDkhAkC4jdJ23lJMF0dIdq-M-BquWZr_E3FXEdZjDyG2DD" />
             </div>
@@ -224,8 +232,10 @@ const CreatePost = ({ show, onHide, setModalShow }) => {
           <div
             onClick={handleNewPost}
             className={classNames({
-              "bottom-post-color": inputValue !== "" || img !== null,
-              "bottom-post-not-color": inputValue === "" && img === null,
+              "bottom-post-color dark:bg-[#3A3B3C] dark:text-white":
+                inputValue !== "" || img !== null,
+              "bottom-post-not-color dark:bg-[#3A3B3C] dark:text-[#B0B3B8]":
+                inputValue === "" && img === null,
             })}
           >
             Đăng

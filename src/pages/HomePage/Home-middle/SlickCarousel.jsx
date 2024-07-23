@@ -56,21 +56,21 @@ export default function SlickCarousel() {
   };
 
   return (
-    <div className="bg-[#F0F2F5] mb-[24px]">
+    <div className="bg-[#F0F2F5] mb-[24px] dark:bg-[#18191A]">
       <Carousel responsive={responsive}>
         <Link
           to={"/stories/create"}
-          className="card relative w-[250px] z-10 bg-white cursor-pointer"
+          className="card relative w-[250px] z-10  bg-white dark:bg-[#202122] cursor-pointer"
         >
-          <div className="w-[40px] h-[40px] bg-white absolute rounded-full mt-[144px] ml-[54px]">
+          <div className="w-[40px] h-[40px] bg-white dark:bg-[#202122] absolute rounded-full mt-[144px] ml-[54px]">
             <div className="bg-blue-500 absolute z-20 h-[37px] w-[37px] mt-10 rounded-full flex items-center justify-center text-4xl">
               <MdOutlineAdd className="text-3xl" />
             </div>
           </div>
-          <p className="absolute z-10 mt-[230px] ml-[50px] text-black text-sm font-medium">
+          <p className="absolute z-10 mt-[230px] ml-[50px]  text-black text-sm font-medium">
             Tạo tin
           </p>
-          <div className="h-[202px] rounded-lg relative object-contain">
+          <div className="h-[202px] dark:bg-[#202122] rounded-lg relative object-contain">
             <img
               className="img-card object-cover rounded-lg h-full w-full"
               src={authUser.user.avatar}

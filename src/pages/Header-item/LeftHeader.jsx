@@ -89,16 +89,16 @@ const LeftHeader = () => {
   };
 
   return (
-    <div className="h-full leftheader">
+    <div className="h-full leftheader dark:bg-[#242526]">
       {!isComponentVisible ? (
         <div className="flex w-[304px] pl-[16px]">
           <Link to={"/"} className="w-[40px] rounded-full">
             <img src="/src/assets/Facebook_Logo_(2019).png" alt="logo" />
           </Link>
-          <div className="w-[237px] flex bg-[#F0F2F5] rounded-full pl-3 ml-[7px]">
-            <CiSearch className="mt-[13px] text-gray-300 mr-2 text-md " />
+          <div className="w-[237px] flex bg-[#F0F2F5] dark:bg-[#3A3B3C] rounded-full pl-3 ml-[7px]">
+            <CiSearch className="mt-[13px] text-gray-300 dark:text-gray-400 mr-2 text-md " />
             <input
-              className="border-none bg-[#F0F2F5] focus:border-transparent focus:outline-none w-13 rounded-full"
+              className="border-none bg-[#F0F2F5] dark:bg-[#3A3B3C] focus:border-transparent focus:outline-none w-13 rounded-full dark:placeholder-gray-400 dark:text-white"
               placeholder="Tìm kiếm trên facebook"
               onClick={changeButton}
               value={searchInput}
@@ -108,63 +108,66 @@ const LeftHeader = () => {
         </div>
       ) : (
         <div
-          className="flex w-[304px] h-[505px] bg-white ml-0 flex-col shadow-lg rounded-lg flex-1 leftheader"
+          className=" w-[304px] max-h-[505px] bg-white dark:bg-[#242526] ml-0 flex-col shadow-lg rounded-lg flex-1 leftheader"
           style={{ zIndex: 2 }}
           ref={ref}
         >
-          <div className="flex h-[52px] ml-[8px]">
-            <div
-              className="rounded-full w-[40px] h-[40px] hover:bg-gray-300 items-center justify-center flex"
-              onClick={changeButton}
-            >
-              <WiDirectionLeft className="text-4xl rounded-full" />
-            </div>
-            <div className="w-[235px] flex bg-[#F0F2F5] rounded-full pl-3 ml-[15px] mb-2 h-[38px]">
-              <input
-                className="border-none bg-[#F0F2F5] focus:border-transparent focus:outline-none w-13 rounded-full"
-                placeholder="Tìm kiếm trên facebook"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="flex justify-between ml-[16px] mr-[16px] mt-[4px]">
-            <div className="font-semibold cursor-pointer">Gần đây</div>
-            <div className="font-normal text-sm text-blue-600 cursor-pointer">
-              Chỉnh sửa
-            </div>
-          </div>
-          {(!searchInput ? recentSearches : searchResults).map((user) => (
-            <div
-              key={user._id}
-              className="box-left-bar-item"
-              onClick={() => handleUserClick(user._id)}
-            >
-              <div className="flex mt-[7px] pr-[16px]">
-                <div className="w-[38px] bg-blue-700 h-[38px] mr-[14px] rounded-full flex items-center justify-center ">
-                  <img
-                    className="rounded-full object-cover w-full h-full"
-                    src={user.avatar}
-                    alt="User Avatar"
-                  />
-                </div>
-                <div className="w-[204px]">
-                  <div className="font-medium">
-                    {user.firstName} {user.lastName}
-                  </div>
-                  <div className="font-sm text-current text-xs">
-                    {user.email}
-                  </div>
-                </div>
-                <div
-                  onClick={() => handleRemoveUserFromSearch(user._id)}
-                  className="flex items-center justify-center w-[25px] h-[25px] hover:bg-opacity-50 hover:bg-gray-50 hover:rounded-full mt-2"
-                >
-                  <BsX className="text-2xl" />
-                </div>
+          {" "}
+          <div className="flex  dark:bg-[#242526] ml-0 flex-col shadow-lg rounded-lg flex-1 leftheader">
+            <div className="flex h-[52px] ml-[8px] ">
+              <div
+                className="rounded-full w-[40px] h-[40px] dark:bg-[#3A3B3C] hover:bg-gray-300 dark:hover:bg-gray-600 items-center justify-center flex"
+                onClick={changeButton}
+              >
+                <WiDirectionLeft className="text-4xl rounded-full dark:text-white" />
+              </div>
+              <div className="w-[235px] flex  bg-[#F0F2F5] dark:bg-[#3A3B3C] rounded-full pl-3 ml-[15px] mb-2 h-[38px]">
+                <input
+                  className="border-none bg-[#F0F2F5] dark:bg-[#3A3B3C] focus:border-transparent focus:outline-none w-13 rounded-full dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Tìm kiếm trên facebook"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
               </div>
             </div>
-          ))}
+            <div className="flex justify-between ml-[16px] mr-[16px] mt-[4px] dark:text-white dark:bg-[#242526]">
+              <div className="font-semibold cursor-pointer">Gần đây</div>
+              <div className="font-normal text-sm text-blue-600 cursor-pointer dark:bg-[#242526]">
+                Chỉnh sửa
+              </div>
+            </div>
+            {(!searchInput ? recentSearches : searchResults).map((user) => (
+              <div
+                key={user._id}
+                className="box-left-bar-item dark:hover:bg-[#3A3B3C]"
+                onClick={() => handleUserClick(user._id)}
+              >
+                <div className="flex mt-[7px] pr-[16px]">
+                  <div className="w-[38px] bg-blue-700 h-[38px] mr-[14px] rounded-full flex items-center justify-center ">
+                    <img
+                      className="rounded-full object-cover w-full h-full"
+                      src={user.avatar}
+                      alt="User Avatar"
+                    />
+                  </div>
+                  <div className="w-[204px] dark:text-white">
+                    <div className="font-medium">
+                      {user.firstName} {user.lastName}
+                    </div>
+                    <div className="font-sm text-current text-xs">
+                      {user.email}
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => handleRemoveUserFromSearch(user._id)}
+                    className="flex items-center justify-center w-[25px] h-[25px] hover:bg-opacity-50 hover:bg-gray-50 dark:hover:bg-gray-600 hover:rounded-full mt-2"
+                  >
+                    <BsX className="text-2xl dark:text-white" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

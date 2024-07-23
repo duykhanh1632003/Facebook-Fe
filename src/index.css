@@ -127,10 +127,10 @@ html,
 
 @layer utilities{
   .item-header-middle{
-    @apply w-[107px] ml-[4px] flex items-center justify-center mb-[10px] cursor-pointer h-full hover:bg-gray-100 hover:bg-opacity-90 hover:rounded-lg hover:mb-1 active:text-blue-500
+    @apply w-[107px] ml-[4px] flex items-center justify-center mb-[10px] dark:bg-[#242526] cursor-pointer h-full hover:bg-gray-100 hover:bg-opacity-90 hover:rounded-lg hover:mb-1 active:text-blue-500
   }
   .icon-header-text-middle-not-active{
-    @apply text-black text-3xl
+    @apply text-black text-3xl dark:text-white
   }
 
   .icon-header-text-middle-active{
