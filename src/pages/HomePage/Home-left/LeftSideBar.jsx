@@ -4,9 +4,10 @@ import { FaUserFriends } from "react-icons/fa";
 import { FaWarehouse } from "react-icons/fa";
 import { RiGroupLine } from "react-icons/ri";
 import { PiClockCounterClockwiseBold } from "react-icons/pi";
-import { IoMdBookmark } from "react-icons/io";
+import { IoMdBookmark, IoMdCart } from "react-icons/io";
 import { BiSolidChevronDown } from "react-icons/bi";
 import { useAuthContext } from "../../../context/AuthContext";
+import { MdShoppingCart } from "react-icons/md";
 
 const LeftSideBar = () => {
   const { authUser } = useAuthContext();
@@ -34,6 +35,15 @@ const LeftSideBar = () => {
         <FaUserFriends className="w-[36px] h-[36px] rounded-full text-blue-400 flex items-center justify-center ml-[16px] mr-[12px]" />
         <div className="flex items-center justify-center font-medium">
           Bạn Bè
+        </div>
+      </Link>
+      <Link
+        to={"/shop"}
+        className="flex  h-[48px]   hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg hover:bg-opacity-90"
+      >
+        <MdShoppingCart className="w-[36px] h-[36px] rounded-full text-blue-400 flex items-center justify-center ml-[16px] mr-[12px]" />
+        <div className="flex items-center justify-center font-medium">
+          Bán hàng
         </div>
       </Link>
       <Link

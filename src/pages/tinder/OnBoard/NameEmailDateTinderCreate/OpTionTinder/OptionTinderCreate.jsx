@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { FaCheck } from "react-icons/fa";
 import { BsPencilFill } from "react-icons/bs";

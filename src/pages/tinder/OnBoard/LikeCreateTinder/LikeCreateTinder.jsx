@@ -26,7 +26,7 @@ const LikeCreateTinder = () => {
   const handleModalOpen = () => {
     setShowModal(true);
   };
-
+  
   return (
     <div className="w-[422px] text-white mt-4">
       <div className="text-md font-bold mb-2">Sở thích</div>
@@ -103,3 +103,4 @@ const LikeCreateTinder = () => {
 };
 
 export default LikeCreateTinder;
+  

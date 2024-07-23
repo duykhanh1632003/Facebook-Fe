@@ -1,4 +1,3 @@
-import React from "react";
 import { LoadingRounded } from "../../../Loading/LoadingRounded";
 import LikeCreateTinder from "./LikeCreateTinder/LikeCreateTinder";
 import NameEmailDateTinderCreate from "./NameEmailDateTinderCreate/NameEmailDateTinderCreate";
