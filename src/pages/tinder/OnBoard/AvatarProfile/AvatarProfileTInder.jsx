@@ -78,7 +78,7 @@ const AvatarProfileTInder = () => {
                 <img
                   src={images[index]}
                   alt={`avatar-${index}`}
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-lg image-tinder"
                 />
                 <div
                   onClick={() => handleRemoveImage(index)}
