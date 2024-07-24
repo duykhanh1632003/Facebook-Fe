@@ -13,7 +13,7 @@ const WatchLayout = () => {
         <div>
           <LeftSideBarShop />
         </div>
-        <div>
+        <div className="h-full w-full pl-6 pr-6 pt-3 ">
           <Outlet />
         </div>
       </div>

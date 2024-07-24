@@ -1,0 +1,22 @@
+.bg-gradient-green {
+    background: linear-gradient(to right, rgb(29, 162, 86), rgb(72, 212, 131));
+  }
+  
+  .bg-gradient-pink {
+    background: linear-gradient(to right, rgb(192, 18, 226), rgb(235, 100, 254));
+  }
+  
+  .bg-gradient-blue {
+    background: linear-gradient(to right, rgba(0, 0, 255, 0.7), rgba(173, 216, 230, 0.7));
+  }
+  
+  .bg-gradient-yellow {
+    background: linear-gradient(to right, rgb(225, 149, 14), rgb(243, 205, 41));
+  }
+  
+  .icon-wrapper {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 10px;
+  }
+  

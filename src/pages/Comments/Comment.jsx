@@ -225,7 +225,7 @@ const Comment = ({ _id, message, userId, likes, level = 0, postId }) => {
         </div>
         {showDropdown && (
           <div className="absolute w-[354px] h-[-84px] mt-[40px] rounded-md ml-[-10px] z-3 shadow-xl  dark:bg-[#3A3B3C]  bg-white">
-            <div className=" dark:bg-[#3A3B3C] hover:bg-[#C2C6CC] p-2 ">
+            <div className=" dark:bg-[#3A3B3C]  p-2 ">
               {" "}
               {authUser.user._id === userId._id ? (
                 <>

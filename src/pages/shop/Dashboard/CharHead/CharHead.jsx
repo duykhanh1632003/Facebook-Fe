@@ -1,7 +1,7 @@
 import React from "react";
 
-const HomeShop = () => {
+const CharHead = () => {
   return <div></div>;
 };
 
-export default HomeShop;
+export default CharHead;

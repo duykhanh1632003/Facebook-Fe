@@ -1,3 +1,4 @@
+// FriendCanKnow.js
 import { useEffect, useState } from "react";
 import "./FriendCanKnow.css";
 import { axiosHaveAuth } from "../../util/axios";
@@ -39,6 +40,7 @@ const FriendCanKnow = () => {
         setSentRequests((prev) => prev.filter((id) => id !== receiverId));
       });
   };
+
   const navigate = useNavigate();
   const handleToLink = (id) => {
     navigate(`/profile/${id}`);
@@ -51,11 +53,11 @@ const FriendCanKnow = () => {
   };
 
   return (
-    <div className="flex flex-wrap pt-2 ml-7 justify-start overflow-y-auto !z-1">
+    <div className="flex flex-wrap pt-2 ml-7 justify-start overflow-y-auto !z-1 dark:bg-[#1A1A1A]">
       {friendCanKnow?.slice(0, visibleCount).map((request) => (
         <div
           key={request.nonFriend._id}
-          className="h-[361px] w-[210px] bg-[#F9F9F9] rounded-lg m-[5px] shadow-lg"
+          className="h-[361px] w-[210px] bg-[#F9F9F9] dark:bg-[#333] rounded-lg m-[5px] shadow-lg"
         >
           <div
             onClick={() => handleToLink(request.nonFriend._id)}
@@ -69,7 +71,7 @@ const FriendCanKnow = () => {
           </div>
           <div
             onClick={() => handleToLink(request.nonFriend._id)}
-            className="pt-[5px] pl-[12px] pr-[12px] font-medium text-md hover:underline cursor-pointer"
+            className="pt-[5px] pl-[12px] pr-[12px] font-medium text-md hover:underline cursor-pointer dark:text-white"
           >
             {request.nonFriend.firstName} {request.nonFriend.lastName}
           </div>
@@ -87,7 +89,7 @@ const FriendCanKnow = () => {
                     </div>
                   ))}
                 </div>
-                <div className="text-[#657374]">
+                <div className="text-[#657374] dark:text-[#A8A8A8]">
                   {request.mutualFriends.length} bạn chung
                 </div>
               </div>
@@ -101,13 +103,13 @@ const FriendCanKnow = () => {
           )}
           {sentRequests.includes(request.nonFriend._id) ? (
             <div
-              className="h-[36px] mt-[72px] w-[186px] bg-[#E4E6EB] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB]"
+              className="h-[36px] mt-[72px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB] dark:hover:bg-[#5A5A5A]"
               onClick={() => cancelFriendRequest(request.nonFriend._id)}
             >
               Hủy lời mời
             </div>
           ) : (
-            <div className="h-[36px] w-[186px] bg-[#E4E6EB] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB]">
+            <div className="h-[36px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB] dark:hover:bg-[#5A5A5A]">
               Xóa
             </div>
           )}
@@ -116,7 +118,7 @@ const FriendCanKnow = () => {
       {visibleCount < (friendCanKnow?.length || 0) && (
         <div className="w-full flex justify-center mt-4">
           <button
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-500"
             onClick={showMore}
           >
             Xem thêm

@@ -1,3 +1,4 @@
+// FriendRequest.js
 import React, { useEffect, useState } from "react";
 import "./FriendRequest.css";
 import { axiosHaveAuth } from "../../util/axios";
@@ -36,11 +37,11 @@ const FriendRequest = () => {
   const [visibleCount, setVisibleCount] = useState(10);
 
   return (
-    <div className="flex flex-wrap pt-2 ml-7 justify-start overflow-y-auto">
+    <div className="flex flex-wrap pt-2 ml-7 justify-start overflow-y-auto dark:bg-[#1A1A1A]">
       {friendRequests.slice(0, visibleCount).map((request) => (
         <div
           key={request.sender._id}
-          className="h-[361px] w-[210px] bg-[#F9F9F9] rounded-lg m-[5px] shadow-lg"
+          className="h-[361px] w-[210px] bg-[#F9F9F9] dark:bg-[#333] rounded-lg m-[5px] shadow-lg"
         >
           <div className="h-[210px] w-full object-fill rounded-lg cursor-pointer">
             <img
@@ -49,7 +50,7 @@ const FriendRequest = () => {
               alt="Profile"
             />
           </div>
-          <div className="pt-[5px] pl-[12px] pr-[12px] font-medium text-md hover:underline cursor-pointer">
+          <div className="pt-[5px] pl-[12px] pr-[12px] font-medium text-md hover:underline cursor-pointer dark:text-white">
             {request.sender.firstName} {request.sender.lastName}
           </div>
           <div className="flex items-center ml-4 ">
@@ -62,7 +63,7 @@ const FriendRequest = () => {
                 ))}
               </div>
             </div>
-            <div className="text-[#657374] ml-1">
+            <div className="text-[#657374] ml-1 dark:text-[#A8A8A8]">
               {request.mutualFriends.length} bạn chung
             </div>
           </div>
@@ -74,13 +75,13 @@ const FriendRequest = () => {
               >
                 Xác nhận
               </div>
-              <div className="h-[36px] w-[186px] bg-[#E4E6EB] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#d1d5e0]">
+              <div className="h-[36px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#d1d5e0] dark:hover:bg-[#5A5A5A]">
                 Xóa
               </div>
             </>
           )}
           {acceptedRequests.includes(request.sender._id) && (
-            <div className="h-[36px] w-[186px] bg-[#E4E6EB] ml-2 mt-[51px] rounded-md flex items-center justify-center font-medium cursor-pointer">
+            <div className="h-[36px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[51px] rounded-md flex items-center justify-center font-medium cursor-pointer dark:text-white">
               Đã chấp nhận
             </div>
           )}
@@ -89,7 +90,7 @@ const FriendRequest = () => {
       {visibleCount < friendRequests.length && (
         <div className="w-full flex justify-center mt-4">
           <button
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-500"
             onClick={showMore}
           >
             Xem thêm
