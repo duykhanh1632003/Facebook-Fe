@@ -5,7 +5,7 @@ import LeftSideBarShop from "./LeftSideBarShop/LeftSideBarShop";
 
 const WatchLayout = () => {
   return (
-    <div className="w-full h-full overflow-y-auto">
+    <div className="w-full h-full overflow-y-auto bg-[#F0F2F5]">
       <div className="z-4">
         <Header />
       </div>
@@ -13,7 +13,7 @@ const WatchLayout = () => {
         <div className="w-[307px]">
           <LeftSideBarShop />
         </div>
-        <div className="h-full w-full pl-6 pr-6 pt-3 ml-[50px]">
+        <div className="h-full w-full pl-6 pr-6 pt-3 ml-[50px] bg-[#F0F2F5]">
           <Outlet />
         </div>
       </div>
