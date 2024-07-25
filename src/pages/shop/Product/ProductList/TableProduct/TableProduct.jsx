@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaEye, FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { IoSwapVertical } from "react-icons/io5";
 import {
@@ -9,7 +9,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  IconButton,
   Pagination,
 } from "@mui/material";
 import "./TableProduct.css";
@@ -202,6 +201,7 @@ const TableProduct = () => {
         </Table>
       </TableContainer>
       <Pagination
+        color="primary"
         count={Math.ceil(products.length / rowsPerPage)}
         page={currentPage}
         onChange={handlePageChange}
