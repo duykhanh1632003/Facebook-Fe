@@ -31,6 +31,7 @@ import Dashboard from "./pages/shop/Dashboard/Dashboard.jsx";
 import ProductList from "./pages/shop/Product/ProductList/ProductList.jsx";
 import ProductUpload from "./pages/shop/Product/ProductUpload/ProductUpload.jsx";
 import ListAttributes from "./pages/shop/Product/Attributes/ListAttributes/ListAttributes.jsx";
+import CreateAttributes from "./pages/shop/Product/Attributes/CreateAttributes/CreateAttributes.jsx";
 function App() {
   const { authUser } = useAuthContext();
   useEffect(() => {
@@ -153,6 +154,10 @@ function App() {
           <Route
             path="/shop/attributes-list"
             element={authUser ? <ListAttributes /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/shop/add-attributes"
+            element={authUser ? <CreateAttributes /> : <Navigate to="/login" />}
           />
         </Route>
         <Route
