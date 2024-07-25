@@ -5,7 +5,7 @@ import TableProduct from "./TableProduct/TableProduct";
 const ProductList = () => {
   return (
     <div className="w-[1166px] ml-4 mt-4  ">
-      <HeadProduct />
+      <HeadProduct name={"Product list"} />
       <NumberOfProduct />
       <TableProduct />
     </div>

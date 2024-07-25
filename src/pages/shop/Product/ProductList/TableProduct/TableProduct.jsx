@@ -205,7 +205,7 @@ const TableProduct = () => {
         count={Math.ceil(products.length / rowsPerPage)}
         page={currentPage}
         onChange={handlePageChange}
-        className="mt-4"
+        className="mt-4 ml-[900px]"
       />
     </div>
   );

@@ -29,6 +29,8 @@ import { TinderContextProvider } from "./context/TinderContext.jsx";
 import ShopLayout from "./pages/shop/shopLayout.jsx";
 import Dashboard from "./pages/shop/Dashboard/Dashboard.jsx";
 import ProductList from "./pages/shop/Product/ProductList/ProductList.jsx";
+import ProductUpload from "./pages/shop/Product/ProductUpload/ProductUpload.jsx";
+import ListAttributes from "./pages/shop/Product/Attributes/ListAttributes/ListAttributes.jsx";
 function App() {
   const { authUser } = useAuthContext();
   useEffect(() => {
@@ -143,6 +145,14 @@ function App() {
           <Route
             path="/shop/product-list"
             element={authUser ? <ProductList /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/shop/product-upload"
+            element={authUser ? <ProductUpload /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/shop/attributes-list"
+            element={authUser ? <ListAttributes /> : <Navigate to="/login" />}
           />
         </Route>
         <Route
