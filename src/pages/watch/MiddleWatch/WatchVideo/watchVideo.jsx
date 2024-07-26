@@ -53,7 +53,7 @@ const WatchVideo = ({ post }) => {
             </a>
           )}
         </div>
-        <div className="w-full max-h-[437px]">
+        <div className="w-full ">
           <Video videoUrl={post.videoUrl} videoId={post._id} />
         </div>
         <div className="mt-3 h-[100px] w-full">{post.view} lượt xem</div>

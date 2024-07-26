@@ -21,15 +21,14 @@ const generateProducts = (count = 30) => {
 };
 
 export default generateProducts;
-
 export const generateAttributes = () => {
   return [
-    { id: 1, category: "Color", value: "Blue, green, white" },
-    { id: 2, category: "Size", value: "S, M, L, XL" },
-    { id: 3, category: "Material", value: "Cotton, Polyester" },
-    { id: 4, category: "Style", value: "Classic, modern, ethnic, western" },
-    { id: 5, category: "Meat Type", value: "Fresh, Frozen, Marinated" },
-    { id: 6, category: "Weight", value: "1kg, 2kg, 3kg, over 5kg" },
+    { id: 1, category: "Color", value: "Blue,green,white" },
+    { id: 2, category: "Size", value: "S,M,L,XL" },
+    { id: 3, category: "Material", value: "Cotton,Polyester" },
+    { id: 4, category: "Style", value: "Classic,modern,ethnic,western" },
+    { id: 5, category: "Meat Type", value: "Fresh,Frozen,Marinated" },
+    { id: 6, category: "Weight", value: "1kg,2kg,3kg,over 5kg" },
     {
       id: 7,
       category: "Packaging",
@@ -42,12 +41,5 @@ export const generateAttributes = () => {
     },
     { id: 9, category: "Milk", value: "Formula milk, fresh milk" },
     { id: 10, category: "Combo", value: "Cat food, dog food" },
-    { id: 12, category: "Combo", value: "Cat food, dog food" },
-
-    { id: 13, category: "Combo", value: "Cat food, dog food" },
-
-    { id: 14, category: "Combo", value: "Cat food, dog food" },
-
-    // Add more data as needed
   ];
 };
