@@ -30,7 +30,7 @@ const NewAttributes = () => {
             placeholder="Attribute name"
             value={attributeName}
             onChange={(e) => setAttributeName(e.target.value)}
-            className="w-[821px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-[821px] px-4 py-2 border text-gray-700 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
         <div className="flex items-center">
@@ -46,7 +46,7 @@ const NewAttributes = () => {
             placeholder="Attribute value"
             value={attributeValue}
             onChange={(e) => setAttributeValue(e.target.value)}
-            className="w-[821px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-[821px] px-4 text-gray-700 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
         <div className="w-full flex justify-center">

@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { generateAttributes } from "../../../../../../util/util";
 import { IoMdAdd } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const TableAttributes = () => {
   const [attributes, setAttributes] = useState(generateAttributes());
@@ -91,12 +92,15 @@ const TableAttributes = () => {
             <FaSearch className="text-gray-500 dark:text-gray-300" />
           </div>
         </div>
-        <div className="w-[210px] h-[51px] rounded-lg flex border-blue-1 hover:bg-blue-500 cursor-pointer hover:text-white border-[1px] items-center justify-center text-[#2275FC]">
+        <Link
+          to={"/shop/add-attributes"}
+          className="w-[210px] h-[51px] rounded-lg flex border-blue-1 hover:bg-blue-500 cursor-pointer hover:text-white border-[1px] items-center justify-center text-[#2275FC]"
+        >
           <div className="text-lg">
             <IoMdAdd />
           </div>
-          <div className="flex items-center font-bold">Add new</div>
-        </div>
+          <Link className="flex items-center font-bold">Add new</Link>
+        </Link>
       </div>
       <TableContainer component={Paper} className="dark:bg-gray-800">
         <Table>
