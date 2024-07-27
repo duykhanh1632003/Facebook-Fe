@@ -1,5 +1,10 @@
 import { CircularProgress } from "@mui/material";
 
 export const LoadingRounded = () => {
-  return <CircularProgress />;
+  return (
+    <div className="w-full h-full">
+      {" "}
+      <CircularProgress />
+    </div>
+  );
 };

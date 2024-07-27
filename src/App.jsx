@@ -6,6 +6,7 @@ import { PostContextProvider } from "./context/PostContext.jsx";
 import { VideoPostProvider } from "./context/VideoPostContext.jsx";
 import { TinderContextProvider } from "./context/TinderContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { LoadingRounded } from "./Loading/LoadingRounded.jsx";
 
 // Lazy load components
 const SignUp = lazy(() => import("./pages/Auth/SignUp/SignUp"));
@@ -66,7 +67,16 @@ function App() {
 
   return (
     <main>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="w-full h-full">
+            <svg
+              className="animate-spin h-full w-full mr-3 ..."
+              viewBox="0 0 24 24"
+            ></svg>
+          </div>
+        }
+      >
         <Routes>
           {/* Public routes */}
           <Route path="/test" element={<Test />} />
