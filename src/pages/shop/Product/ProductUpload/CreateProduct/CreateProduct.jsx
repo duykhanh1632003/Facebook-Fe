@@ -6,14 +6,15 @@ import slugify from "slugify";
 import "./CreateProduct.css";
 
 const CreateProduct = () => {
-  const { register, handleSubmit, control, watch, setValue } = useForm({
-    defaultValues: {
-      attributes: [],
-      images: [],
-    },
-  });
+  const { register, handleSubmit, control, setValue, getValues, watch } =
+    useForm({
+      defaultValues: {
+        attributes: [],
+        images: [],
+      },
+    });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "attributes",
   });
@@ -21,6 +22,7 @@ const CreateProduct = () => {
   const [combinations, setCombinations] = useState([]);
   const [images, setImages] = useState([]);
   const [thumb, setThumb] = useState(null);
+  const selectedAttributes = watch("attributes");
 
   const onDrop = (acceptedFiles) => {
     setImages((prev) => [...prev, ...acceptedFiles]);
@@ -43,8 +45,6 @@ const CreateProduct = () => {
 
   const attributes = generateAttributes();
 
-  const selectedAttributes = watch("attributes");
-
   useEffect(() => {
     generateCombinations();
   }, [selectedAttributes]);
@@ -63,7 +63,24 @@ const CreateProduct = () => {
     const attribute = attributes.find((attr) => attr.category === category);
     if (attribute) {
       setValue(`attributes.${index}.value`, attribute.value);
+      updateSelectedAttributes(index, category, attribute.value);
     }
+  };
+
+  const updateSelectedAttributes = (index, category, value) => {
+    const updatedAttributes = getValues("attributes").map((attr, i) => {
+      if (i === index) return { category, value };
+      return attr;
+    });
+    setValue("attributes", updatedAttributes);
+  };
+
+  const handleRemoveAttribute = (index) => {
+    remove(index);
+    const updatedAttributes = getValues("attributes").filter(
+      (_, i) => i !== index
+    );
+    setValue("attributes", updatedAttributes);
   };
 
   const onSubmit = (data) => {
@@ -71,6 +88,10 @@ const CreateProduct = () => {
     data.images = images;
     data.thumb = thumb;
     console.log(data);
+  };
+
+  const isAttributeSelected = (category) => {
+    return selectedAttributes.some((attr) => attr.category === category);
   };
 
   return (
@@ -121,8 +142,8 @@ const CreateProduct = () => {
             Product Attributes
           </label>
           {fields.map((item, index) => (
-            <div key={item.id} className="mb-2">
-              <div className="flex">
+            <div key={item.id} className="mb-2 flex items-center">
+              <div className="flex w-full">
                 <select
                   {...register(`attributes.${index}.category`, {
                     required: true,
@@ -133,7 +154,11 @@ const CreateProduct = () => {
                 >
                   <option value="">Select Attribute</option>
                   {attributes.map((attr) => (
-                    <option key={attr.id} value={attr.category}>
+                    <option
+                      key={attr.id}
+                      value={attr.category}
+                      disabled={isAttributeSelected(attr.category)}
+                    >
                       {attr.category}
                     </option>
                   ))}
@@ -145,6 +170,13 @@ const CreateProduct = () => {
                   placeholder="Values (comma separated)"
                 />
               </div>
+              <button
+                type="button"
+                onClick={() => handleRemoveAttribute(index)}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+              >
+                Remove
+              </button>
             </div>
           ))}
           {fields.length < 2 && (
@@ -229,7 +261,7 @@ const CreateProduct = () => {
                 key={index}
                 src={URL.createObjectURL(file)}
                 alt={`product ${index}`}
-                className="w-24 h-24 m-2"
+                className="w-24 h-24 m-2 object-cover"
               />
             ))}
           </div>
@@ -250,7 +282,7 @@ const CreateProduct = () => {
             <img
               src={URL.createObjectURL(thumb)}
               alt="Thumbnail"
-              className="w-24 h-24 mt-2"
+              className="w-24 h-24 mt-2 object-cover"
             />
           )}
         </div>
