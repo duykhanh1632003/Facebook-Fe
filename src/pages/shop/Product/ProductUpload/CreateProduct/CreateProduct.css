@@ -1,5 +1,5 @@
 .container {
-    max-width: 1000px;
+   width: 1200px;
   }
   
   input[type="number"]::-webkit-inner-spin-button,

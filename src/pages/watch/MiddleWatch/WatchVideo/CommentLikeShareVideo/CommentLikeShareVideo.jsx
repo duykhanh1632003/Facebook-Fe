@@ -23,7 +23,7 @@ const CommentLikeShareVideo = ({
   likes: initialLikes = [],
   comments = [],
   share = [],
-  view = 0,
+  view,
 }) => {
   const [showEmojis, setShowEmojis] = useState(false);
   const [reaction, setReaction] = useState(null);
