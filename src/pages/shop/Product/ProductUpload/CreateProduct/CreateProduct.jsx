@@ -3,6 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { generateAttributes } from "../../../../../util/util";
 import { useDropzone } from "react-dropzone";
 import slugify from "slugify";
+import JoditEditor from "jodit-react";
 import "./CreateProduct.css";
 
 const CreateProduct = () => {
@@ -11,6 +12,7 @@ const CreateProduct = () => {
       defaultValues: {
         attributes: [],
         images: [],
+        product_description: "",
       },
     });
 
@@ -83,6 +85,14 @@ const CreateProduct = () => {
     setValue("attributes", updatedAttributes);
   };
 
+  const handleRemoveImage = (index) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const onDescriptionChange = (value) => {
+    setValue("product_description", value);
+  };
+
   const onSubmit = (data) => {
     data.slug = slugify(data.product_name, { lower: true });
     data.images = images;
@@ -96,7 +106,6 @@ const CreateProduct = () => {
 
   return (
     <div className="container mx-auto p-5">
-      <h2 className="text-2xl font-bold mb-5">Create Product</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white p-5 rounded shadow-lg"
@@ -115,10 +124,11 @@ const CreateProduct = () => {
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Product Description
           </label>
-          <textarea
-            {...register("product_description")}
+          <JoditEditor
+            value={watch("product_description")}
+            onChange={onDescriptionChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          ></textarea>
+          />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -257,12 +267,20 @@ const CreateProduct = () => {
           </div>
           <div className="mt-2 flex flex-wrap">
             {images.map((file, index) => (
-              <img
-                key={index}
-                src={URL.createObjectURL(file)}
-                alt={`product ${index}`}
-                className="w-24 h-24 m-2 object-cover"
-              />
+              <div key={index} className="relative m-2">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={`product ${index}`}
+                  className="w-24 h-24 object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  className="absolute top-0 right-0 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                >
+                  Cancel
+                </button>
+              </div>
             ))}
           </div>
         </div>

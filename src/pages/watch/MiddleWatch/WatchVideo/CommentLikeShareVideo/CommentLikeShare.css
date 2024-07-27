@@ -1,0 +1,53 @@
+.reaction-container {
+    position: relative;
+  }
+  
+  .reaction-button {
+    width: 250px;
+    height: 33px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .reaction-button:hover {
+    background-color: #eeeaea9f;
+  }
+  
+  .emoji-bar {
+    position: absolute;
+    top: -50px; /* Adjust to position above the like button */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    border-radius: 9px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .emoji {
+  }
+  
+  .emoji:hover {
+    transform: scale(1.1);
+  }
+  
+  .emoji > div {
+    width: 40px;
+    height: 40px;
+  }
+  

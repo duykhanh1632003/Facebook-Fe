@@ -56,18 +56,18 @@ function CreatePostVideo({ setShowModal, showModal }) {
   };
 
   return (
-    <div>
+    <div className="dark:bg-[#3A3B3C]">
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 overflow-y-auto">
-          <div className="bg-white rounded-lg w-1/3 p-6 relative">
-            <h2 className="text-2xl text-center text-blue-600 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 dark:bg-opacity-50 overflow-y-auto">
+          <div className="bg-white dark:bg-[#242526] rounded-lg w-1/3 p-6 relative">
+            <h2 className="text-2xl text-center text-blue-600 mb-4 dark:text-blue-400">
               Upload Video
             </h2>
             <form onSubmit={handleUpload} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="content"
-                  className="text-blue-600 font-semibold"
+                  className="text-blue-600 font-semibold dark:text-blue-400"
                 >
                   Content
                 </label>
@@ -77,13 +77,13 @@ function CreatePostVideo({ setShowModal, showModal }) {
                   placeholder="Enter content here..."
                   value={content}
                   onChange={handleContentChange}
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="p-2 border border-gray-300 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 dark:bg-[#3A3B3C] dark:text-gray-300"
                 ></textarea>
                 <div className="flex items-center">
                   <button
                     type="button"
                     onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                    className="mr-2 text-blue-600"
+                    className="mr-2 text-blue-600 dark:text-blue-400"
                   >
                     {showEmojiPicker ? "Close" : "Add Emoji"}
                   </button>
@@ -95,28 +95,35 @@ function CreatePostVideo({ setShowModal, showModal }) {
                         right: "10px",
                       }}
                     >
-                      <Picker data={data} onEmojiSelect={addEmoji} />
+                      <Picker
+                        data={data}
+                        onEmojiSelect={addEmoji}
+                        theme="dark"
+                      />
                     </div>
                   )}
                 </div>
               </div>
               <div className="flex flex-col gap-2 overflow-y-auto max-h-[330px] relative">
-                <label htmlFor="video" className="text-blue-600 font-semibold">
+                <label
+                  htmlFor="video"
+                  className="text-blue-600 font-semibold dark:text-blue-400"
+                >
                   Video Upload
                 </label>
-                <div className="flex items-center justify-center border-2 border-dashed border-gray-300 rounded p-4 cursor-pointer relative">
+                <div className="flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded p-4 cursor-pointer relative">
                   {video && (
                     <button
                       type="button"
                       onClick={handleRemoveVideo}
-                      className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                      className="absolute top-2 right-2 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-500"
                     >
                       &times;
                     </button>
                   )}
                   <label
                     htmlFor="video"
-                    className="text-gray-500 cursor-pointer w-full h-full flex items-center justify-center"
+                    className="text-gray-500 dark:text-gray-300 cursor-pointer w-full h-full flex items-center justify-center"
                   >
                     {video ? (
                       <video ref={videoRef} className="w-full h-auto" controls>
@@ -140,20 +147,20 @@ function CreatePostVideo({ setShowModal, showModal }) {
                 <Button
                   name="Upload"
                   icon={<i className="fas fa-upload"></i>}
-                  bg="bg-blue-500"
+                  bg="bg-blue-500 dark:bg-blue-400"
                   type="submit"
                   disabled={loading}
                 />
               </div>
             </form>
             {loading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 rounded-lg">
+              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 dark:bg-opacity-75 rounded-lg">
                 <LoadingRounded />
               </div>
             )}
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              className="absolute top-2 right-2 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-500"
             >
               &times;
             </button>

@@ -1,37 +1,12 @@
-import React, { useRef, useEffect } from "react";
-import videojs from "video.js";
-import "videojs-contrib-quality-levels";
-import VideoJS from "./VideoJS";
+import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
-import "./WatchContainer.css"; // Import the CSS file
+import "./WatchContainer.css";
 import { axiosHaveAuth } from "../../util/axios";
 
 const Video = ({ videoUrl, videoId }) => {
-  const videoConRef = useRef(null);
-  const playerRef = useRef(null);
-  const viewSentRef = useRef(false); // To track if view has been sent
+  const [isLoading, setIsLoading] = useState(true);
+  const viewSentRef = useRef(false);
   const instance = axiosHaveAuth();
-  const handlePlayerReady = (player) => {
-    playerRef.current = player;
-    player.on("timeupdate", () => {
-      const currentTime = player.currentTime();
-      const duration = player.duration();
-
-      if (
-        (currentTime >= 30 ||
-          currentTime >= duration * 0.5 ||
-          currentTime === duration) &&
-        !viewSentRef.current
-      ) {
-        incrementView();
-        viewSentRef.current = true;
-      }
-    });
-
-    player.on("dispose", () => {
-      videojs.log("player will dispose");
-    });
-  };
 
   const incrementView = async () => {
     try {
@@ -42,43 +17,48 @@ const Video = ({ videoUrl, videoId }) => {
     }
   };
 
-  const videoOptions = {
-    autoplay: false,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    playbackRates: [0.5, 0.75, 1, 1.5, 1.75, 2],
-    sources: [
-      {
-        src: videoUrl,
-        type: "video/mp4",
-      },
-    ],
-    controlBar: {
-      children: [
-        "playToggle",
-        "volumePanel",
-        "progressControl",
-        "currentTimeDisplay",
-        "timeDivider",
-        "durationDisplay",
-        "playbackRateMenuButton", // Add playback rate control
-        "pictureInPictureToggle",
-        "qualitySelector",
-        "fullscreenToggle",
-      ],
-      durationDisplay: {
-        timeToShow: ["duration"],
-        countDown: false,
-      },
-    },
-  };
+  useEffect(() => {
+    const iframe = document.getElementById("video-iframe");
+
+    const handleIframeLoad = () => {
+      setIsLoading(false);
+    };
+
+    const handleIframeMessage = (event) => {
+      if (event.origin !== window.location.origin) return;
+      const { currentTime, duration } = event.data;
+      if (
+        (currentTime >= 30 ||
+          currentTime >= duration * 0.5 ||
+          currentTime === duration) &&
+        !viewSentRef.current
+      ) {
+        incrementView();
+        viewSentRef.current = true;
+      }
+    };
+
+    iframe.addEventListener("load", handleIframeLoad);
+    window.addEventListener("message", handleIframeMessage);
+
+    return () => {
+      iframe.removeEventListener("load", handleIframeLoad);
+      window.removeEventListener("message", handleIframeMessage);
+    };
+  }, [videoId]);
 
   return (
     <div className="video-player">
-      <div className="video-container" ref={videoConRef}>
-        <VideoJS options={videoOptions} onReady={handlePlayerReady} />
-      </div>
+      {isLoading && <div className="spinner"></div>}
+      <iframe
+        id="video-iframe"
+        src={videoUrl}
+        frameBorder="0"
+        allow="autoplay; fullscreen"
+        allowFullScreen
+        className="video-iframe"
+        onLoad={() => setIsLoading(false)}
+      ></iframe>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import Video from "../../Video";
+import CommentLikeShareVideo from "./CommentLikeShareVideo/CommentLikeShareVideo";
 
 const WatchVideo = ({ post }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -15,8 +16,8 @@ const WatchVideo = ({ post }) => {
       : post.content.split(" ").slice(0, 10).join(" ") + "...";
 
   return (
-    <div className="w-full bg-white mt-2 rounded-lg">
-      <div key={post._id} className="mb-4">
+    <div className="w-full bg-white  mt-2 rounded-lg">
+      <div key={post._id} className="mb-4 dark:bg-[#3A3B3C]">
         <div className="flex justify-between">
           <div className="flex items-center px-2 py-2">
             <div className="w-[49px] h-[49px] rounded-full">
@@ -35,8 +36,8 @@ const WatchVideo = ({ post }) => {
               </div>
             </div>
           </div>
-          <div>
-            <BsThreeDots />
+          <div className="flex items-center px-2 py-2">
+            <BsThreeDots className="text-zinc-900 dark:text-zinc-100" />
           </div>
         </div>
         <div className="px-2 font-bold">
@@ -53,10 +54,19 @@ const WatchVideo = ({ post }) => {
             </a>
           )}
         </div>
-        <div className="w-full ">
+        <div className="w-full">
           <Video videoUrl={post.videoUrl} videoId={post._id} />
         </div>
-        <div className="mt-3 h-[100px] w-full">{post.view} lượt xem</div>
+
+        <div className="flex w-[823px]">
+          <CommentLikeShareVideo
+            postId={post._id}
+            likes={[]}
+            comments={[]}
+            share={[]}
+            view={post.view}
+          />
+        </div>
       </div>
     </div>
   );

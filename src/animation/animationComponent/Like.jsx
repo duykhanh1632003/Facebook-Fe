@@ -11,8 +11,8 @@ const Like = () => {
   };
 
   return (
-    <div>
-      <Lottie options={defaultOptions} height={41} width={41} />
+    <div className="rounded-full ">
+      <Lottie options={defaultOptions} height={40} width={40} />
     </div>
   );
 };
