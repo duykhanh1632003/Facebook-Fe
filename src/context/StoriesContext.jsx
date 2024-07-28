@@ -158,5 +158,5 @@ export const StoriesProvider = ({ children }) => {
     >
       {children}
     </StoriesContext.Provider>
-  );
+  );  
 };

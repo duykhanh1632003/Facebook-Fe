@@ -26,6 +26,8 @@ const NewAttributes = () => {
     }
   };
 
+  
+
   return (
     <div className="mt-3 w-full bg-white p-6 rounded-md shadow-md text-white">
       <form className="space-y-4" onSubmit={handleSave}>
