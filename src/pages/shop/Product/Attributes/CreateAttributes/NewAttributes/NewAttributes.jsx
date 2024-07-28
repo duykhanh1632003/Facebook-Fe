@@ -2,6 +2,7 @@ import { useState } from "react";
 import { axiosHaveAuth } from "../../../../../../util/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { createAttributes } from "../../../../../../api/productAPI";
 
 const NewAttributes = () => {
   const [attributeName, setAttributeName] = useState("");
@@ -13,9 +14,10 @@ const NewAttributes = () => {
     try {
       const attributes = { attributeName, attributeValue };
       const response = await instance.post("/api/new/attributes", attributes);
+      // const response = await createAttributes(attributes);
       if (response) {
         toast.success("Create attribute success");
-        navigate("/proshop/attributes-list");
+        navigate("/shop/attributes-list");
         setAttributeName("");
         setAttributeValue("");
       }
