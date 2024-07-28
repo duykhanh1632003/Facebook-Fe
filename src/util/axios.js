@@ -18,6 +18,7 @@ const axiosHaveAuth = () => {
       refreshToken: localStorage.getItem("refreshToken"),
     },
   });
+
   instance.interceptors.response.use(
     (response) => response,
     async (error) => {

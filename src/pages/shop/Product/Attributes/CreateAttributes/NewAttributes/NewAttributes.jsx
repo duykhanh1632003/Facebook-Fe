@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { axiosHaveAuth } from "../../../../../../util/axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const NewAttributes = () => {
   const [attributeName, setAttributeName] = useState("");
   const [attributeValue, setAttributeValue] = useState("");
-
-  const handleSave = (e) => {
+  const instance = axiosHaveAuth();
+  const navigate = useNavigate();
+  const handleSave = async (e) => {
     e.preventDefault();
-    // Handle the save functionality here
-    console.log("Attribute Name:", attributeName);
-    console.log("Attribute Value:", attributeValue);
-    // Reset the form
-    setAttributeName("");
-    setAttributeValue("");
+    try {
+      const attributes = { attributeName, attributeValue };
+      const response = await instance.post("/api/new/attributes", attributes);
+      if (response) {
+        toast.success("Create attribute success");
+        navigate("/proshop/attributes-list");
+        setAttributeName("");
+        setAttributeValue("");
+      }
+    } catch (error) {
+      console.error("Error saving attributes:", error);
+    }
   };
 
   return (

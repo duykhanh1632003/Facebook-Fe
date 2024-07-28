@@ -15,9 +15,11 @@ import Combinations from "./Combinations/Combinations";
 import ErrorDisplay from "./ErrorAndLoading/ErrorDisplay";
 import Images from "./Images/Images";
 import { axiosHaveAuth } from "../../../../../util/axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreateProduct = () => {
-  const { register, handleSubmit, control, setValue, getValues, watch } =
+  const { register, handleSubmit, control, setValue, getValues, watch, reset } =
     useForm({
       defaultValues: {
         attributes: [],
@@ -37,6 +39,7 @@ const CreateProduct = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const selectedAttributes = watch("attributes");
+  const navigate = useNavigate();
 
   useEffect(() => {
     generateCombinations();
@@ -70,8 +73,10 @@ const CreateProduct = () => {
       }
 
       const response = await instance.post("/api/products/create", data);
-      console.log("Product created:", response.data);
-      // Reset form or navigate to another page if needed
+      if (response) {
+        toast.success("Create product success");
+        navigate("/shop/product-list");
+      }
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     } finally {
