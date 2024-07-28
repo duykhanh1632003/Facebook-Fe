@@ -1,5 +1,6 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import { MdCancel } from "react-icons/md";
 
 const Images = ({ images, setImages }) => {
   const onDrop = (acceptedFiles) => {
@@ -38,9 +39,9 @@ const Images = ({ images, setImages }) => {
             <button
               type="button"
               onClick={() => handleRemoveImage(index)}
-              className="absolute top-0 right-0 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+              className="absolute top-0 right-0 bg-red-500 hover:bg-red-700 text-white font-bold p-1 rounded-full"
             >
-              Remove
+              <MdCancel />
             </button>
           </div>
         ))}

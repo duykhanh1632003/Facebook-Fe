@@ -14,6 +14,7 @@ import Attributes from "./Attributes/Attributes";
 import Combinations from "./Combinations/Combinations";
 import ErrorDisplay from "./ErrorAndLoading/ErrorDisplay";
 import Images from "./Images/Images";
+import { axiosHaveAuth } from "../../../../../util/axios";
 
 const CreateProduct = () => {
   const { register, handleSubmit, control, setValue, getValues, watch } =
@@ -29,7 +30,7 @@ const CreateProduct = () => {
     control,
     name: "attributes",
   });
-
+  const instance = axiosHaveAuth();
   const [combinations, setCombinations] = useState([]);
   const [images, setImages] = useState([]);
   const [thumb, setThumb] = useState(null);
@@ -55,7 +56,7 @@ const CreateProduct = () => {
     setLoading(true);
     setError(null);
     try {
-      data.slug = slugify(data.product_name, { lower: true });
+      data.product_slug = slugify(data.product_name, { lower: true });
 
       // Upload images to Firebase
       const imageUrls = await Promise.all(
@@ -65,10 +66,10 @@ const CreateProduct = () => {
 
       // Upload thumbnail to Firebase
       if (thumb) {
-        data.thumb = await uploadToFirebase(thumb);
+        data.product_thumb = await uploadToFirebase(thumb);
       }
 
-      const response = await axios.post("/api/products/create", data);
+      const response = await instance.post("/api/products/create", data);
       console.log("Product created:", response.data);
       // Reset form or navigate to another page if needed
     } catch (error) {
