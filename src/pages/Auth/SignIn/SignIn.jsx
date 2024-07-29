@@ -62,7 +62,7 @@ const SignIn = () => {
         >
           <div className="relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[364px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[18px]">
             <textarea
-              className="w-full bg-transparent outline-none resize-none text-sm input-textarea"
+              className="w-full bg-transparent outline-none mt-3 ml-3 resize-none text-sm input-textarea"
               placeholder="Email hoặc số điện thoại"
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={handleKeyPress}

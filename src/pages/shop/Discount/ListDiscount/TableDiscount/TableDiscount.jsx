@@ -126,25 +126,25 @@ const TableDiscount = () => {
                 <td className="p-4 flex items-center">
                   {discount.discount_status === "active" && (
                     <>
-                      <MdOutlineCheckCircle className="text-green-500 mr-2" />
+                      <MdOutlineCheckCircle className="text-green-500 mr-2 text-lg" />
                       Active
                     </>
                   )}
                   {discount.discount_status === "scheduled" && (
                     <>
-                      <MdOutlineCheckCircle className="text-yellow-500 mr-2" />
+                      <MdOutlineCheckCircle className="text-yellow-500 mr-2 text-lg" />
                       Scheduled
                     </>
                   )}
                   {discount.discount_status === "draft" && (
                     <>
-                      <MdOutlineCheckCircle className="text-gray-500 mr-2" />
+                      <MdOutlineCheckCircle className="text-gray-500 mr-2 text-lg" />
                       Draft
                     </>
                   )}
                   {discount.discount_status === "expired" && (
                     <>
-                      <MdOutlineCancel className="text-red-500 mr-2" />
+                      <MdOutlineCancel className="text-red-500 mr-2 text-lg" />
                       Expired
                     </>
                   )}
@@ -175,26 +175,30 @@ const TableDiscount = () => {
           </tbody>
         </table>
       </div>
+
       <div className="flex justify-between items-center mt-4">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          className="bg-gray-200 p-2 rounded disabled:bg-gray-400"
-        >
-          Prev
-        </button>
         <div className="text-gray-600">
           Page {currentPage} of {totalPages}
         </div>
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          className="bg-gray-200 p-2 rounded disabled:bg-gray-400"
-        >
-          Next
-        </button>
+        <div>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            className="bg-gray-200 p-2 rounded disabled:bg-white mr-2"
+          >
+            Prev
+          </button>
+
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            className="bg-gray-200 p-2 rounded disabled:bg-white"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

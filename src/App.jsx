@@ -11,6 +11,7 @@ import MarketContainer from "./pages/Market/MarketContainer.jsx";
 import Notification from "./pages/Market/Notification/Notification.jsx";
 import MailMarket from "./pages/Market/MailMarket/MailMarket.jsx";
 import Cart from "./pages/Market/Cart/Cart.jsx";
+import CreateDiscountLayout from "./pages/shop/Discount/CreateDiscount/CreateDiscountLayout.jsx";
 
 // Lazy load components
 const SignUp = lazy(() => import("./pages/Auth/SignUp/SignUp"));
@@ -187,7 +188,7 @@ function App() {
             <Route path="/shop/discount-list" element={<ListDiscount />} />
             <Route
               path="/shop/create-discount"
-              element={<CreateAttributes />}
+              element={<CreateDiscountLayout />}
             />
             <Route path="/shop/edit-discount" element={<CreateAttributes />} />
             <Route
