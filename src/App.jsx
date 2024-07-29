@@ -7,6 +7,10 @@ import { VideoPostProvider } from "./context/VideoPostContext.jsx";
 import { TinderContextProvider } from "./context/TinderContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LoadingRounded } from "./Loading/LoadingRounded.jsx";
+import MarketContainer from "./pages/Market/MarketContainer.jsx";
+import Notification from "./pages/Market/Notification/Notification.jsx";
+import MailMarket from "./pages/Market/MailMarket/MailMarket.jsx";
+import Cart from "./pages/Market/Cart/Cart.jsx";
 
 // Lazy load components
 const SignUp = lazy(() => import("./pages/Auth/SignUp/SignUp"));
@@ -15,6 +19,7 @@ const RootLayout = lazy(() => import("./components/RootLayout"));
 const MiddleSideBar = lazy(() =>
   import("./pages/HomePage/Home-middle/MiddleSideBar")
 );
+const MarketLayout = lazy(() => import("./pages/Market/MarketLayout.jsx"));
 const FriendContainer = lazy(() => import("./pages/Friends/FriendContainer"));
 const DetailPost = lazy(() =>
   import("./pages/HomePage/Home-middle/Post/detail/DetailPost")
@@ -161,6 +166,14 @@ function App() {
             element={authUser ? <ProfileLayout /> : <Navigate to="/login" />}
           >
             <Route path="/profile/:id" element={<HomeProfile />} />
+          </Route>
+          <Route
+            element={authUser ? <MarketLayout /> : <Navigate to="/login" />}
+          >
+            <Route path="/market" element={<MarketContainer />} />
+            <Route path="/market/notifications" element={<Notification />} />
+            <Route path="/market/inbox" element={<MailMarket />} />
+            <Route path="/market/you" element={<Cart />} />
           </Route>
           <Route element={authUser ? <ShopLayout /> : <Navigate to="/login" />}>
             <Route path="/shop" element={<Dashboard />} />
