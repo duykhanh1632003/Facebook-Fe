@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MdDashboard } from "react-icons/md";
 import { FaChevronRight } from "react-icons/fa";
 import { LuBox } from "react-icons/lu";
+import { FaTag } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import "./LeftSideBarShop.css"; // Import the CSS file
 
@@ -9,6 +10,7 @@ const LeftSideBarShop = () => {
   const location = useLocation();
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isAttributesOpen, setIsAttributesOpen] = useState(false);
+  const [isDiscountsOpen, setIsDiscountsOpen] = useState(false);
 
   const toggleProductsMenu = () => {
     setIsProductsOpen(!isProductsOpen);
@@ -16,6 +18,10 @@ const LeftSideBarShop = () => {
 
   const toggleAttributesMenu = () => {
     setIsAttributesOpen(!isAttributesOpen);
+  };
+
+  const toggleDiscountsMenu = () => {
+    setIsDiscountsOpen(!isDiscountsOpen);
   };
 
   return (
@@ -35,6 +41,7 @@ const LeftSideBarShop = () => {
         />
         <div>Dashboard</div>
       </Link>
+
       <div
         className={`h-[49px] w-full flex items-center text-xl font-bold ${
           location.pathname.includes("/shop/product")
@@ -98,6 +105,7 @@ const LeftSideBarShop = () => {
           </div>
         </div>
       )}
+
       <div
         className={`h-[49px] w-full flex items-center text-xl font-bold ${
           location.pathname.includes("/shop/attributes")
@@ -155,6 +163,108 @@ const LeftSideBarShop = () => {
               }`}
             >
               Add Attributes
+            </Link>
+          </div>
+        </div>
+      )}
+
+      <div
+        className={`h-[49px] w-full flex items-center text-xl font-bold ${
+          location.pathname.includes("/shop/discount")
+            ? "bg-[#F1F1F1] text-blue-500"
+            : "text-[#777687]"
+        } rounded-md p-2 cursor-pointer`}
+        onClick={toggleDiscountsMenu}
+      >
+        <div className="flex items-center">
+          <FaTag
+            className={`mr-2 ${
+              location.pathname.includes("/shop/discount")
+                ? "text-blue-500"
+                : ""
+            }`}
+          />
+          <div className="ml-2">Discount</div>
+        </div>
+        <div
+          className={`ml-auto ${isDiscountsOpen ? "rotate-down" : "rotate-up"}`}
+        >
+          <FaChevronRight />
+        </div>
+      </div>
+      {isDiscountsOpen && (
+        <div className="flex items-center mt-2 text-[#b6b4c7] font-medium">
+          <div className="w-[2px] h-[99px] bg-[#F1F1F1]"></div>
+          <div className={`products-menu ${isDiscountsOpen ? "open" : ""}`}>
+            <Link
+              to="/shop/discount-list"
+              className={`block py-1 hover:text-blue-500 ${
+                location.pathname === "/shop/discount-list"
+                  ? "text-blue-500"
+                  : "text-gray-700"
+              }`}
+            >
+              List Discount
+            </Link>
+            <Link
+              to="/shop/create-discount"
+              className={`block py-1 hover:text-blue-500 mt-2 ${
+                location.pathname === "/shop/create-discount"
+                  ? "text-blue-500"
+                  : "text-gray-700"
+              }`}
+            >
+              Create Discount
+            </Link>
+            <Link
+              to="/shop/edit-discount"
+              className={`block py-1 hover:text-blue-500 mt-2 ${
+                location.pathname === "/shop/edit-discount"
+                  ? "text-blue-500"
+                  : "text-gray-700"
+              }`}
+            >
+              Edit Discount
+            </Link>
+            <Link
+              to="/shop/delete-discount"
+              className={`block py-1 hover:text-blue-500 mt-2 ${
+                location.pathname === "/shop/delete-discount"
+                  ? "text-blue-500"
+                  : "text-gray-700"
+              }`}
+            >
+              Delete Discount
+            </Link>
+            <Link
+              to="/shop/discount-analytics"
+              className={`block py-1 hover:text-blue-500 mt-2 ${
+                location.pathname === "/shop/discount-analytics"
+                  ? "text-blue-500"
+                  : "text-gray-700"
+              }`}
+            >
+              Discount Analytics
+            </Link>
+            <Link
+              to="/shop/expired-discounts"
+              className={`block py-1 hover:text-blue-500 mt-2 ${
+                location.pathname === "/shop/expired-discounts"
+                  ? "text-blue-500"
+                  : "text-gray-700"
+              }`}
+            >
+              Expired Discounts
+            </Link>
+            <Link
+              to="/shop/active-discounts"
+              className={`block py-1 hover:text-blue-500 mt-2 ${
+                location.pathname === "/shop/active-discounts"
+                  ? "text-blue-500"
+                  : "text-gray-700"
+              }`}
+            >
+              Active Discounts
             </Link>
           </div>
         </div>

@@ -24,6 +24,9 @@ const FriendContainer = lazy(() => import("./pages/Friends/FriendContainer"));
 const DetailPost = lazy(() =>
   import("./pages/HomePage/Home-middle/Post/detail/DetailPost")
 );
+const ListDiscount = lazy(() =>
+  import("./pages/shop/Discount/ListDiscount/ListDiscount.jsx")
+);
 const FriendLayout = lazy(() => import("./pages/Friends/FriendLayout"));
 const ProfileLayout = lazy(() => import("./pages/Profile/ProfileLayout"));
 const HomeProfile = lazy(() => import("./pages/Profile/HomeProfile"));
@@ -181,6 +184,21 @@ function App() {
             <Route path="/shop/product-upload" element={<ProductUpload />} />
             <Route path="/shop/attributes-list" element={<ListAttributes />} />
             <Route path="/shop/add-attributes" element={<CreateAttributes />} />
+            <Route path="/shop/discount-list" element={<ListDiscount />} />
+            <Route
+              path="/shop/create-discount"
+              element={<CreateAttributes />}
+            />
+            <Route path="/shop/edit-discount" element={<CreateAttributes />} />
+            <Route
+              path="/shop/delete-discount"
+              element={<CreateAttributes />}
+            />
+
+            <Route
+              path="/shop/discount-analytics"
+              element={<CreateAttributes />}
+            />
           </Route>
           <Route path="/stories/create" element={<CreateStories />} />
         </Routes>
