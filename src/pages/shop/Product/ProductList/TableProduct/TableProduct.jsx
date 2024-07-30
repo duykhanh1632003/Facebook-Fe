@@ -21,6 +21,7 @@ import "./TableProduct.css";
 import { useProductContext } from "../../../../../context/ProductContext";
 import { axiosHaveAuth } from "../../../../../util/axios";
 import { toast } from "react-toastify";
+import deleteFile from "../../../../../config/deleteFile";
 
 const TableProduct = () => {
   const { productData, loading, setProductData } = useProductContext();
@@ -105,8 +106,26 @@ const TableProduct = () => {
 
   const handleDeleteProduct = async () => {
     try {
+      // Fetch the product to get the image URLs and thumbnail URL
+      const productToDelete = products.find(
+        (product) => product._id === selectedProductId
+      );
+      if (!productToDelete) {
+        toast.error("Product not found");
+        return;
+      }
+
+      // Delete images and thumbnail from Firebase storage
+      const imageUrls = productToDelete.images;
+      const thumbnailUrl = productToDelete.product_thumb;
+      const allUrls = [...imageUrls, thumbnailUrl];
+      await Promise.all(allUrls.map((url) => deleteFile(url)));
+
+      // Delete the product from the database
       await instance.delete(`/api/delete/product/${selectedProductId}`);
-      toast.success("Product deleted successfully");
+      toast.success("Product and images deleted successfully");
+
+      // Update state
       const updatedProducts = products.filter(
         (product) => product._id !== selectedProductId
       );
@@ -114,7 +133,7 @@ const TableProduct = () => {
       setProducts(updatedProducts);
       setOpenDeleteModal(false);
     } catch (e) {
-      toast.error("Error deleting product");
+      toast.error("Error deleting product and images");
       console.log(e);
     }
   };
