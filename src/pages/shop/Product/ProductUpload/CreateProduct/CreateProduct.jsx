@@ -17,6 +17,7 @@ import Images from "./Images/Images";
 import { axiosHaveAuth } from "../../../../../util/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuthContext } from "../../../../../context/AuthContext";
 
 const CreateProduct = () => {
   const { register, handleSubmit, control, setValue, getValues, watch, reset } =
@@ -40,7 +41,7 @@ const CreateProduct = () => {
   const [error, setError] = useState(null);
   const selectedAttributes = watch("attributes");
   const navigate = useNavigate();
-
+  const { authUser } = useAuthContext();
   useEffect(() => {
     generateCombinations();
   }, [selectedAttributes]);
@@ -71,7 +72,7 @@ const CreateProduct = () => {
       if (thumb) {
         data.product_thumb = await uploadToFirebase(thumb);
       }
-
+      data.product_user = authUser.user._id;
       const response = await instance.post("/api/products/create", data);
       if (response) {
         toast.success("Create product success");

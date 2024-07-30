@@ -88,7 +88,7 @@ const TableDiscount = () => {
           className="h-[44px] w-[91px] ml-4 flex items-center justify-center text-lg cursor-pointer bg-gray-200 rounded-lg hover:bg-gray-300"
         >
           <div className="mr-2">
-            <LuArrowUpRight />
+            <LuArrowUpRight />  
           </div>
           <div>Export</div>
         </div>

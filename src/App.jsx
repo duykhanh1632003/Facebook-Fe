@@ -12,6 +12,7 @@ import Notification from "./pages/Market/Notification/Notification.jsx";
 import MailMarket from "./pages/Market/MailMarket/MailMarket.jsx";
 import Cart from "./pages/Market/Cart/Cart.jsx";
 import CreateDiscountLayout from "./pages/shop/Discount/CreateDiscount/CreateDiscountLayout.jsx";
+import { ProductProvider } from "./context/ProductContext.jsx";
 
 // Lazy load components
 const SignUp = lazy(() => import("./pages/Auth/SignUp/SignUp"));
@@ -181,14 +182,32 @@ function App() {
           </Route>
           <Route element={authUser ? <ShopLayout /> : <Navigate to="/login" />}>
             <Route path="/shop" element={<Dashboard />} />
-            <Route path="/shop/product-list" element={<ProductList />} />
-            <Route path="/shop/product-upload" element={<ProductUpload />} />
+            <Route
+              path="/shop/product-list"
+              element={
+                <ProductProvider>
+                  <ProductList />
+                </ProductProvider>
+              }
+            />
+            <Route
+              path="/shop/product-upload"
+              element={
+                <ProductProvider>
+                  <ProductUpload />
+                </ProductProvider>
+              }
+            />
             <Route path="/shop/attributes-list" element={<ListAttributes />} />
             <Route path="/shop/add-attributes" element={<CreateAttributes />} />
             <Route path="/shop/discount-list" element={<ListDiscount />} />
             <Route
               path="/shop/create-discount"
-              element={<CreateDiscountLayout />}
+              element={
+                <ProductProvider>
+                  <CreateDiscountLayout />
+                </ProductProvider>
+              }
             />
             <Route path="/shop/edit-discount" element={<CreateAttributes />} />
             <Route

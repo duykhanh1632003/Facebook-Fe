@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEye, FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { IoSwapVertical } from "react-icons/io5";
 import {
@@ -10,27 +10,47 @@ import {
   TableRow,
   Paper,
   Pagination,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import "./TableProduct.css";
-import generateProducts from "../../../../../util/util";
+import { useProductContext } from "../../../../../context/ProductContext";
+import { axiosHaveAuth } from "../../../../../util/axios";
+import { toast } from "react-toastify";
 
 const TableProduct = () => {
-  const [products, setProducts] = useState(generateProducts());
+  const { productData, loading, setProductData } = useProductContext();
+  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const instance = axiosHaveAuth();
+
+  useEffect(() => {
+    if (productData && productData.length > 0) {
+      setProducts(productData);
+    } else {
+      setProducts([]);
+    }
+  }, [productData]);
 
   useEffect(() => {
     if (searchQuery) {
-      const filteredProducts = generateProducts().filter((product) =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const filteredProducts = productData.filter((product) =>
+        product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setProducts(filteredProducts);
     } else {
-      setProducts(generateProducts());
+      setProducts(productData);
     }
-  }, [searchQuery]);
+  }, [searchQuery, productData]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -64,20 +84,56 @@ const TableProduct = () => {
     setSortConfig({ key, direction });
   };
 
-  const handleStatusChange = (id, status) => {
+  const handleStatusChange = async (id, status) => {
+    try {
+      const res = await instance.post(`/api/change/status/${id}`);
+      if (!res) {
+        toast.error("Cannot change status");
+      } else {
+        toast.success("Status changed successfully");
+      }
+    } catch (e) {
+      console.log(e);
+    }
     const updatedProducts = products.map((product) =>
-      product.id === id ? { ...product, status } : product
+      product._id === id ? { ...product, status } : product
     );
+
+    setProductData(updatedProducts);
     setProducts(updatedProducts);
   };
 
-  const currentData = sortedProducts.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
+  const handleDeleteProduct = async () => {
+    try {
+      await instance.delete(`/api/delete/product/${selectedProductId}`);
+      toast.success("Product deleted successfully");
+      const updatedProducts = products.filter(
+        (product) => product._id !== selectedProductId
+      );
+      setProductData(updatedProducts);
+      setProducts(updatedProducts);
+      setOpenDeleteModal(false);
+    } catch (e) {
+      toast.error("Error deleting product");
+      console.log(e);
+    }
+  };
+
+  const currentData =
+    rowsPerPage > 10 && sortedProducts.length < rowsPerPage
+      ? sortedProducts
+      : sortedProducts.slice(
+          (currentPage - 1) * rowsPerPage,
+          currentPage * rowsPerPage
+        );
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800 mt-3 rounded-lg p-3">
+    <div className="w-full bg-white dark:bg-gray-800 mt-3 rounded-lg p-3 relative">
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-text">Loading...</div>
+        </div>
+      )}
       <div className="font-bold text-lg mb-4 dark:text-white">
         Your Products
       </div>
@@ -95,14 +151,14 @@ const TableProduct = () => {
               <TableCell className="header-cell">ID</TableCell>
               <TableCell className="header-cell">Thumbnail</TableCell>
               <TableCell
-                onClick={() => handleSort("name")}
+                onClick={() => handleSort("product_name")}
                 className="header-cell cursor-pointer"
               >
                 Name & Description
                 <IoSwapVertical className="inline ml-1" />
               </TableCell>
               <TableCell
-                onClick={() => handleSort("rating")}
+                onClick={() => handleSort("product_ratingsAverage")}
                 className="header-cell cursor-pointer"
               >
                 Rating
@@ -116,7 +172,7 @@ const TableProduct = () => {
                 <IoSwapVertical className="inline ml-1" />
               </TableCell>
               <TableCell
-                onClick={() => handleSort("purchases")}
+                onClick={() => handleSort("orders_count")}
                 className="header-cell cursor-pointer"
               >
                 Purchases
@@ -142,41 +198,51 @@ const TableProduct = () => {
           <TableBody>
             {currentData.map((product, index) => (
               <TableRow
-                key={product.id}
+                key={product._id}
                 className={`${
                   index % 2 === 0 ? "bg-[#F2F2F2]" : "bg-[#FFFFFF]"
                 }`}
               >
-                <TableCell>{product.id}</TableCell>
+                <TableCell>
+                  {product._id.length > 5
+                    ? product._id.slice(0, 5)
+                    : product._id}
+                </TableCell>
                 <TableCell>
                   <img
-                    src={product.thumbnail}
-                    alt={product.name}
+                    src={product.product_thumb}
+                    alt={product.product_name}
                     className="w-16 h-16 object-cover"
                   />
                 </TableCell>
                 <TableCell>
                   <div>
-                    {product.name.length > 22
-                      ? `${product.name.substring(0, 22)}...`
-                      : product.name}
+                    {product.product_name.length > 22
+                      ? `${product.product_name.substring(0, 22)}...`
+                      : product.product_name}
                   </div>
                   <div className="text-sm text-gray-500">
-                    {product.description.length > 22
-                      ? `${product.description.substring(0, 22)}...`
-                      : product.description}
+                    {product.product_description &&
+                    product.product_description.length > 22
+                      ? `${product.product_description.substring(0, 22)}...`
+                      : product.product_description}
                   </div>
                 </TableCell>
-                <TableCell>{product.rating}</TableCell>
-                <TableCell>${product.price}</TableCell>
-                <TableCell>{product.purchases}</TableCell>
-                <TableCell>${product.totalRevenue}</TableCell>
+                <TableCell>{product.product_ratingsAverage}</TableCell>
+                <TableCell>
+                  {product.priceMax === product.priceMin
+                    ? product.priceMax
+                    : `${product.priceMin} - ${product.priceMax} `}
+                  vnd
+                </TableCell>
+                <TableCell>{product.orders_count}</TableCell>
+                <TableCell>{product.total} vnd</TableCell>
                 <TableCell>
                   <div
                     className={`status-indicator ${product.status}`}
                     onClick={() =>
                       handleStatusChange(
-                        product.id,
+                        product._id,
                         product.status === "public" ? "draft" : "public"
                       )
                     }
@@ -191,7 +257,13 @@ const TableProduct = () => {
                   <div className="action-icon text-sm text-green-500 cursor-pointer bg-[#C7E2D3]">
                     <FaPencilAlt />
                   </div>
-                  <div className="action-icon text-sm text-red-500 cursor-pointer bg-[#F2C5CC]">
+                  <div
+                    className="action-icon text-sm text-red-500 cursor-pointer bg-[#F2C5CC]"
+                    onClick={() => {
+                      setSelectedProductId(product._id);
+                      setOpenDeleteModal(true);
+                    }}
+                  >
                     <FaTrashAlt />
                   </div>
                 </TableCell>
@@ -207,6 +279,24 @@ const TableProduct = () => {
         onChange={handlePageChange}
         className="mt-4 ml-[900px]"
       />
+
+      <Dialog open={openDeleteModal} onClose={() => setOpenDeleteModal(false)}>
+        <DialogTitle>{"Confirm Delete"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this product? This action cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDeleteModal(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteProduct} color="secondary">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
