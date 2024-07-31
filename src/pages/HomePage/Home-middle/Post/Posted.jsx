@@ -11,7 +11,7 @@ import {
   fetchPostsStart,
   fetchPostsFailure,
 } from "../../../../redux/post/postsSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Posted = ({ userId }) => {
   const [posts, setPosts] = useState([]);
@@ -21,7 +21,8 @@ const Posted = ({ userId }) => {
   const page = useSelector((state) => state.posts.page);
   const hasMore = useSelector((state) => state.posts.hasMore);
   const instance = axiosHaveAuth();
-
+  const params = useParams();
+  console.log("check pareams", params);
   const observer = useRef();
   const navigate = useNavigate();
   const lastPostElementRef = useCallback(
@@ -70,7 +71,7 @@ const Posted = ({ userId }) => {
       .catch((err) => {
         dispatch(fetchPostsFailure(err.toString()));
       });
-  }, [dispatch, userId]);
+  }, [dispatch, params]);
 
   const timeFromNow = (date) => {
     const now = moment();
@@ -91,7 +92,7 @@ const Posted = ({ userId }) => {
 
   return (
     <div className="dark:bg-[#242526]">
-      {posts.map((post, index) => {
+      {posts?.map((post, index) => {
         const { author, createdAt, content, image, likes, comments, share } =
           post;
         const isLastPost = posts.length === index + 1;

@@ -9,50 +9,27 @@ import {
   Paper,
   Pagination,
 } from "@mui/material";
-import { axiosHaveAuth } from "../../../../../../util/axios";
 import TableHeader from "./TableHeader";
 import AttributeRow from "./AttributeRow";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
+import { useProductContext } from "../../../../../../context/ProductContext";
 
 const TableAttributes = () => {
-  const [attributes, setAttributes] = useState([]);
+  const {
+    attributes,
+    setAttributes,
+    originalAttributes,
+    setOriginalAttributes,
+    loading,
+  } = useProductContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
-  const [originalAttributes, setOriginalAttributes] = useState([]);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [selectedAttribute, setSelectedAttribute] = useState(null);
   const [editedValue, setEditedValue] = useState("");
-  const instance = axiosHaveAuth();
-
-  useEffect(() => {
-    const fetchAttributes = async () => {
-      try {
-        const response = await instance.get("/api/get/attributes");
-        if (
-          response &&
-          response.data &&
-          response.data.metadata &&
-          Array.isArray(response.data.metadata)
-        ) {
-          const fetchedAttributes = response.data.metadata;
-          setAttributes(fetchedAttributes);
-          setOriginalAttributes(fetchedAttributes);
-        } else {
-          setAttributes([]); // Ensure attributes is an array
-          setOriginalAttributes([]); // Ensure originalAttributes is an array
-        }
-      } catch (e) {
-        console.log(e);
-        setAttributes([]); // Ensure attributes is an array in case of error
-        setOriginalAttributes([]); // Ensure originalAttributes is an array in case of error
-      }
-    };
-
-    fetchAttributes();
-  }, []);
 
   useEffect(() => {
     if (searchQuery) {
@@ -63,7 +40,7 @@ const TableAttributes = () => {
     } else {
       setAttributes(originalAttributes);
     }
-  }, [searchQuery]);
+  }, [searchQuery, originalAttributes]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -71,7 +48,7 @@ const TableAttributes = () => {
 
   const handleRowsPerPageChange = (event) => {
     setRowsPerPage(event.target.value);
-    setCurrentPage(1); // Reset to first page on rows per page change
+    setCurrentPage(1);
   };
 
   const handleSearch = (event) => {
@@ -158,6 +135,11 @@ const TableAttributes = () => {
 
   return (
     <div className="bg-white mt-5 p-4 rounded-lg">
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-text">Loading...</div>
+        </div>
+      )}
       <TableHeader
         rowsPerPage={rowsPerPage}
         handleRowsPerPageChange={handleRowsPerPageChange}

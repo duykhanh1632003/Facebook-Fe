@@ -18,6 +18,7 @@ import { axiosHaveAuth } from "../../../../../util/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../../../../../context/AuthContext";
+import { useProductContext } from "../../../../../context/ProductContext";
 
 const CreateProduct = () => {
   const { register, handleSubmit, control, setValue, getValues, watch, reset } =
@@ -34,6 +35,8 @@ const CreateProduct = () => {
     name: "attributes",
   });
   const instance = axiosHaveAuth();
+  const { attributes } = useProductContext();
+  console.log("check attributes");
   const [combinations, setCombinations] = useState([]);
   const [images, setImages] = useState([]);
   const [thumb, setThumb] = useState(null);
@@ -107,7 +110,7 @@ const CreateProduct = () => {
           setValue={setValue}
           getValues={getValues}
           watch={watch}
-          attributes={generateAttributes()}
+          attributes={attributes}
         />
 
         {combinations.length > 0 && (

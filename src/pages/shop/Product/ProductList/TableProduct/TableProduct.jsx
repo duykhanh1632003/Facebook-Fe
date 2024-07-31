@@ -254,7 +254,7 @@ const TableProduct = () => {
                     : `${product.priceMin} - ${product.priceMax} `}
                   vnd
                 </TableCell>
-                <TableCell>{product.orders_count}</TableCell>
+                <TableCell>{product.countBuy}</TableCell>
                 <TableCell>{product.total} vnd</TableCell>
                 <TableCell>
                   <div

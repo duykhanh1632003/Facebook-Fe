@@ -13,6 +13,7 @@ import MailMarket from "./pages/Market/MailMarket/MailMarket.jsx";
 import Cart from "./pages/Market/Cart/Cart.jsx";
 import CreateDiscountLayout from "./pages/shop/Discount/CreateDiscount/CreateDiscountLayout.jsx";
 import { ProductProvider } from "./context/ProductContext.jsx";
+import { DiscountProvider } from "./context/DiscountContext.jsx";
 
 // Lazy load components
 const SignUp = lazy(() => import("./pages/Auth/SignUp/SignUp"));
@@ -198,9 +199,26 @@ function App() {
                 </ProductProvider>
               }
             />
-            <Route path="/shop/attributes-list" element={<ListAttributes />} />
+            <Route
+              path="/shop/attributes-list"
+              element={
+                <ProductProvider>
+                  <ListAttributes />
+                </ProductProvider>
+              }
+            />
             <Route path="/shop/add-attributes" element={<CreateAttributes />} />
-            <Route path="/shop/discount-list" element={<ListDiscount />} />
+            <Route
+              path="/shop/discount-list"
+              element={
+                <DiscountProvider>
+                  {" "}
+                  <ProductProvider>
+                    <ListDiscount />
+                  </ProductProvider>
+                </DiscountProvider>
+              }
+            />
             <Route
               path="/shop/create-discount"
               element={
