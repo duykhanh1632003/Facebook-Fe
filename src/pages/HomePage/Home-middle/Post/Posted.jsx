@@ -93,7 +93,7 @@ const Posted = ({ userId }) => {
   return (
     <div className="dark:bg-[#242526]">
       {posts?.map((post, index) => {
-        const { author, createdAt, content, image, likes, comments, share } =
+        const { author, createdAt, content, image, likes } =
           post;
         const isLastPost = posts.length === index + 1;
         const postElement = (

@@ -8,6 +8,7 @@ const CreateDiscountLayout = () => {
       {" "}
       <HeadProduct name={"Add new discount"} />
       <CreateDiscount />
+      <div className="h-[100px] w-full"></div>
     </div>
   );
 };
