@@ -51,7 +51,15 @@ const FriendRequest = () => {
             />
           </div>
           <div className="pt-[5px] pl-[12px] pr-[12px] font-medium text-md hover:underline cursor-pointer dark:text-white">
-            {request.sender.firstName} {request.sender.lastName}
+            {request.sender.firstName.length + request.sender.lastName.length >
+            16
+              ? request.sender.firstName +
+                " " +
+                request.sender.lastName.slice(
+                  0,
+                  16 - request.sender.firstName.length
+                )
+              : request.sender.firstName + request.sender.lastName}
           </div>
           <div className="flex items-center ml-4 ">
             <div className="h-[16px] w-[24px] flex">

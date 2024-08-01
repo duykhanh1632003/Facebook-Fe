@@ -3,28 +3,30 @@ import { FaArrowDown, FaSearch } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { LuArrowUpRight } from "react-icons/lu";
 import { MdOutlineCheckCircle, MdOutlineCancel } from "react-icons/md";
-import generateDiscounts from "../../../../../util/generateDiscount";
-import { BsThreeDots } from "react-icons/bs";
 import * as XLSX from "xlsx";
+import { useDiscountContext } from "../../../../../context/DiscountContext";
+import { BsThreeDots } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 10;
 
 const TableDiscount = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [allDataTable, setAllDataTable] = useState(generateDiscounts());
+  const [allDataTable, setAllDataTable] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({
     key: "discount_name",
     direction: "ascending",
   });
+  const { dataDiscount } = useDiscountContext();
 
   useEffect(() => {
-    const filteredData = generateDiscounts().filter((discount) =>
+    const filteredData = dataDiscount.filter((discount) =>
       discount.discount_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setAllDataTable(filteredData);
     setCurrentPage(1);
-  }, [searchQuery]);
+  }, [searchQuery, dataDiscount]);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -88,13 +90,16 @@ const TableDiscount = () => {
           className="h-[44px] w-[91px] ml-4 flex items-center justify-center text-lg cursor-pointer bg-gray-200 rounded-lg hover:bg-gray-300"
         >
           <div className="mr-2">
-            <LuArrowUpRight />  
+            <LuArrowUpRight />
           </div>
           <div>Export</div>
         </div>
-        <div className="h-[44px] w-[44px] rounded-lg flex items-center justify-center text-lg ml-4 cursor-pointer bg-gray-200 hover:bg-gray-300">
+        <Link
+          to={"/shop/create-discount"}
+          className="h-[44px] w-[44px] rounded-lg flex items-center justify-center text-lg ml-4 cursor-pointer bg-gray-200 hover:bg-gray-300"
+        >
           <IoMdAdd />
-        </div>
+        </Link>
       </div>
       <div className="w-full mt-4">
         <table className="border-collapse w-full">
@@ -166,7 +171,7 @@ const TableDiscount = () => {
                 <td className="p-4 text-center">
                   {discount.discount_uses_count}
                 </td>
-                <td className="p-4 text-center cursor-pointer relative">
+                <td className=" p-4 text-center cursor-pointer relative flex items-center justify-center">
                   <BsThreeDots className="text-gray-500" />
                   {/* Add your options menu here */}
                 </td>

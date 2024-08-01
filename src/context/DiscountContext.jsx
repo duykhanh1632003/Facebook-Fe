@@ -17,7 +17,7 @@ export const DiscountProvider = ({ children }) => {
     const fetchDiscount = async () => {
       try {
         const response = await instance.get("/api/get/allDiscount");
-
+        console.log("Check res", response);
         if (response.data.metadata && Array.isArray(response.data.metadata)) {
           const fetchedAttributes = response.data.metadata;
           setDataDiscount(fetchedAttributes);

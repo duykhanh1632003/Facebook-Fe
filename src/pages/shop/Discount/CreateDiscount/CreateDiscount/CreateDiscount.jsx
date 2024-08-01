@@ -16,7 +16,7 @@ registerLocale("vi", vi);
 
 const CreateDiscount = () => {
   const instance = axiosHaveAuth();
-  const { authUser } = useAuthContext();  
+  const { authUser } = useAuthContext();
   const { productData, loading: productLoading } = useProductContext();
 
   const [loading, setLoading] = useState(false);

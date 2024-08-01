@@ -29,7 +29,7 @@ const axiosHaveAuth = () => {
           const refreshToken = localStorage.getItem("refreshToken");
           if (!refreshToken) throw new Error("No refresh token available");
 
-          const response = await axios.post(
+          const response = await axiosNotHaveAuth.post(
             "http://localhost:8000/v1/api/user/refreshAccessToken",
             { refreshToken }
           );

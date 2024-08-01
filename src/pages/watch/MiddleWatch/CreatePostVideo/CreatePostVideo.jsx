@@ -93,6 +93,7 @@ function CreatePostVideo({ setShowModal, showModal }) {
                         position: "absolute",
                         top: "50px",
                         right: "10px",
+                        zIndex: 2,
                       }}
                     >
                       <Picker

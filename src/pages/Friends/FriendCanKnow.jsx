@@ -73,7 +73,16 @@ const FriendCanKnow = () => {
             onClick={() => handleToLink(request.nonFriend._id)}
             className="pt-[5px] pl-[12px] pr-[12px] font-medium text-md hover:underline cursor-pointer dark:text-white"
           >
-            {request.nonFriend.firstName} {request.nonFriend.lastName}
+            {request.nonFriend.firstName.length +
+              request.nonFriend.lastName.length >
+            16
+              ? request.nonFriend.firstName +
+                " " +
+                request.nonFriend.lastName.slice(
+                  0,
+                  16 - request.nonFriend.firstName.length
+                )
+              : request.nonFriend.firstName + request.nonFriend.lastName}
           </div>
           {!sentRequests.includes(request.nonFriend._id) && (
             <>
@@ -109,7 +118,7 @@ const FriendCanKnow = () => {
               Hủy lời mời
             </div>
           ) : (
-            <div className="h-[36px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB] dark:hover:bg-[#5A5A5A]">
+            <div className="h-[36px] w-[186px] dark:text-white bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB] dark:hover:bg-[#5A5A5A]">
               Xóa
             </div>
           )}
