@@ -22,7 +22,6 @@ const Posted = ({ userId }) => {
   const hasMore = useSelector((state) => state.posts.hasMore);
   const instance = axiosHaveAuth();
   const params = useParams();
-  console.log("check pareams", params);
   const observer = useRef();
   const navigate = useNavigate();
   const lastPostElementRef = useCallback(

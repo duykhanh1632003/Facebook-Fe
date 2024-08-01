@@ -12,7 +12,9 @@ Modal.setAppElement("#root");
 const LocationModal = ({ isOpen, onRequestClose }) => {
   const [address, setAddress] = useState("");
   const [radius, setRadius] = useState(10);
-  const [position, setPosition] = useState([21.0285, 105.8542]); // Default to Ha Noi
+  const [position, setPosition] = useState(
+    JSON.parse(localStorage.getItem("location"))
+  ); // Default to Ha Noi
 
   const handleAddressChange = (value) => {
     setAddress(value);
