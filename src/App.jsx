@@ -72,10 +72,6 @@ const CreateAttributes = lazy(() =>
 function App() {
   const { authUser } = useAuthContext();
 
-  useEffect(() => {
-    console.log("check auth", authUser);
-  }, [authUser]);
-
   return (
     <main>
       <Suspense

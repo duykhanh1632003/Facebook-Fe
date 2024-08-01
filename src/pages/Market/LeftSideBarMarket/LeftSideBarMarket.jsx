@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiSettings5Fill } from "react-icons/ri";
 import { FaUserFriends } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
@@ -6,9 +6,12 @@ import { HiInbox } from "react-icons/hi2";
 import { PiHandbagFill } from "react-icons/pi";
 import { FaTag } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
+import Separate from "../../../components/Separate";
+import LocationModal from "./LocationModal"; // Import modal
 
 const LeftSideBarMarket = () => {
   const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getLinkClass = (path) =>
     `ml-2 mr-2 pt-1 pb-1 pl-2 pr-2 rounded-lg flex h-[47px] cursor-pointer ${
@@ -23,6 +26,14 @@ const LeftSideBarMarket = () => {
         ? "text-[#EBE4C9] bg-[#1877F2]"
         : "text-black bg-[#D8DADF] dark:bg-[#3A3B3C]"
     }`;
+
+  const handleLocationClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="left-sidebar-friend w-[360px] pt-[12px] bg-[#FFFFFF] dark:bg-[#1A1A1A] h-full mt-2">
@@ -75,6 +86,15 @@ const LeftSideBarMarket = () => {
           Bán hàng
         </div>
       </Link>
+      <Separate />
+      <div>
+        <div>Location</div>
+        <div className="cursor-pointer" onClick={handleLocationClick}>
+          Ha Noi Viet Nam
+        </div>
+      </div>
+      <Separate />
+      <LocationModal isOpen={isModalOpen} onRequestClose={handleModalClose} />
     </div>
   );
 };

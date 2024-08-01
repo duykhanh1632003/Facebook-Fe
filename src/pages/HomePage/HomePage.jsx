@@ -12,6 +12,7 @@ const HomePage = () => {
     function success(position) {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
+      console.log("da vao day");
 
       instance
         .post("/api/save-location", {
