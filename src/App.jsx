@@ -37,14 +37,15 @@ const CreateStories = lazy(() =>
   import("./pages/HomePage/Home-middle/Story/CreateStories.jsx")
 );
 const GoogleSuccess = lazy(() => import("./components/GoogleSuccess.jsx"));
-const ForgotPassWordLayout = lazy(() =>
-  import("./pages/Auth/forgotPassword/ForgotpassWordLayout.jsx")
-);
+
 const Test = lazy(() => import("./test/Test.jsx"));
 const StoryContainer = lazy(() => import("./pages/Story/StoryContainer.jsx"));
 const WatchLayout = lazy(() => import("./pages/watch/WatchLayout.jsx"));
 const WatchContainer = lazy(() => import("./pages/watch/WatchContainer.jsx"));
 const TinderLayout = lazy(() => import("./pages/tinder/TinderLayout.jsx"));
+import ShopLayout from "./pages/shop/ShopLayout";
+import ForgotPassWordLayout from "./pages/Auth/forgotPassword/ForgotPassWordLayout";
+
 const TinderContainer = lazy(() =>
   import("./pages/tinder/TinderContainer.jsx")
 );
@@ -52,7 +53,6 @@ const CreateAccount = lazy(() =>
   import("./pages/tinder/OnBoard/CreateAccount.jsx")
 );
 const Recs = lazy(() => import("./pages/tinder/Recs/Recs.jsx"));
-const ShopLayout = lazy(() => import("./pages/shop/shopLayout.jsx"));
 const Dashboard = lazy(() => import("./pages/shop/Dashboard/Dashboard.jsx"));
 const ProductList = lazy(() =>
   import("./pages/shop/Product/ProductList/ProductList.jsx")

@@ -14,7 +14,7 @@ const LocationModal = ({ isOpen, onRequestClose }) => {
   const [radius, setRadius] = useState(10);
   const [position, setPosition] = useState(
     JSON.parse(localStorage.getItem("location"))
-  ); // Default to Ha Noi
+  ); 
 
   const handleAddressChange = (value) => {
     setAddress(value);

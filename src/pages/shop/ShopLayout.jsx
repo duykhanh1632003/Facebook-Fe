@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../HomePage/Header";
 import LeftSideBarShop from "./LeftSideBarShop/LeftSideBarShop";
 
-const WatchLayout = () => {
+const ShopLayout = () => {
   return (
     <div className="w-full h-full overflow-y-auto bg-[#F0F2F5]">
       <div className="z-4">
@@ -21,4 +21,4 @@ const WatchLayout = () => {
   );
 };
 
-export default WatchLayout;
+export default ShopLayout;

@@ -4,9 +4,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import HelpIcon from "@mui/icons-material/Help";
 import "../SignIn/SignIn.css";
 import { Link, useLocation } from "react-router-dom";
-import useSignup from "../../../hooks/useSignUp";
-import { axiosNotHaveAuth } from "../../../util/axios";
-import axios from "axios";
+import useSignup from "./../../../hooks/useSignup";
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
