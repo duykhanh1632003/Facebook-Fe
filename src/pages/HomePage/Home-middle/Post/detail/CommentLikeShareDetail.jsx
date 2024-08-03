@@ -2,7 +2,6 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa6";
 import { RiShareForwardLine } from "react-icons/ri";
 import Haha from "../../../../../animation/animationComponent/Haha";
-import Cry from "../../../../../animation/animationComponent/cry";
 import Like from "../../../../../animation/animationComponent/like";
 import Phanno from "../../../../../animation/animationComponent/phanno";
 import Wow from "../../../../../animation/animationComponent/wow";
@@ -19,6 +18,7 @@ import { useEffect, useState } from "react";
 import { axiosHaveAuth } from "../../../../../util/axios";
 import { useAuthContext } from "../../../../../context/AuthContext";
 import "./CommentLikeShareDetail.css"; // Import CSS file for custom styles
+import Cry from "../../../../../animation/animationComponent/cry";
 
 const CommentLikeShareDetail = ({
   postId,

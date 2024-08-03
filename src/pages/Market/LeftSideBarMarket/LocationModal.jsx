@@ -6,15 +6,13 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import { useMarketContext } from "../../../context/MarketContext";
 
 Modal.setAppElement("#root");
 
 const LocationModal = ({ isOpen, onRequestClose }) => {
-  const [address, setAddress] = useState("");
-  const [radius, setRadius] = useState(10);
-  const [position, setPosition] = useState(
-    JSON.parse(localStorage.getItem("location"))
-  ); 
+  const { address, setAddress, radius, setRadius, position, setPosition } =
+    useMarketContext();
 
   const handleAddressChange = (value) => {
     setAddress(value);
@@ -46,7 +44,7 @@ const LocationModal = ({ isOpen, onRequestClose }) => {
       className="flex items-center justify-center w-[800px]"
       overlayClassName="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center"
     >
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full ">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-full">
         <h2 className="text-2xl font-semibold mb-4">Select Location</h2>
         <PlacesAutocomplete
           value={address}

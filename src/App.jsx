@@ -45,6 +45,7 @@ const WatchContainer = lazy(() => import("./pages/watch/WatchContainer.jsx"));
 const TinderLayout = lazy(() => import("./pages/tinder/TinderLayout.jsx"));
 import ShopLayout from "./pages/shop/ShopLayout";
 import ForgotPassWordLayout from "./pages/Auth/forgotPassword/ForgotPassWordLayout";
+import { MarketProvider } from "./context/MarketContext.jsx";
 
 const TinderContainer = lazy(() =>
   import("./pages/tinder/TinderContainer.jsx")
@@ -170,7 +171,15 @@ function App() {
             <Route path="/profile/:id" element={<HomeProfile />} />
           </Route>
           <Route
-            element={authUser ? <MarketLayout /> : <Navigate to="/login" />}
+            element={
+              authUser ? (
+                <MarketProvider>
+                  <MarketLayout />
+                </MarketProvider>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           >
             <Route path="/market" element={<MarketContainer />} />
             <Route path="/market/notifications" element={<Notification />} />

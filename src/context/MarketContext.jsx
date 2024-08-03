@@ -11,25 +11,48 @@ export const useMarketContext = () => {
 export const MarketProvider = ({ children }) => {
   const params = useParams();
   const instance = axiosHaveAuth();
-  const [dataDiscount, setDataDiscount] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [address, setAddress] = useState(localStorage.getItem("address") || "");
+  const [radius, setRadius] = useState(10);
+  const [position, setPosition] = useState(
+    JSON.parse(localStorage.getItem("location")) || [0, 0]
+  );
+
   useEffect(() => {
     const fetchDiscount = async () => {
-        
       try {
-        const response  = instance.get("/api/get/all/market")
-        
-        
+        const response = await instance.get(`/api/get/all/market/${radius}`);
+        console.log("Check res", response);
       } catch (e) {
         console.log(e);
         setLoading(false);
       }
     };
     fetchDiscount();
-  }, [params]);
+  }, [params, radius]);
+
+  const saveAddress = (newAddress) => {
+    setAddress(newAddress);
+    localStorage.setItem("address", newAddress);
+  };
+
+  const savePosition = (newPosition) => {
+    setPosition(newPosition);
+    localStorage.setItem("location", JSON.stringify(newPosition));
+  };
 
   return (
-    <MarketContext.Provider value={{ loading, dataDiscount }}>
+    <MarketContext.Provider
+      value={{
+        loading,
+        address,
+        setAddress: saveAddress,
+        radius,
+        setRadius,
+        position,
+        setPosition: savePosition,
+      }}
+    >
       {children}
     </MarketContext.Provider>
   );
