@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { useMarketContext } from "../../../context/MarketContext";
 import { LoadingRounded } from "../../../Loading/LoadingRounded";
 import { Star } from "@mui/icons-material"; // For displaying stars
@@ -11,7 +11,7 @@ const HomeMarket = () => {
       ((originalPrice - discountedPrice) / originalPrice) * 100
     );
   };
-
+  console.log("Check productsAfterDiscount ", productsAfterDiscount);
   const getLowestPriceVariation = (product) => {
     return product.product_variations.reduce(
       (min, variation) =>
@@ -19,8 +19,6 @@ const HomeMarket = () => {
       product.product_variations[0].discountedPrice
     );
   };
-
-  console.log("check productsAfterDiscount", productsAfterDiscount);
 
   return (
     <div className="container mx-auto px-4 mt-4">
@@ -38,7 +36,8 @@ const HomeMarket = () => {
           const hasDiscount = originalPriceVariation > lowestPriceVariation;
 
           return (
-            <div
+            <Link
+              to={`/market/${product._id}`}
               key={product._id}
               className="product-card h-[361px] bg-white p-4 rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition transform duration-200"
             >
@@ -92,7 +91,7 @@ const HomeMarket = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

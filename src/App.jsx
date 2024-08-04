@@ -45,6 +45,7 @@ import ShopLayout from "./pages/shop/ShopLayout";
 import ForgotPassWordLayout from "./pages/Auth/forgotPassword/ForgotPassWordLayout";
 import { MarketProvider } from "./context/MarketContext.jsx";
 import HomeMarket from "./pages/Market/HomeMarket/HomeMarket.jsx";
+import ProductDetail from "./pages/Market/ProductDetail/ProductDetail.jsx";
 
 const CreateAccount = lazy(() =>
   import("./pages/tinder/OnBoard/CreateAccount.jsx")
@@ -181,6 +182,7 @@ function App() {
             <Route path="/market/notifications" element={<Notification />} />
             <Route path="/market/inbox" element={<MailMarket />} />
             <Route path="/market/you" element={<Cart />} />
+            <Route path="/market/:id" element={<ProductDetail />} />
           </Route>
           <Route element={authUser ? <ShopLayout /> : <Navigate to="/login" />}>
             <Route path="/shop" element={<Dashboard />} />

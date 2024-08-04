@@ -109,6 +109,7 @@ export const MarketProvider = ({ children }) => {
         setRadius,
         position,
         setPosition: savePosition,
+        setLoading,
       }}
     >
       {children}

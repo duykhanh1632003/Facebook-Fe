@@ -36,7 +36,7 @@ const LeftSideBarMarket = () => {
   };
 
   return (
-    <div className="left-sidebar-friend w-[360px] pt-[12px] bg-[#FFFFFF] dark:bg-[#1A1A1A] h-full mt-2">
+    <div className="left-sidebar-friend w-[360px] fixed pt-[12px] bg-[#FFFFFF] dark:bg-[#1A1A1A] h-full mt-2">
       <div className="flex justify-between pl-[17px] pr-[17px] mb-[12px]">
         <div className="text-2xl font-bold dark:text-white">Marketplace</div>
         <div className="w-[36px] h-[36px] rounded-full text-2xl bg-[#E4E6EB] text-black dark:bg-[#3A3B3C] flex items-center justify-center">
