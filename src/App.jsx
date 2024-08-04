@@ -1,13 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useAuthContext } from "./context/AuthContext";
-import { useEffect, Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { PostContextProvider } from "./context/PostContext.jsx";
 import { VideoPostProvider } from "./context/VideoPostContext.jsx";
 import { TinderContextProvider } from "./context/TinderContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { LoadingRounded } from "./Loading/LoadingRounded.jsx";
-import MarketContainer from "./pages/Market/MarketContainer.jsx";
 import Notification from "./pages/Market/Notification/Notification.jsx";
 import MailMarket from "./pages/Market/MailMarket/MailMarket.jsx";
 import Cart from "./pages/Market/Cart/Cart.jsx";
@@ -46,10 +44,8 @@ const TinderLayout = lazy(() => import("./pages/tinder/TinderLayout.jsx"));
 import ShopLayout from "./pages/shop/ShopLayout";
 import ForgotPassWordLayout from "./pages/Auth/forgotPassword/ForgotPassWordLayout";
 import { MarketProvider } from "./context/MarketContext.jsx";
+import HomeMarket from "./pages/Market/HomeMarket/HomeMarket.jsx";
 
-const TinderContainer = lazy(() =>
-  import("./pages/tinder/TinderContainer.jsx")
-);
 const CreateAccount = lazy(() =>
   import("./pages/tinder/OnBoard/CreateAccount.jsx")
 );
@@ -181,7 +177,7 @@ function App() {
               )
             }
           >
-            <Route path="/market" element={<MarketContainer />} />
+            <Route path="/market" element={<HomeMarket />} />
             <Route path="/market/notifications" element={<Notification />} />
             <Route path="/market/inbox" element={<MailMarket />} />
             <Route path="/market/you" element={<Cart />} />
