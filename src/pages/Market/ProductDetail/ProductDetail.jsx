@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMarketContext } from "../../../context/MarketContext";
 import { LoadingRounded } from "../../../Loading/LoadingRounded";
@@ -15,6 +15,7 @@ const ProductDetail = () => {
   const [selectedAttributes, setSelectedAttributes] = useState({});
   const [availableQuantity, setAvailableQuantity] = useState(0);
   const [price, setPrice] = useState(0);
+  const [originalPrice, setOriginalPrice] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -22,11 +23,17 @@ const ProductDetail = () => {
       const foundProduct = productsAfterDiscount.find(
         (product) => product._id === id
       );
-      console.log("Check foundProduct", foundProduct);
-
       if (foundProduct) {
         setProduct(foundProduct);
         setSelectedImage(foundProduct.images[0]);
+
+        // Set initial price and original price to the lowest variation price
+        const lowestPriceVariation = foundProduct.product_variations.reduce(
+          (prev, curr) =>
+            prev.discountedPrice < curr.discountedPrice ? prev : curr
+        );
+        setPrice(lowestPriceVariation.discountedPrice);
+        setOriginalPrice(lowestPriceVariation.price);
       } else {
         console.error("Product not found");
       }
@@ -48,8 +55,10 @@ const ProductDetail = () => {
         (attr) => selectedAttributes[attr.category] === attr.value
       )
     );
+
     if (variation) {
-      setPrice(variation.discountedPrice);
+      setPrice(variation.discountedPrice || variation.price);
+      setOriginalPrice(variation.price);
       setAvailableQuantity(variation.quantity);
     }
   };
@@ -112,6 +121,40 @@ const ProductDetail = () => {
     },
   };
 
+  const renderAttributeOptions = (category, options) => {
+    return (
+      <div className="attribute-options mb-4">
+        <h4 className="font-semibold">{category}</h4>
+        <div className="flex space-x-2">
+          {options.map((option, index) => (
+            <div
+              key={index}
+              className={`attribute-option p-2 border rounded cursor-pointer ${
+                selectedAttributes[category] === option ? "bg-gray-200" : ""
+              }`}
+              onClick={() => handleAttributeChange(category, option)}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const attributeCategories = product.product_variations.reduce(
+    (acc, variation) => {
+      variation.attributes.forEach((attr) => {
+        if (!acc[attr.category]) {
+          acc[attr.category] = new Set();
+        }
+        acc[attr.category].add(attr.value);
+      });
+      return acc;
+    },
+    {}
+  );
+
   return (
     <div className="container mx-auto px-4 mt-4">
       <div className="flex flex-col md:flex-row">
@@ -128,7 +171,7 @@ const ProductDetail = () => {
               responsive={responsive}
               showDots={true}
               ssr={true}
-              arrows={true}
+              arrows={false}
               renderButtonGroupOutside={true}
               itemClass="carousel-item"
             >
@@ -163,11 +206,11 @@ const ProductDetail = () => {
             {hasDiscount ? (
               <>
                 <span className="original-price line-through text-gray-500 mr-2">
-                  {product.price} ₫
+                  {originalPrice} ₫
                 </span>
                 <span className="discounted-price text-red-500">{price} ₫</span>
                 <span className="discount-percentage text-red-500 ml-2">
-                  -{calculateDiscountPercentage(product.price, price)}%
+                  -{calculateDiscountPercentage(originalPrice, price)}%
                 </span>
               </>
             ) : (
@@ -180,39 +223,12 @@ const ProductDetail = () => {
             <p>Đổi ý miễn phí</p>
             <i className="icon-help"></i>
           </div>
-          <div className="attributes mb-4">
-            {product.product_variations?.map((variation) =>
-              variation.attributes.map((attribute) => (
-                <div key={attribute.category} className="mb-2">
-                  <h4 className="font-semibold">{attribute.category}</h4>
-                  <div className="flex flex-wrap">
-                    {attribute.values?.map((value, index) => (
-                      <button
-                        key={index}
-                        className={`attribute-button ${
-                          selectedAttributes[attribute.category] === value
-                            ? "bg-blue-500 text-white"
-                            : "bg-gray-200 text-gray-700"
-                        } p-2 m-1 rounded flex items-center`}
-                        onClick={() =>
-                          handleAttributeChange(attribute.category, value)
-                        }
-                      >
-                        {value.includes("http") ? (
-                          <img
-                            src={value}
-                            alt={value}
-                            className="w-6 h-6 object-cover mr-2"
-                          />
-                        ) : null}
-                        {value}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+          {Object.keys(attributeCategories).map((category) =>
+            renderAttributeOptions(
+              category,
+              Array.from(attributeCategories[category])
+            )
+          )}
           <div className="quantity mb-4">
             <h4 className="font-semibold">Số Lượng</h4>
             <input
