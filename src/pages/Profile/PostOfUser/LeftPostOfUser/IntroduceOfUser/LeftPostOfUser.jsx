@@ -1,7 +1,7 @@
 import React from "react";
 import IntroduceOfUser from "./IntroduceOfUser/IntroduceOfUser";
 import ImgOfUser from "./ImgOfUser/ImgOfUser";
-import FriendOfUser from "./FriendOfUser/FriendOfuser";
+import FriendOfUser from "./FriendOfUser/FriendOfUser";
 
 const LeftPostOfUser = ({ userId, friends, numberOfFriends }) => {
   return (

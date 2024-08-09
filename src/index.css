@@ -138,7 +138,7 @@ html,
   }
   .middle-header-box{
     @apply ml-[145px] w-[590px] flex justify-between mr-[250px]
-  }
+  } 
 
   .box-right-top-bar-item{
     @apply w-[38px] h-[38px] rounded-full flex items-center justify-center bg-gray-100 mr-[8px] cursor-pointer

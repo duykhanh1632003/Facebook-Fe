@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CreatePost from "./CreatePost";
+import CreatePost from "./CreatePost/CreatePost";
 import { useAuthContext } from "../../../../context/AuthContext";
 
 const Posts = () => {

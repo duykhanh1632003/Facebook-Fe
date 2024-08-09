@@ -9,8 +9,8 @@ import data from "@emoji-mart/data";
 import { TiFolderAdd } from "react-icons/ti";
 import { MdOutlineCancel } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { createNewPost } from "../../../../redux/post/postsThunks";
-import { useAuthContext } from "../../../../context/AuthContext";
+import { createNewPost } from "../../../../../redux/post/postsThunks";
+import { useAuthContext } from "../../../../../context/AuthContext";
 import classNames from "classnames";
 
 const CreatePost = ({ show, onHide, setModalShow }) => {

@@ -1,5 +1,3 @@
-import React from "react";
-
 const FriendOfUser = ({ friends, numberOfFriends }) => {
   return (
     <div className="w-full rounded-lg p-3 mt-3 bg-white">

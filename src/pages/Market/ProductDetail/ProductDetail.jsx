@@ -55,7 +55,7 @@ const ProductDetail = () => {
         (attr) => selectedAttributes[attr.category] === attr.value
       )
     );
-
+    
     if (variation) {
       setPrice(variation.discountedPrice || variation.price);
       setOriginalPrice(variation.price);

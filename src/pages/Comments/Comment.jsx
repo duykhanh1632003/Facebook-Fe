@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { usePostContext } from "../../context/PostContext";
 import CommentList from "./CommentList";
 import "./Comment.css"; // Import CSS for styling
-import LikeIcon from "../../img/likeIcon";
+import LikeIcon from "../../img/LikeIcon";
 import Send from "@mui/icons-material/Send";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
@@ -229,7 +229,8 @@ const Comment = ({ _id, message, userId, likes, level = 0, postId }) => {
               {" "}
               {authUser.user._id === userId._id ? (
                 <>
-                  <div  ư
+                  <div
+                    ư
                     className="w-full cursor-pointer h-1/2 p-2 font-medium  hover:bg-[#C2C6CC] dark:bg-[#3A3B3C]"
                     onClick={handleEditComment}
                   >

@@ -41,6 +41,7 @@ const LeftHeader = () => {
       const response = await instance.get(
         `/api/search/users?query=${searchInput}`
       );
+      console.log("cehck response", response);
 
       setSearchResults(response.data.metadata);
     } catch (error) {
@@ -86,6 +87,10 @@ const LeftHeader = () => {
       );
       setRecentSearches(newRecentSearch);
     }
+  };
+
+  const truncateName = (name) => {
+    return name.length > 15 ? name.substring(0, 15) + "..." : name;
   };
 
   return (
@@ -139,11 +144,11 @@ const LeftHeader = () => {
             {(!searchInput ? recentSearches : searchResults).map((user) => (
               <div
                 key={user._id}
-                className="box-left-bar-item dark:hover:bg-[#3A3B3C]"
+                className="box-left-bar-item relative dark:hover:bg-[#3A3B3C]"
                 onClick={() => handleUserClick(user._id)}
               >
                 <div className="flex mt-[7px] pr-[16px]">
-                  <div className="w-[38px] bg-blue-700 h-[38px] mr-[14px] rounded-full flex items-center justify-center ">
+                  <div className="w-[38px] bg-blue-700 h-[38px] mr-[14px] rounded-full flex items-center justify-center">
                     <img
                       className="rounded-full object-cover w-full h-full"
                       src={user.avatar}
@@ -151,16 +156,19 @@ const LeftHeader = () => {
                     />
                   </div>
                   <div className="w-[204px] dark:text-white">
-                    <div className="font-medium">
-                      {user.firstName} {user.lastName}
+                    <div className="font-medium text-sm">
+                      {truncateName(user.firstName + " " + user.lastName)}{" "}
                     </div>
                     <div className="font-sm text-current text-xs">
                       {user.email}
                     </div>
                   </div>
                   <div
-                    onClick={() => handleRemoveUserFromSearch(user._id)}
-                    className="flex items-center justify-center w-[25px] h-[25px] hover:bg-opacity-50 hover:bg-gray-50 dark:hover:bg-gray-600 hover:rounded-full mt-2"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Ngăn chặn sự kiện click lan truyền lên thẻ cha
+                      handleRemoveUserFromSearch(user._id);
+                    }}
+                    className="flex items-center absolute justify-center right-3 w-[25px] h-[25px] dark:hover:bg-black hover:rounded-full mt-2 z-[6] cursor-pointer"
                   >
                     <BsX className="text-2xl dark:text-white" />
                   </div>

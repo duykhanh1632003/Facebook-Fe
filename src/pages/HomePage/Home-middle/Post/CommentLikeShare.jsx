@@ -3,11 +3,11 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
 import Haha from "../../../../animation/animationComponent/Haha";
-import Cry from "../../../../animation/animationComponent/cry";
-import Like from "../../../../animation/animationComponent/like";
+import Cry from "../../../../animation/animationComponent/Cry";
+import Like from "../../../../animation/animationComponent/Like";
 import Love from "../../../../animation/animationComponent/Love";
-import Phanno from "../../../../animation/animationComponent/phanno";
-import Wow from "../../../../animation/animationComponent/wow";
+import Phanno from "../../../../animation/animationComponent/Phanno";
+import Wow from "../../../../animation/animationComponent/Wow";
 import "./CommentLikeShare.css"; // Import CSS file for custom styles
 import { useAuthContext } from "../../../../context/AuthContext";
 import CryIcon from "../../../../img/CryIcon";

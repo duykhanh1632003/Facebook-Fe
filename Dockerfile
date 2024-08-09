@@ -1,29 +1,32 @@
-# Sử dụng image node chính thức để build ứng dụng
-FROM node:20 as build
+# Stage 1: Build the application using Node.js
+FROM node:20 AS build
 
-# Đặt thư mục làm việc cho giai đoạn build
+# Set the working directory for the build stage
 WORKDIR /app
 
-# Sao chép tệp package.json và package-lock.json để cài đặt phụ thuộc
+# Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
 
-# Cài đặt các phụ thuộc
+# Install the dependencies
 RUN npm install
 
-# Sao chép toàn bộ mã nguồn vào thư mục làm việc
+# Copy the entire source code into the working directory
 COPY . .
 
-# Build ứng dụng cho môi trường production
+# Copy the environment file (if needed)
+COPY .env .env
+
+# Build the application for production
 RUN npm run build
 
-# Sử dụng image nginx chính thức để phục vụ ứng dụng
+# Stage 2: Serve the application using Nginx
 FROM nginx:alpine
 
-# Copy các tệp build của ứng dụng vào thư mục gốc của nginx
+# Copy the build artifacts from the build stage to the Nginx HTML directory
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose port 80 để truy cập
+# Expose port 80 to the outside world (default port for Nginx)
 EXPOSE 80
 
-# Khởi động nginx khi container chạy
+# Command to run Nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
