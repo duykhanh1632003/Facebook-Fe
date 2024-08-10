@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { WiDirectionLeft } from "react-icons/wi";
 import { BsX } from "react-icons/bs";
@@ -16,7 +16,7 @@ const LeftHeader = () => {
   const [recentSearches, setRecentSearches] = useState([]);
   const { authUser } = useAuthContext();
   const instance = axiosHaveAuth();
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (!searchInput) {
       fetchRecentSearches();
@@ -55,6 +55,7 @@ const LeftHeader = () => {
         userId: authUser.user._id,
         searchedUserId,
       });
+      navigate(`/profile/${searchedUserId}`);
       setSearchInput("");
       setIsComponentVisible(false);
     } catch (error) {

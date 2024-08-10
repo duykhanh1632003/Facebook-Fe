@@ -50,11 +50,10 @@ const axiosHaveAuth = () => {
 
           return instance(originalRequest);
         } catch (err) {
-          // Xử lý lỗi refresh token, ví dụ: chuyển hướng đến trang đăng nhập
+          // Nếu refreshToken cũng hết hạn, xóa hết dữ liệu và logout
           toast.error("Session expired. Please log in again.");
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-          navigate("/login"); // Hoặc dùng phương thức khác để điều hướng
+          localStorage.clear(); // Xóa toàn bộ dữ liệu trong localStorage
+          navigate("/login"); // Điều hướng đến trang đăng nhập
         }
       }
       return Promise.reject(error);

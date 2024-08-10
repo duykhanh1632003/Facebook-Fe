@@ -5,8 +5,8 @@ import "./Header.css";
 
 const Header = () => {
   return (
-    <div className="h-[55px] z-10 fixed bg-white shadow-md dark:bg-[#242526] header">
-      <div className="flex h-[55px] pt-[8px] pb-2">
+    <div className="h-[55px] bg-white z-10 fixed  shadow-md  header">
+      <div className="flex h-[55px] pt-[8px] pb-2 dark:bg-[#242526]">
         <LeftHeader />
         <MiddleHeader />
         <RightHeader />

@@ -136,7 +136,7 @@ const Posted = ({ userId }) => {
   return (
     <div className="dark:bg-[#242526]">
       {posts?.map((post, index) => {
-        const { author, createdAt, content, image, likes } = post;
+        const { author, createdAt, content, image, likes, comments } = post;
         const isLastPost = posts.length === index + 1;
         const postElement = (
           <div
@@ -214,7 +214,11 @@ const Posted = ({ userId }) => {
               </Link>
             )}
             <div className="pl-[8px] pr-[8px] pt-[8px] pb-[8px] mt-[4px]">
-              <CommentLikeShare postId={post._id} likes={likes} />
+              <CommentLikeShare
+                postId={post._id}
+                likes={likes}
+                comments={comments}
+              />
             </div>
           </div>
         );

@@ -73,14 +73,14 @@ const SignUp = () => {
       <div className="w-[398px] bg-[#FFFFFF] h-[570px] mt-[40px] rounded-1 flex flex-col items-center">
         <div>
           <div className="flex justify-between w-[366px]">
-            <div className="relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[170px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[18px]">
+            <div className="p-3 relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[170px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[18px]">
               <textarea
                 className="w-full bg-transparent outline-none resize-none text-sm input-textarea"
                 placeholder="Họ"
                 onChange={(e) => setFirstName(e.target.value)}
               ></textarea>
             </div>
-            <div className="relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[170px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[18px]">
+            <div className="relative p-3 border border-gray-300 rounded-lg focus-within:border-blue-500 w-[170px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[18px]">
               <textarea
                 className="w-full bg-transparent outline-none resize-none text-sm input-textarea"
                 placeholder="Tên"
@@ -91,7 +91,7 @@ const SignUp = () => {
         </div>
         <div className="relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[364px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[0px]">
           <textarea
-            className="w-full bg-transparent outline-none resize-none text-sm input-textarea"
+            className="w-full p-3 bg-transparent outline-none resize-none text-sm input-textarea"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           ></textarea>
@@ -113,7 +113,7 @@ const SignUp = () => {
         </div>{" "}
         <div className="relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[364px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[0px]">
           <textarea
-            className="w-full bg-transparent outline-none resize-none text-sm input-textarea"
+            className="w-full p-3 bg-transparent outline-none resize-none text-sm input-textarea"
             placeholder="Số điện thoại"
             onChange={(e) => setPhoneNumber(e.target.value)}
           ></textarea>

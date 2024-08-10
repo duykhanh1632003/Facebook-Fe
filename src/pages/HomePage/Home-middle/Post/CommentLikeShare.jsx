@@ -157,7 +157,7 @@ const CommentLikeShare = ({
       <div className="flex justify-between items-center text-[#77797C] pl-[16px] pr-[16px] pt-[12px]">
         <div className="flex">
           <LikeIcon />
-          <div className="text-[13px] font-normal text-[#65676B]">
+          <div className="text-[13px] font-normal text-[#65676B] ml-1">
             {lengthLike} like
           </div>
         </div>

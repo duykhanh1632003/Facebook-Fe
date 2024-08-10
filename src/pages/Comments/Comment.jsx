@@ -90,6 +90,7 @@ const Comment = ({ _id, message, userId, likes, level = 0, postId }) => {
       if (response) {
         const childCommentNew = getReplies(_id);
         setChildComments(childCommentNew);
+        console.log("check ", _id, editInput);
         updateLocalComment({ _id: _id, message: editInput });
         toast.success("Comment thành công");
       }
