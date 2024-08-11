@@ -3,13 +3,19 @@ import React, { useEffect, useState } from "react";
 import "./FriendRequest.css";
 import { axiosHaveAuth } from "../../util/axios";
 import { useAuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const FriendRequest = () => {
+  const navigate = useNavigate();
+
   const instance = axiosHaveAuth();
   const [friendRequests, setFriendRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
   const { authUser } = useAuthContext();
 
+  const handleOnClick = (userId) => {
+    navigate(`/profile/${userId}`);
+  };
   useEffect(() => {
     instance
       .get("/api/friend/requests", { params: { userId: authUser.user._id } })
@@ -41,6 +47,7 @@ const FriendRequest = () => {
       {friendRequests.slice(0, visibleCount).map((request) => (
         <div
           key={request.sender._id}
+          onClick={() => handleOnClick(request.sender._id)}
           className="h-[361px] w-[210px] bg-[#F9F9F9] dark:bg-[#333] rounded-lg m-[5px] shadow-lg"
         >
           <div className="h-[210px] w-full object-fill rounded-lg cursor-pointer">

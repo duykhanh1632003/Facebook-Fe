@@ -7,17 +7,22 @@ import AvatarEditModal from "./AvatarEditModal"; // Import modal component
 import { PiUserSquare } from "react-icons/pi";
 import { MdOutlinePhotoLibrary } from "react-icons/md";
 import NavBarOfProfile from "../NavBarOfProfile";
+import { useNavigate } from "react-router-dom";
 
 const HeaderProfileMe = ({ id, friends, numberOfFriends }) => {
   const { authUser } = useAuthContext();
   const [showDropdown, setShowDropdown] = useState(false); // State to control the dropdown menu
   const [showAvatarModal, setShowAvatarModal] = useState(false); // State to control avatar edit modal
-
+  const navigate = useNavigate();
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
   const handleEditAvatarClick = () => {
     setShowDropdown(false);
     setShowAvatarModal(true);
+  };
+
+  const handleOnClickAddStory = () => {
+    navigate("/stories/create");
   };
 
   return (
@@ -99,7 +104,12 @@ const HeaderProfileMe = ({ id, friends, numberOfFriends }) => {
               <div className="text-lg mr-1 text-white">
                 <IoMdAdd />
               </div>
-              <div className="font-medium text-white">Thêm vào tin</div>
+              <div
+                className="font-medium text-white"
+                onClick={handleOnClickAddStory}
+              >
+                Thêm vào tin
+              </div>
             </div>
             <div className="ml-[8px] flex w-[220px] h-[37px] rounded-md bg-[#E4E6EB] hover:bg-[#d2d7e4] justify-center items-center cursor-pointer">
               <div className="text-lg mr-1">

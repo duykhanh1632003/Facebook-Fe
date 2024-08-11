@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 const FriendOfUser = ({ friends, numberOfFriends }) => {
+  const navigate = useNavigate();
+
+  const handleOnClick = (userId) => {
+    navigate(`/profile/${userId}`);
+  };
+  console.log("check friends", friends);
   return (
     <div className="w-full rounded-lg p-3 mt-3 bg-white">
       <div className="flex items-center justify-between">
@@ -10,7 +18,11 @@ const FriendOfUser = ({ friends, numberOfFriends }) => {
       <div className="mt-1">{numberOfFriends} người bạn</div>
       <div className="grid grid-cols-3 gap-2 mt-3 pb-3">
         {friends.map((friend, index) => (
-          <div key={index} className="mt-2">
+          <div
+            onClick={() => handleOnClick(friend._id)}
+            key={index}
+            className="mt-2 cursor-pointer"
+          >
             <div className="w-[129px] h-[129px]">
               <img
                 src={friend.avatar}

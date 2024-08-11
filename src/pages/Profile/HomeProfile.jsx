@@ -10,7 +10,7 @@ import { axiosHaveAuth } from "../../util/axios";
 import { useEffect, useState } from "react";
 
 const HomeProfile = () => {
-  const { id } = useParams();
+  const { id, params } = useParams();
   const instance = axiosHaveAuth();
   const [friends, setFriends] = useState([]);
   const [numberOfFriends, setNumberOfFriends] = useState(0);
@@ -28,7 +28,7 @@ const HomeProfile = () => {
       }
     };
     fetchNumberOfFriends();
-  }, [authUser.user._id]);
+  }, [authUser.user._id, params]);
 
   return (
     <div className="h-full overflow-y-auto">

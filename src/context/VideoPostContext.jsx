@@ -43,7 +43,7 @@ export const VideoPostProvider = ({ children }) => {
 
       if (res.data) {
         toast.success("Video uploaded successfully!");
-        setVideoPosts((prevPosts) => [...prevPosts, res.metadata]);
+        setVideoPosts((prevPosts) => [...prevPosts, res.data.metadata]);
       }
     } catch (error) {
       toast.error("Upload failed. Please try again.");

@@ -6,7 +6,7 @@ import FriendOfUser from "./FriendOfUser/FriendOfUser";
 const LeftPostOfUser = ({ userId, friends, numberOfFriends }) => {
   return (
     <div className="w-[426px] mt-[15px] ml-[210px]">
-      <IntroduceOfUser />
+      <IntroduceOfUser userId={userId} />
       <ImgOfUser userId={userId} />
       <FriendOfUser friends={friends} numberOfFriends={numberOfFriends} />
     </div>

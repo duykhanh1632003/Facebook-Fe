@@ -10,7 +10,7 @@ const FriendCanKnow = () => {
   const [friendCanKnow, setFriendCanKnow] = useState(null);
   const [sentRequests, setSentRequests] = useState([]);
   const { authUser } = useAuthContext();
-
+  const navigate = useNavigate();
   useEffect(() => {
     instance
       .get("/api/friend/canKnow", {
@@ -41,7 +41,6 @@ const FriendCanKnow = () => {
       });
   };
 
-  const navigate = useNavigate();
   const handleToLink = (id) => {
     navigate(`/profile/${id}`);
   };
