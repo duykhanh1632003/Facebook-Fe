@@ -55,7 +55,7 @@ const ProductDetail = () => {
         (attr) => selectedAttributes[attr.category] === attr.value
       )
     );
-    
+
     if (variation) {
       setPrice(variation.discountedPrice || variation.price);
       setOriginalPrice(variation.price);
@@ -166,14 +166,14 @@ const ProductDetail = () => {
               className="w-[451px] h-[451px] object-cover rounded-lg"
             />
           </div>
-          <div className="carousel-container">
+          <div className="carousel-container-product">
             <Carousel
               responsive={responsive}
               showDots={true}
               ssr={true}
               arrows={false}
               renderButtonGroupOutside={true}
-              itemClass="carousel-item"
+              itemClass="carousel-item-product"
             >
               {product.images?.map((image, index) => (
                 <div key={index} className="h-[82px] w-[82px]">

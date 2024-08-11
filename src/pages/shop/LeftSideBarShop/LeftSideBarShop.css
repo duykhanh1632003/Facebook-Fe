@@ -1,58 +1,57 @@
 /* LeftSideBarShop.css */
 @keyframes rotate-down {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(90deg);
-    }
+  from {
+    transform: rotate(0deg);
   }
-  
-  @keyframes rotate-up {
-    from {
-      transform: rotate(90deg);
-    }
-    to {
-      transform: rotate(0deg);
-    }
+  to {
+    transform: rotate(90deg);
   }
-  
-  .rotate-down {
-    animation: rotate-down 0.5s forwards;
-  }
-  
-  .rotate-up {
-    animation: rotate-up 0.5s forwards;
-  }
-  
-  .products-menu {
-    margin-left: 15px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-  }
-  
-  .products-menu.open {
-    max-height: 200px; /* Adjust based on your content */
-  }
-  
-  .menu-item {
-    display: flex;
-    align-items: center;
+}
 
-    padding: 2px;
-    height: 49px;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+@keyframes rotate-up {
+  from {
+    transform: rotate(90deg);
   }
-  
-  .menu-item:hover {
-    background-color: #f1f1f1;
+  to {
+    transform: rotate(0deg);
   }
-  
-  .menu-item.selected {
-    background-color: #f1f1f1;
-    color: #1e90ff;
-  }
-  
+}
+
+.rotate-down {
+  animation: rotate-down 0.5s forwards;
+}
+
+.rotate-up {
+  animation: rotate-up 0.5s forwards;
+}
+
+.products-menu {
+  margin-left: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.products-menu.open {
+  max-height: 200px; /* Adjust based on your content */
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+
+  padding: 2px;
+  height: 49px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #f1f1f1;
+}
+
+.menu-item.selected {
+  background-color: #f1f1f1;
+  color: #1e90ff;
+}

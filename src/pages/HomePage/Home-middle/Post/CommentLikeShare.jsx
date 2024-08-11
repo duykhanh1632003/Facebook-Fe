@@ -77,7 +77,7 @@ const CommentLikeShare = ({
           postId: postId,
           type: typeFeel,
         });
-
+        
         setLikes(data.likes); // Update likes state with the new likes array from the server
         setShowEmojis(false);
       } catch (error) {

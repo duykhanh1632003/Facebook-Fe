@@ -28,7 +28,7 @@ const LeftSideBar = () => {
         </Link>
       </div>
       <Link
-        to={"/friend"}
+        to={"/friends"}
         className="flex mt-12 h-[48px] dark:hover:bg-[#3A3B3C] hover:bg-gray-200 hover:rounded-tl-lg hover:rounded-bl-lg hover:bg-opacity-90"
       >
         <FaUserFriends className="w-[36px] h-[36px] rounded-full text-blue-400 flex items-center justify-center ml-[16px] mr-[12px]" />

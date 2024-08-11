@@ -1,41 +1,40 @@
 /* CreateDiscount.css */
 
 .select-products {
-    height: auto;
-    max-height: 200px; /* Set maximum height */
-    overflow-y: auto; /* Enable vertical scrolling if content overflows */
-    padding: 0.5rem;
-  }
-  
-  .select-products option {
-    padding: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .select-products option:hover {
-    background-color: #e2e8f0; /* Light gray background on hover */
-  }
-  
-  .select-products option:checked {
-    background-color: #3182ce; /* Blue background for selected options */
-    color: white; /* White text for selected options */
-  }
-  
-  .select-products-container {
-    position: relative;
-  }
-  
-  .select-products-container::after {
-    content: ' ';
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #4a5568;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-  
+  height: auto;
+  max-height: 200px; /* Set maximum height */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  padding: 0.5rem;
+}
+
+.select-products option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.select-products option:hover {
+  background-color: #e2e8f0; /* Light gray background on hover */
+}
+
+.select-products option:checked {
+  background-color: #3182ce; /* Blue background for selected options */
+  color: white; /* White text for selected options */
+}
+
+.select-products-container {
+  position: relative;
+}
+
+.select-products-container::after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #4a5568;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

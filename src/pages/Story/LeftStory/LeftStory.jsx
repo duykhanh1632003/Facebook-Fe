@@ -26,7 +26,7 @@ const LeftStory = ({ user }) => {
       </div>
       <Separate />
       <div className="h-full w-full">
-        <MiddleLeftStory user={user}  />
+        <MiddleLeftStory user={user} />
       </div>
     </div>
   );

@@ -1,48 +1,47 @@
 /* NotMessageTinder.css */
 
 .container-NotMessageTinder {
-    margin-top: 10px;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center; /* Center text even when it wraps */
+  margin-top: 10px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Center text even when it wraps */
+}
+
+.rotating-div-NotMessageTinder {
+  color: #FE4951;
+  font-size: 150px;
+  border-radius: 8px; /* Use the same value as rounded-lg */
+  animation: scaleAnimation 3s infinite;
+}
+
+.title-NotMessageTinder {
+  width: 219px;
+  font-weight: bold;
+  color: white;
+  font-size: 1.5rem; /* 2xl */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-NotMessageTinder {
+  width: 219px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Ensure text is centered when wrapping */
+}
+
+@keyframes scaleAnimation {
+  0%, 100% {
+    transform: scale(1);
   }
-  
-  .rotating-div-NotMessageTinder {
-    color: #FE4951;
-    font-size: 150px;
-    border-radius: 8px; /* Use the same value as rounded-lg */
-    animation: scaleAnimation 3s infinite;
+  50% {
+    transform: scale(1.1);
   }
-  
-  .title-NotMessageTinder {
-    width: 219px;
-    font-weight: bold;
-    color: white;
-    font-size: 1.5rem; /* 2xl */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .description-NotMessageTinder {
-    width: 219px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* Ensure text is centered when wrapping */
-  }
-  
-  @keyframes scaleAnimation {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-  }
-  
+}

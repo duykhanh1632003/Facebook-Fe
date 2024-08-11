@@ -1,13 +1,12 @@
 /* HomeMarket.css */
 .home-market-container {
-    position: relative;
-  }
-  
-  .content {
-    transition: opacity 0.3s ease;
-  }
-  
-  .content.dimmed {
-    opacity: 0.5;
-  }
-  
+  position: relative;
+}
+
+.content {
+  transition: opacity 0.3s ease;
+}
+
+.content.dimmed {
+  opacity: 0.5;
+}

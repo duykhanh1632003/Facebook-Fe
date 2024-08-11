@@ -12,7 +12,6 @@ import Cart from "./pages/Market/Cart/Cart.jsx";
 import CreateDiscountLayout from "./pages/shop/Discount/CreateDiscount/CreateDiscountLayout.jsx";
 import { ProductProvider } from "./context/ProductContext.jsx";
 import { DiscountProvider } from "./context/DiscountContext.jsx";
-
 // Lazy load components
 const SignUp = lazy(() => import("./pages/Auth/SignUp/SignUp"));
 const SignIn = lazy(() => import("./pages/Auth/SignIn/SignIn"));

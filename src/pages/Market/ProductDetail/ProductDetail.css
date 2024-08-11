@@ -1,16 +1,15 @@
-.carousel-container {
 
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .carousel-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    width: 200px;
-  }
-  
-  
+.carousel-container-product {
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-item-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+}

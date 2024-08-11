@@ -1,71 +1,70 @@
 .status-indicator {
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: white;
-    text-align: center;
-  }
-  
-  .status-indicator.public {
-    background-color: green;
-  }
-  
-  .status-indicator.draft {
-    background-color: orange;
-  }
-  
-  .MuiTableCell-root {
-    color: inherit !important;
-  }
-  
-  .MuiTableHead-root .MuiTableCell-root {
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  
-  .action-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;  
-    font-size: 10px;
-    justify-content: center;
-    margin-right: 4px;
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .action-icon:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  
-  .text-sm {
-    font-size: 0.875rem;
-  }
-  
-  .text-gray-500 {
-    color: #6b7280;
-  }
-  
-  .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .loading-text {
-    font-size: 2rem;
-    color: #000;
-  }
-  
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.status-indicator.public {
+  background-color: green;
+}
+
+.status-indicator.draft {
+  background-color: orange;
+}
+
+.MuiTableCell-root {
+  color: inherit !important;
+}
+
+.MuiTableHead-root .MuiTableCell-root {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.action-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;  
+  font-size: 10px;
+  justify-content: center;
+  margin-right: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.action-icon:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-text {
+  font-size: 2rem;
+  color: #000;
+}

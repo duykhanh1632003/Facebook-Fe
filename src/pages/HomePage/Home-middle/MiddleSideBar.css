@@ -2,10 +2,9 @@
 
 /* Ẩn thanh scrollbar nhưng vẫn giữ cho khả năng cuộn */
 .middlesidebar::-webkit-scrollbar {
-    width: 0 !important;
-  }
-  
-  .middlesidebar {
-    scrollbar-width: none; 
-  }
-  
+  width: 0 !important;
+}
+
+.middlesidebar {
+  scrollbar-width: none; 
+}

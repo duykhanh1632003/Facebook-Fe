@@ -88,8 +88,11 @@ const LeftSideBarMarket = () => {
       </Link>
       <Separate />
       <div>
-        <div>Location</div>
-        <div className="cursor-pointer" onClick={handleLocationClick}>
+        <div>Địa chỉ</div>
+        <div
+          className="cursor-pointer font-bold text-blue-600"
+          onClick={handleLocationClick}
+        >
           Ha Noi Viet Nam
         </div>
       </div>

@@ -18,44 +18,8 @@ const StoryContainer = () => {
           storyId: "story1",
           type: "image",
           image:
-            "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg",
+            "https://ongnhuahdpevietnam.com/wp-content/uploads/2022/08/anh-nen-den-cho-dien-thoai.jpg",
           createdAt: "2024-07-07T12:34:56.000Z",
-        },
-        {
-          storyId: "story2",
-          type: "image",
-          image:
-            "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg",
-          createdAt: "2024-07-07T12:34:56.000Z",
-        },
-        {
-          storyId: "story3",
-          type: "image",
-          image:
-            "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg",
-          createdAt: "2024-07-07T12:34:56.000Z",
-        },
-        {
-          storyId: "story5",
-          type: "text",
-          text: "Some text content",
-          backGround: 2,
-          font: 3,
-          createdAt: "2024-07-07T12:45:00.000Z",
-        },
-      ],
-    },
-    {
-      userId: "user2",
-      userName: "User Two",
-      avatar: "avatar_url_2",
-      stories: [
-        {
-          storyId: "story3",
-          type: "image",
-          image:
-            "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpg",
-          createdAt: "2024-07-07T13:00:00.000Z",
         },
       ],
     },
@@ -67,7 +31,6 @@ const StoryContainer = () => {
     const fetchNumberOfFriends = async () => {
       try {
         const response = await instance.get("/api/stories");
-        console.log("check ré", response);
         if (!response) {
           return;
         }
@@ -80,7 +43,7 @@ const StoryContainer = () => {
   }, []);
   return (
     <div className="h-screen w-full bg-white">
-      <LeftStory user={user}  />
+      <LeftStory user={user} />
       <RightStory user={user} activeUserIndex={activeUserIndex} />
     </div>
   );
