@@ -7,7 +7,7 @@ const StoryList = ({ users, currentActiveUserIndex }) => {
   );
   const [isUserEnd, setIsUserEnd] = useState(false);
   const userSwiperRefs = useRef(users.map(() => React.createRef()));
-
+  
   useEffect(() => {
     setCurrentUserIndex(currentActiveUserIndex);
   }, [currentActiveUserIndex]);

@@ -5,14 +5,14 @@ import RightStory from "./RightStory/RightStory";
 import { useEffect, useState } from "react";
 
 const StoryContainer = () => {
-  const instance = axiosHaveAuth();
+  const instance = axiosHaveAuth(); 
 
   const [user, setUser] = useState([
     {
       userId: "user1",
       userName: "User One",
       avatar:
-        "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D",
+        "https://ongnhuahdpevietnam.com/wp-content/uploads/2022/08/anh-nen-den-cho-dien-thoai.jpg",
       stories: [
         {
           storyId: "story1",

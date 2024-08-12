@@ -1,11 +1,12 @@
 import { useState } from "react";
 import CreatePost from "./CreatePost/CreatePost";
 import { useAuthContext } from "../../../../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 const Posts = () => {
   const [modalShow, setModalShow] = useState(false);
   const { authUser } = useAuthContext();
-
+  const { t } = useTranslation();
   return (
     <div className="h-[67px] w-full bg-[#FFFFFF] dark:bg-[#202122] flex items-center justify-start rounded-lg">
       <div className="w-[40px] h-[40px] rounded-full ml-[13px] mt-[10px]">
@@ -20,7 +21,7 @@ const Posts = () => {
           onClick={() => setModalShow(true)}
           className="flex items-center mt-[9px] text-[#65676B] dark:text-[#B0B3B8]"
         >
-          {authUser.user.lastName} ơi bạn đang nghĩ gì thế?
+          {authUser.user.lastName} {t("HomePage.MiddleSideBar.WhatDoYouThing")}
         </button>
       </div>
 

@@ -15,7 +15,7 @@ const resources = {
 i18n.use(initReactI18next).init({
   resources,
   lng: "en", // Default language
-  keySeparator: false,
+  keySeparator: ".",
   interpolation: {
     escapeValue: false,
   },

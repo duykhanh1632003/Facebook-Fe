@@ -1,4 +1,26 @@
 {
   "Ngôn ngữ": "Language",
-  "Đăng xuất": "Logout"
+  "Đăng xuất": "Logout",
+  "trai":"aaaa",
+  "HomePage": {
+    "leftSideBar": {
+      "Friend": "Friends",
+      "Shop": "Shop",
+      "MarketPlace": "Marketplace",
+      "Group": "Groups",
+      "Memory": "Memories",
+      "Bookmark": "Bookmarks",
+      "WatchMore": "See more"
+    },
+    "MiddleSideBar": {
+      "CreateStory": "Create Story",
+      "WhatDoYouThing": "What's on your mind?",
+      "VideoStreaming": "Live Video",
+      "Photo/video": "Photo/Video",
+      "Feeling/action": "Feeling/Activity",
+      "Comments": "Comments",
+      "Share": "Share",
+      "Like": "Like"
+    }
+  }
 }

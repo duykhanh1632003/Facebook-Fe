@@ -1,4 +1,26 @@
-{
-  "Ngôn ngữ": "Ngôn ngữ",
-  "Đăng xuất": "Đăng xuất"
-}
+  {
+    "Ngôn ngữ": "Ngôn ngữ",
+    "Đăng xuất": "Đăng xuất",
+    "trai":"aaaa",
+    "HomePage":{
+      "leftSideBar":{
+        "Friend": "Bạn bè",
+        "Shop": "Bán hàng",
+        "MarketPlace": "MarketPlace",
+        "Group":"Nhóm",
+        "Memory": "Kỷ niệm",
+        "Bookmark":"Đánh dấu",
+        "WatchMore":"Xem thêm"
+      },
+      "MiddleSideBar":{
+        "CreateStory": "Tạo tin",
+        "WhatDoYouThing": "bạn đang nghĩ gì thế?",
+        "VideoStreaming":"Video trực tiếp",
+        "Photo/video":"Ảnh/video",
+        "Feeling/action":"Cảm xúc/hoạt động",
+        "Comments": "Bình luận",
+        "Share":"Chia sẻ",
+        "Like": "Thích"
+      }
+    }
+  }
