@@ -1,7 +1,9 @@
 import { RiSettings5Fill } from "react-icons/ri";
 import { PiVideoFill } from "react-icons/pi";
+import { useTranslation } from "react-i18next";
 
 const LeftWatch = () => {
+  const { t } = useTranslation();
   return (
     <div className="left-sidebar-friend w-[360px] pt-[12px] dark:bg-black bg-[#FFFFFF] h-full mt-2 fixed">
       <div className="flex justify-between pl-[17px] pr-[17px] mb-[12px]">
@@ -15,7 +17,7 @@ const LeftWatch = () => {
           <PiVideoFill />
         </div>
         <div className="flex items-center ml-2 font-medium dark:text-white">
-          Trang chủ
+          {t("HomePage.MiddleSideBar.HomePage")}
         </div>
       </div>
     </div>

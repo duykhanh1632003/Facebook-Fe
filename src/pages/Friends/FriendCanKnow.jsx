@@ -4,8 +4,10 @@ import "./FriendCanKnow.css";
 import { axiosHaveAuth } from "../../util/axios";
 import { useAuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const FriendCanKnow = () => {
+  const { t } = useTranslation();
   const instance = axiosHaveAuth();
   const [friendCanKnow, setFriendCanKnow] = useState(null);
   const [sentRequests, setSentRequests] = useState([]);
@@ -98,14 +100,14 @@ const FriendCanKnow = () => {
                   ))}
                 </div>
                 <div className="text-[#657374] dark:text-[#A8A8A8]">
-                  {request.mutualFriends.length} bạn chung
+                  {request.mutualFriends.length} {t("Friends.MutualFriend")}
                 </div>
               </div>
               <div
                 className="h-[36px] w-[186px] bg-[#DFE9F2] text-[#0067D0] hover:bg-[#d1dce6] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer"
                 onClick={() => sendFriendRequest(request.nonFriend._id)}
               >
-                Thêm bạn bè
+                {t("Friends.AddFriend")}
               </div>
             </>
           )}
@@ -114,11 +116,11 @@ const FriendCanKnow = () => {
               className="h-[36px] mt-[72px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB] dark:hover:bg-[#5A5A5A]"
               onClick={() => cancelFriendRequest(request.nonFriend._id)}
             >
-              Hủy lời mời
+              {t("Friends.CancelOfRequest")}
             </div>
           ) : (
             <div className="h-[36px] w-[186px] dark:text-white bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#E4E6EB] dark:hover:bg-[#5A5A5A]">
-              Xóa
+              {t("Friends.Delete")}
             </div>
           )}
         </div>
@@ -129,7 +131,7 @@ const FriendCanKnow = () => {
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-500"
             onClick={showMore}
           >
-            Xem thêm
+            t{"Friends.WatchMore"}
           </button>
         </div>
       )}

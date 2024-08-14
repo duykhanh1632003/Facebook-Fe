@@ -17,6 +17,7 @@ import Haha from "../../../../../animation/animationComponent/Haha";
 import { useAuthContext } from "../../../../../context/AuthContext";
 import CryIcon from "../../../../../img/CryIcon";
 import { axiosHaveAuth } from "../../../../../util/axios";
+import { useTranslation } from "react-i18next";
 
 const CommentLikeShareVideo = ({
   postId,
@@ -25,6 +26,7 @@ const CommentLikeShareVideo = ({
   share = [],
   view,
 }) => {
+  const { t } = useTranslation();
   const [showEmojis, setShowEmojis] = useState(false);
   const [reaction, setReaction] = useState(null);
   const [likes, setLikes] = useState(initialLikes);
@@ -87,11 +89,15 @@ const CommentLikeShareVideo = ({
   const getReactionIconAndText = () => {
     switch (reaction) {
       case "like":
-        return { icon: <LikeIcon />, text: "Like", color: "text-blue-500" };
+        return {
+          icon: <LikeIcon />,
+          text: t("HomePage.MiddleSideBar.Like"),
+          color: "text-blue-500",
+        };
       case "favourite":
         return {
           icon: <FavofriteIcon />,
-          text: "Yêu thích",
+          text: t("HomePage.MiddleSideBar.Favorite"),
           color: "text-red-500",
         };
       case "smile":
@@ -99,17 +105,21 @@ const CommentLikeShareVideo = ({
       case "wow":
         return { icon: <WowIcon />, text: "Wow", color: "text-yellow-500" };
       case "cry":
-        return { icon: <CryIcon />, text: "Buồn", color: "text-yellow-500" };
+        return {
+          icon: <CryIcon />,
+          text: t("HomePage.MiddleSideBar.Sad"),
+          color: "text-yellow-500",
+        };
       case "angry":
         return {
           icon: <AngryIcon />,
-          text: "Phẫn nộ",
+          text: t("HomePage.MiddleSideBar.Angry"),
           color: "text-orange-500",
         };
       default:
         return {
           icon: <AiOutlineLike />,
-          text: "Thích",
+          text: t("HomePage.MiddleSideBar.Like"),
           color: "text-[#757779]",
         };
     }
@@ -123,17 +133,17 @@ const CommentLikeShareVideo = ({
         <div className="flex">
           <LikeIcon />
           <div className="text-[13px] font-normal text-[#65676B] dark:text-[#BBB]">
-            {lengthLike} like
+            {lengthLike} {t("HomePage.MiddleSideBar.Like")}
           </div>
         </div>
         <div className="text-[13px] font-normal text-[#65676B] dark:text-[#BBB]">
-          {comments?.length || 0} comments
+          {comments?.length || 0} {t("HomePage.MiddleSideBar.Comments")}
         </div>
         <div className="text-[13px] font-normal text-[#65676B] dark:text-[#BBB]">
-          {view || 0} lượt xem
+          {view || 0} {t("HomePage.MiddleSideBar.View")}
         </div>
         <div className="text-[13px] font-normal text-[#65676B] dark:text-[#BBB]">
-          {share?.length || 0} share
+          {share?.length || 0} {t("HomePage.MiddleSideBar.Share")}
         </div>
       </div>
       <div className="pl-[8px] pr-[8px] pt-[8px] pb-[8px] mt-[4px]">
@@ -193,7 +203,7 @@ const CommentLikeShareVideo = ({
               <FaRegComment className="text-2xl" />
             </div>
             <div className="ml-2 text-[#757779] dark:text-[#BBB] font-medium mr-2">
-              Bình luận
+              {t("HomePage.MiddleSideBar.Comments")}
             </div>
           </div>
           <div className="reaction-button">
@@ -201,7 +211,7 @@ const CommentLikeShareVideo = ({
               <RiShareForwardLine className="text-2xl" />
             </div>
             <div className="ml-2 text-[#757779] dark:text-[#BBB] font-medium mr-2">
-              Chia sẻ
+              {t("HomePage.MiddleSideBar.Share")}
             </div>
           </div>
         </div>

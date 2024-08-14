@@ -4,10 +4,11 @@ import "./FriendRequest.css";
 import { axiosHaveAuth } from "../../util/axios";
 import { useAuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const FriendRequest = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const instance = axiosHaveAuth();
   const [friendRequests, setFriendRequests] = useState([]);
   const [acceptedRequests, setAcceptedRequests] = useState([]);
@@ -79,7 +80,7 @@ const FriendRequest = () => {
               </div>
             </div>
             <div className="text-[#657374] ml-1 dark:text-[#A8A8A8]">
-              {request.mutualFriends.length} bạn chung
+              {request.mutualFriends.length} {t("Friends.MutualFriend")}
             </div>
           </div>
           {!acceptedRequests.includes(request.sender._id) && (
@@ -88,16 +89,16 @@ const FriendRequest = () => {
                 className="h-[36px] w-[186px] bg-[#0866FF] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium text-white cursor-pointer"
                 onClick={() => acceptFriendRequest(request.sender._id)}
               >
-                Xác nhận
+                {t("Friends.Accept")}
               </div>
               <div className="h-[36px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[7px] rounded-md flex items-center justify-center font-medium cursor-pointer hover:bg-[#d1d5e0] dark:hover:bg-[#5A5A5A]">
-                Xóa
+                {t("Friends.Delete")}
               </div>
             </>
           )}
           {acceptedRequests.includes(request.sender._id) && (
             <div className="h-[36px] w-[186px] bg-[#E4E6EB] dark:bg-[#3A3B3C] ml-2 mt-[51px] rounded-md flex items-center justify-center font-medium cursor-pointer dark:text-white">
-              Đã chấp nhận
+              {t("Friends.Accepted")}
             </div>
           )}
         </div>
@@ -108,7 +109,7 @@ const FriendRequest = () => {
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-500"
             onClick={showMore}
           >
-            Xem thêm
+            {t("Friends.WatchMore")}
           </button>
         </div>
       )}

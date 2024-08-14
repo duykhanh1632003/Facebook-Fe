@@ -20,7 +20,25 @@
         "Feeling/action":"Cảm xúc/hoạt động",
         "Comments": "Bình luận",
         "Share":"Chia sẻ",
-        "Like": "Thích"
+        "Like": "Thích",
+        "Angry":"Phẫn nộ",
+        "Sad":"Buồn",
+        "Favorite":"Yêu thích",
+        "View":"Lượt xem",
+        "HomePage":"Trang chủ"
       }
+    },
+    "Friends":{
+      "RequestFriend": "Lời mời kết bạn",
+      "MutualFriend": "bạn chung",
+      "Accept":"Xác nhận",
+      "Delete":"Xóa",
+      "FriendCanKnow":"Những người mà bạn có thể biết",
+      "AddFriend":"Thêm bạn bè",
+      "CancelOfRequest":"Hủy lời mời",
+      "WatchAll":"Xem tất cả",
+      "Friend":"Bạn bè",
+      "WatchMore":"Xem thêm",
+      "Accepted": "Đã chấp nhận"
     }
   }

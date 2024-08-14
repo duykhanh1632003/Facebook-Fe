@@ -17,6 +17,7 @@ import HahaIcon from "../../../../img/HahaIcon";
 import LikeIcon from "../../../../img/LikeIcon";
 import WowIcon from "../../../../img/WowIcon";
 import { axiosHaveAuth } from "../../../../util/axios";
+import { useTranslation } from "react-i18next";
 
 const CommentLikeShare = ({
   postId,
@@ -24,6 +25,8 @@ const CommentLikeShare = ({
   comments = [],
   share = [],
 }) => {
+  const { t } = useTranslation();
+
   const [showEmojis, setShowEmojis] = useState(false);
   const [reaction, setReaction] = useState(null);
   const [likes, setLikes] = useState(initialLikes);
@@ -77,7 +80,7 @@ const CommentLikeShare = ({
           postId: postId,
           type: typeFeel,
         });
-        
+
         setLikes(data.likes); // Update likes state with the new likes array from the server
         setShowEmojis(false);
       } catch (error) {
@@ -122,11 +125,15 @@ const CommentLikeShare = ({
   const getReactionIconAndText = () => {
     switch (reaction) {
       case "like":
-        return { icon: <LikeIcon />, text: "Like", color: "text-blue-500" };
+        return {
+          icon: <LikeIcon />,
+          text: t("HomePage.MiddleSideBar.Like"),
+          color: "text-blue-500",
+        };
       case "favourite":
         return {
           icon: <FavofriteIcon />,
-          text: "Yêu thích",
+          text: t("HomePage.MiddleSideBar.Favorite"),
           color: "text-red-500",
         };
       case "smile":
@@ -134,17 +141,21 @@ const CommentLikeShare = ({
       case "wow":
         return { icon: <WowIcon />, text: "Wow", color: "text-yellow-500" };
       case "cry":
-        return { icon: <CryIcon />, text: "Buồn", color: "text-yellow-500" };
+        return {
+          icon: <CryIcon />,
+          text: t("HomePage.MiddleSideBar.Sad"),
+          color: "text-yellow-500",
+        };
       case "angry":
         return {
           icon: <AngryIcon />,
-          text: "Phẫn nộ",
+          text: t("HomePage.MiddleSideBar.Angry"),
           color: "text-orange-500",
         };
       default:
         return {
           icon: <AiOutlineLike />,
-          text: "Thích",
+          text: t("HomePage.MiddleSideBar.Like"),
           color: "text-[#757779]",
         };
     }
@@ -225,14 +236,16 @@ const CommentLikeShare = ({
               <FaRegComment className="text-2xl" />
             </div>
             <div className="ml-2 text-[#757779] font-medium mr-2">
-              Bình luận
+              {t("HomePage.MiddleSideBar.Comments")}
             </div>
           </div>
           <div className="reaction-button">
             <div className="text-[#757779]">
               <RiShareForwardLine className="text-2xl" />
             </div>
-            <div className="ml-2 text-[#757779] font-medium mr-2">Chia sẻ</div>
+            <div className="ml-2 text-[#757779] font-medium mr-2">
+              {t("HomePage.MiddleSideBar.Share")}
+            </div>
           </div>
         </div>
       </div>

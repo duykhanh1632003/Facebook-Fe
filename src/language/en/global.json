@@ -1,26 +1,44 @@
 {
-  "Ngôn ngữ": "Language",
-  "Đăng xuất": "Logout",
-  "trai":"aaaa",
+  "Language": "Language",
+  "Logout": "Logout",
+  "trai": "aaaa",
   "HomePage": {
     "leftSideBar": {
-      "Friend": "Friends",
+      "Friend": "Friend",
       "Shop": "Shop",
-      "MarketPlace": "Marketplace",
-      "Group": "Groups",
-      "Memory": "Memories",
-      "Bookmark": "Bookmarks",
-      "WatchMore": "See more"
+      "MarketPlace": "MarketPlace",
+      "Group": "Group",
+      "Memory": "Memory",
+      "Bookmark": "Bookmark",
+      "WatchMore": "Watch more"
     },
     "MiddleSideBar": {
       "CreateStory": "Create Story",
       "WhatDoYouThing": "What's on your mind?",
       "VideoStreaming": "Live Video",
       "Photo/video": "Photo/Video",
-      "Feeling/action": "Feeling/Activity",
+      "Feeling/action": "Feeling/Action",
       "Comments": "Comments",
       "Share": "Share",
-      "Like": "Like"
+      "Like": "Like",
+      "Angry": "Angry",
+      "Sad": "Sad",
+      "Favorite": "Favorite",
+      "View": "Views",
+      "HomePage": "Home"
     }
+  },
+  "Friends": {
+    "RequestFriend": "Friend Requests",
+    "MutualFriend": "Mutual Friends",
+    "Accept": "Confirm",
+    "Delete": "Delete",
+    "FriendCanKnow": "People You May Know",
+    "AddFriend": "Add Friend",
+    "CancelOfRequest": "Cancel Request",
+    "WatchAll": "See All",
+    "Friend": "Friends",
+    "WatchMore":"Watch more",
+    "Accepted": "Accepted"
   }
 }

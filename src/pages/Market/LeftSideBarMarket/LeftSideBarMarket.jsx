@@ -8,8 +8,10 @@ import { FaTag } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 import Separate from "../../../components/Separate";
 import LocationModal from "./LocationModal"; // Import modal
+import { useTranslation } from "react-i18next";
 
 const LeftSideBarMarket = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,7 +50,7 @@ const LeftSideBarMarket = () => {
           <FaUserFriends />
         </div>
         <div className="flex items-center ml-2 font-medium dark:text-white">
-          Trang chủ
+          {t("HomePage.MiddleSideBar.HomePage")}
         </div>
       </Link>
       <Link
