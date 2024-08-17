@@ -14,7 +14,9 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en", // Default language
+  lng: localStorage.getItem("language").toString()
+    ? localStorage.getItem("language").toString()
+    : "vi",
   keySeparator: ".",
   interpolation: {
     escapeValue: false,
