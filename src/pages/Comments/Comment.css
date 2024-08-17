@@ -20,11 +20,8 @@
 .comment-info {
   background-color: #f0f2f5;
   padding: 10px;
-  max-width: 265px;
-  min-width: 132px;
   border-radius: 12px;
   flex: 1;
-  min-height: 67px;
 }
 
 .comment-user {
@@ -90,7 +87,6 @@
 }
 
 textarea {
-  height: 100%;
   width: 100%;
   border: none;
   outline: none;
@@ -135,31 +131,3 @@ textarea {
 }
 
 /* Add more levels if needed, adjust accordingly */
-.edit-input-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  width: 100%;
-  
-}
-
-.edit-input {
-  min-height: 30px !important;
-  height: 40px;
-  width: 100%;
-  resize: none;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  outline: none;
-}
-.emoji-picker {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.emoji-picker .icon {
-  cursor: pointer;
-}

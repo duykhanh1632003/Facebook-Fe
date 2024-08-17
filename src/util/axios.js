@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuthContext } from "../context/AuthContext";
 
 const axiosHaveAuth = () => {
   const { authUser, setAuthUser } = useAuthContext();
@@ -18,7 +18,6 @@ const axiosHaveAuth = () => {
       refreshToken: localStorage.getItem("refreshToken"),
     },
   });
-
   instance.interceptors.response.use(
     (response) => response,
     async (error) => {
@@ -29,7 +28,7 @@ const axiosHaveAuth = () => {
           const refreshToken = localStorage.getItem("refreshToken");
           if (!refreshToken) throw new Error("No refresh token available");
 
-          const response = await axiosNotHaveAuth.post(
+          const response = await axios.post(
             "http://localhost:8000/v1/api/user/refreshAccessToken",
             { refreshToken }
           );
@@ -50,10 +49,11 @@ const axiosHaveAuth = () => {
 
           return instance(originalRequest);
         } catch (err) {
-          // Nếu refreshToken cũng hết hạn, xóa hết dữ liệu và logout
+          // Xử lý lỗi refresh token, ví dụ: chuyển hướng đến trang đăng nhập
           toast.error("Session expired. Please log in again.");
-          localStorage.clear(); // Xóa toàn bộ dữ liệu trong localStorage
-          navigate("/login"); // Điều hướng đến trang đăng nhập
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          navigate("/login"); // Hoặc dùng phương thức khác để điều hướng
         }
       }
       return Promise.reject(error);

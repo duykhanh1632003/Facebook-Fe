@@ -9,8 +9,8 @@ const MiddleHeader = () => {
   const location = useLocation().pathname;
   console.log(location);
   return (
-    <NavLink to={"/"} className="middle-header-box dark:bg-[#242526]">
-      <div className="item-header-middle dark:bg-[#242526]">
+    <NavLink to={"/"} className="middle-header-box">
+      <div className="item-header-middle">
         <AiFillHome
           className={`${
             location === "/"

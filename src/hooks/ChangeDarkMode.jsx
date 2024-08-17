@@ -2,20 +2,18 @@ import { useEffect, useState } from "react";
 import { MaterialUISwitch } from "../theme/Switch";
 
 export default function ChangeDarkMode() {
-  // Initialize state for dark mode
-  const [darkMode, setDarkMode] = useState(() => {
-    // Get dark mode setting from localStorage
-    const savedMode = localStorage.getItem("darkMode");
-    return savedMode === "true" || savedMode === null; // Default to dark mode if no setting is found
-  });
+  // Khởi tạo state cho chế độ tối
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     if (darkMode) {
       localStorage.setItem("darkMode", "true");
       window.document.documentElement.classList.add("dark");
-    } else {
-      localStorage.setItem("darkMode", "false");
+    } else if (darkMode === false) {
+      localStorage.setItem("darkMode", false);
       window.document.documentElement.classList.remove("dark");
+    } else {
+      setDarkMode(localStorage.getItem("darkMode") === "true");
     }
   }, [darkMode]);
 
@@ -23,7 +21,7 @@ export default function ChangeDarkMode() {
     setDarkMode(!darkMode);
   };
 
-  // Return the UI
+  // Trả về giao diện người dùng
   return (
     <div>
       <MaterialUISwitch

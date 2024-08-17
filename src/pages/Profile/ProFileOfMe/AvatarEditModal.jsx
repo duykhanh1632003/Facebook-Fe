@@ -1,15 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import { IoCamera } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { updateProfilePicture } from "../../../redux/profile/avatarThunk";
-import { useAuthContext } from "../../../context/AuthContext";
 
 const AvatarEditModal = ({ show, onHide }) => {
   const [img, setImg] = useState(null);
   const fileInputRef = useRef();
   const dispatch = useDispatch();
-  const { authUser, setAuthUser } = useAuthContext();
+
   const handleOnChangeImage = (e) => {
     const file = e.target.files[0];
     setImg({
@@ -20,13 +19,7 @@ const AvatarEditModal = ({ show, onHide }) => {
 
   const handleSave = () => {
     if (img) {
-      dispatch(
-        updateProfilePicture({
-          file: img.file,
-          authUser: authUser,
-          setAuthUser: setAuthUser,
-        })
-      );
+      dispatch(updateProfilePicture(img.file));
       onHide();
     }
   };

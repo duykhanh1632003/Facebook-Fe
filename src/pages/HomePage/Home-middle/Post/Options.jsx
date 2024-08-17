@@ -1,11 +1,6 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-
 const Options = () => {
-  const { t } = useTranslation();
-
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center ">
       <div className="w-[185px] h-[40px] rounded-md flex items-center justify-center cursor-pointer hover:bg-[#b1abab9f] transition duration-300">
         <div>
           <img
@@ -14,10 +9,9 @@ const Options = () => {
           />
         </div>
         <div className="ml-2 text-[#757779] font-medium mr-2">
-          {t("HomePage.MiddleSideBar.VideoStreaming")}
+          Video trực tiếp
         </div>
       </div>
-
       <div className="w-[185px] h-[40px] rounded-md flex items-center justify-center cursor-pointer hover:bg-[#b1abab9f] transition duration-300">
         <div>
           <img
@@ -25,11 +19,8 @@ const Options = () => {
             alt="icon"
           />
         </div>
-        <div className="ml-2 text-[#757779] font-medium mr-2">
-          {t("HomePage.MiddleSideBar.Photo/video")}
-        </div>
+        <div className="ml-2 text-[#757779] font-medium mr-2">Ảnh/video</div>
       </div>
-
       <div className="w-[185px] h-[40px] rounded-md flex items-center justify-center cursor-pointer hover:bg-[#b1abab9f] transition duration-300">
         <div>
           <img
@@ -38,7 +29,7 @@ const Options = () => {
           />
         </div>
         <div className="ml-2 font-sm text-[#757779] font-medium mr-2">
-          {t("HomePage.MiddleSideBar.Feeling/action")}
+          Cảm xúc/hoạt động
         </div>
       </div>
     </div>

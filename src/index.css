@@ -1,6 +1,5 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Open+Sans&display=swap');
 
 
 @tailwind base;
@@ -8,21 +7,14 @@
 @tailwind utilities;
 
 body {
+  overflow: hidden;
   height: 100%;
-}
-.no-cursor {
-  user-select: none; /* Prevent text selection */
-  pointer-events: none; /* Prevent mouse events */
-  outline: none; /* Remove outline */
 }
 
 html,
 :root {
   height: 100%;
   font-family: 'Roboto', sans-serif;
-  background-color: #F0F2F5;
-  user-select: none; /* Prevent text selection */
-  outline: none; 
 }
 
 
@@ -117,6 +109,9 @@ html,
   width: 141px;
 }
 
+.img-card{
+  object-fit: fill;
+}
 
 .modal-header{
   display: flex !important;
@@ -127,18 +122,18 @@ html,
 
 @layer utilities{
   .item-header-middle{
-    @apply w-[107px] ml-[4px] flex items-center justify-center mb-[10px] dark:bg-[#242526] cursor-pointer h-full hover:bg-gray-100 hover:bg-opacity-90 hover:rounded-lg hover:mb-1 active:text-blue-500
+    @apply w-[107px] ml-[4px] flex items-center justify-center mb-[10px] cursor-pointer h-full hover:bg-gray-100 hover:bg-opacity-90 hover:rounded-lg hover:mb-1 active:text-blue-500
   }
   .icon-header-text-middle-not-active{
-    @apply text-black text-3xl dark:text-white
+    @apply text-black text-3xl
   }
 
   .icon-header-text-middle-active{
     @apply text-blue-600 text-3xl
   }
   .middle-header-box{
-    @apply ml-[145px] w-[590px] flex justify-between mr-[250px]
-  } 
+    @apply ml-[145px] w-[590px] flex justify-between mr-[264px]
+  }
 
   .box-right-top-bar-item{
     @apply w-[38px] h-[38px] rounded-full flex items-center justify-center bg-gray-100 mr-[8px] cursor-pointer

@@ -4,6 +4,7 @@ import {
   fetchPostsStart,
   fetchPostsSuccess,
   fetchPostsFailure,
+  addPost,
   likePostSuccess,
   likePostFailure,
 } from "./postsSlice";
@@ -63,10 +64,9 @@ export const createNewPost = createAsyncThunk(
         setInputValue("");
         setModalShow(false); // Đóng modal
         dispatch(addPost(response.data));
-      } else {
-        toast.error("Tạo bài viết không thành công");
       }
     } catch (error) {
+      toast.error("Tạo bài viết không thành công");
       console.error("Error creating post:", error);
     }
   }

@@ -30,23 +30,6 @@ const SignIn = () => {
     }
   };
 
-  const loginWithGoogle = () => {
-    try {
-      const googleLoginUrl =
-        "https://accounts.google.com/o/oauth2/v2/auth?" +
-        new URLSearchParams({
-          response_type: "code",
-          client_id:
-            "82844157331-qf8ut3n0n3dbdbigeddqmkv4kpuf8u0m.apps.googleusercontent.com",
-          redirect_uri: "http://localhost:8000/auth/google/callback",
-          scope: "email profile",
-        }).toString();
-      window.open(googleLoginUrl, "_self");
-    } catch (error) {
-      console.error("Google Login Error:", error);
-    }
-  };
-
   return (
     <div className="flex pl-[272px] bg-[#F0F2F5] w-full h-screen">
       <div className="w-[250px] h-[70px] mt-[99px] mr-[332px]">
@@ -55,14 +38,14 @@ const SignIn = () => {
           alt="logo"
         />
       </div>
-      <div className="w-[398px] h-[430px] bg-[#FFFFFF] mt-[130px] rounded-1 flex flex-col items-center">
+      <div className="w-[398px] h-[348px] bg-[#FFFFFF] mt-[130px] rounded-1 flex flex-col items-center">
         <form
           onSubmit={handleSubmitLogin}
           className="flex flex-col items-center"
         >
           <div className="relative border border-gray-300 rounded-lg focus-within:border-blue-500 w-[364px] h-[52px] bg-[##FFFFFF] mb-[12px] mt-[18px]">
             <textarea
-              className="w-full bg-transparent outline-none mt-3 ml-3 resize-none text-sm input-textarea"
+              className="w-full bg-transparent outline-none resize-none text-sm input-textarea"
               placeholder="Email hoặc số điện thoại"
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={handleKeyPress}
@@ -92,26 +75,17 @@ const SignIn = () => {
             Đăng nhập
           </button>
         </form>
-        <Link
-          to={"/forgot"}
-          className="mt-[18px] text-sm text-[#0899FF] cursor-pointer relative"
-        >
+        <div className="mt-[18px] text-sm text-[#0899FF] cursor-pointer relative">
           <span className="group">Quên mật khẩu?</span>
-        </Link>
+        </div>
         <div className="underline"></div>
         <Link to="/signup" className="register">
           Tạo tài khoản mới
         </Link>
-        <div onClick={loginWithGoogle} className="google mt-3">
-          <div className="text-md mr-2">Đăng nhập với google</div>
-          <img
-            className="h-[20px] w-[20px]"
-            src="/src/assets/Remove-bg.ai_1719840154036.png"
-          />
-        </div>
       </div>
     </div>
   );
 };
 
 export default SignIn;
+  

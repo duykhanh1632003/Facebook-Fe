@@ -8,7 +8,9 @@ import { updateUserAvatar } from "./avatarSlice";
 
 export const updateProfilePicture = createAsyncThunk(
   "user/updateProfilePicture",
-  async ({ file, authUser, setAuthUser }, { dispatch }) => {
+  async (file, { dispatch, getState }) => {
+    const state = getState();
+    const { authUser } = state.auth;
     try {
       const imgRef = ref(imageDb, `avatars/${v4()}`);
       const snapshot = await uploadBytes(imgRef, file);
@@ -26,11 +28,6 @@ export const updateProfilePicture = createAsyncThunk(
 
       if (response) {
         toast.success("Cập nhật ảnh đại diện thành công");
-        const user = authUser;
-        user.user.avatar = url;
-        console.log("Check user", user);
-        setAuthUser(user);
-        localStorage.setItem("user", JSON.stringify(user));
         dispatch(updateUserAvatar(url));
       }
     } catch (error) {
