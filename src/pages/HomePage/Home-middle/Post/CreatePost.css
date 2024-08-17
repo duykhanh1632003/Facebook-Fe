@@ -1,0 +1,207 @@
+.wrap{
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    resize: none;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+textarea:is(:focus, :valid){
+    border-width: 2px;
+    padding: 14px;
+    border: none;
+}
+
+p:empty:not(:focus)::before {
+    content: attr(data-placeholder);
+  }
+
+.parent{
+    max-height: 357.4px; /* Chiều cao tối đa của thẻ cha */
+    border: none;
+    overflow: hidden;
+    flex-direction: column;
+    height: fit-content;
+    overflow: auto
+
+
+}
+
+.child{
+    overflow-y: scroll;
+    height: fit-content;
+}
+
+.emoji-color{
+    width: 466.4px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+}
+.emoji{
+    display: block;
+    position: absolute;
+    z-index: 10;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+.bottom-post-not-color{
+    margin-top: 20px;
+    width: full;
+    height: 40px;
+    background-color: #E4E6EB;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    color: #BEC3C6;
+    cursor: pointer;
+}
+
+.upload{
+
+}
+
+.bottom-post-color{
+    margin-top: 20px;
+    width: full;
+    height: 40px;
+    background-color: #0866FF;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    color: #f3f3f5;
+    cursor: pointer;
+}
+.bottom-post-color:hover{
+    background-color: #0560f3;
+
+}
+.create-image{
+    width: 466.4px;
+    margin-top: 50px;
+    max-height: 270px;
+    border: #E4E6EB solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    object-fit: contain;
+    overflow: auto;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: red; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }
+.create-image-image{
+    object-fit: contain;
+
+}
+.create-image-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F8FA;
+    width: 450.4px;
+    height: 254px;
+    flex-direction: column  ;
+    cursor: pointer;
+}
+.create-image-child:hover{
+    background-color: #e7e1e3e2;
+
+}
+.add-post{
+    margin-top: 40px;
+
+}
+
+.cancel{
+    position: absolute;
+    margin-top:200px;
+    margin-left: 420px;
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    font-size: 30px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+.cancel:hover{
+    background: #E4E6EB;
+}
+.icon-tifolder{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E4E6EB;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 30px;
+
+}
+
+.TiFolderAdd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-image{
+    text-align: center;
+    font-size:medium;
+    font-weight: 600;
+}
+
+.pull-image{
+    text-align: center;
+    font-size: small;
+    font-weight: 300;
+}
+
+.add-post{
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    border-radius: 5px;
+    border: #E4E6EB solid;
+}
+
+.add-post-text{
+    font-size: 16px;
+    font-weight: 600;
+}
+.add-post-photo{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background-color: #D8E4CA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.add-post-photo:hover{
+    background-color: #bae58d;
+
+}

@@ -65,6 +65,7 @@ const CreateAttributes = lazy(() =>
     "./pages/shop/Product/Attributes/CreateAttributes/CreateAttributes.jsx"
   )
 );
+import Messenger from './pages/Messenger/Messenger'
 
 function App() {
   const { authUser } = useAuthContext();
@@ -241,6 +242,11 @@ function App() {
             />
           </Route>
           <Route path="/stories/create" element={<CreateStories />} />
+            <Route
+          path="/messenger"
+          element={authUser ? <Messenger /> : <Navigate to="/login" />}
+        />
+        <Route element={authUser ? <FriendLayout /> : <Navigate to="/login" />}></Route>
         </Routes>
       </Suspense>
     </main>

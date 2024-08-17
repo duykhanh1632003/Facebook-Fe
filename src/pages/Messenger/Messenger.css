@@ -1,0 +1,398 @@
+.messenger{
+    
+    display: grid;
+
+    width:100vw;
+    height: fit-content;
+    grid-template-columns: 25vw 48vw 27vw;
+    height: 100vh;
+}
+
+.leftSideBar{
+    display:flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    width:100%;
+    height:fit-content;
+    padding:15px 0 15px 15px;
+    border-right: 0.01px solid #ccc;
+}
+
+.leftSideBar .menuChat{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    padding-right: 15px;
+}
+
+.leftSideBar .menuChat .title{
+    font-weight: 650;
+    font-size: 21px;
+    color:hsl(0,5%,10%);
+}
+
+.boxAttached{
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+.leftSideBar .menuChat .setting{
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+}
+
+.leftSideBar .menuChat .setting div{
+    height: fit-content;
+    width: fit-content;
+    
+    padding:7px;
+    background-color: hsl(0,5%,90%);
+    border-radius: 50%;
+}
+
+.leftSideBar .searchBox{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    margin : 15px 0 10px 0;
+    font-size: 15px;
+    color:hsl(0,5%,50%);
+    width: 95%;
+    background-color: hsl(0,5%,95%);
+    padding:8px;
+    border-radius: 20px;
+    font-weight: 550;
+    
+}
+
+.leftSideBar .searchBox .search{
+    background-color: hsl(0,5%,95%);
+    font-weight: 450;
+    padding-right: 15px;
+}
+
+.statusBox{
+    display:flex;
+    flex-direction: row;
+    gap:1px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color:hsl(0,1%,20%);
+    padding:5px;
+    background-color: #fff;
+}
+
+.statusBox div{
+    
+    padding:8px;
+    border-radius: 15px;
+}
+
+.statusBox .conversationList{
+    background-color: hsl(230, 70%, 90%);
+}
+
+.listConversations{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display:flex;
+    flex-direction: column;
+    height: 60vh;
+    padding:10px 0;
+    gap:10px;
+}
+
+.listConversations .conversation{
+    display :grid;
+    grid-template-columns: 50px 18vw;
+    align-items: center;
+    column-gap: 10px;
+    padding:3px 5px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.listConversations .conversation .image{
+    height: 55px;
+    width: 55px;
+    grid-row: 1 / span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.listConversations .conversation .image img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.listConversations .conversation .nameUser {
+    font-size:14px;
+    font-weight: 550;
+    line-height: .4;
+}
+
+.listConversations .conversation .currentMessage{
+    display:flex;
+    flex-direction: row;
+    font-size: 12px;
+    align-items: center;
+    gap:5px;
+}
+
+.listConversations .conversation:hover{
+    background-color: hsl(0,5%,95%);
+}
+
+.middleSideBar{
+    height: 100vh;
+    border-left: .5px solid #ccc;
+    border-right: .1px solid #ccc;
+}
+
+.middleSideBar .toolBarChat{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding :10px 15px;
+    height: 60px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background-color: #fff;
+}
+
+.toolBarChat .userInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.toolBarChat .userInfo .image img{
+    border-radius: 50%;
+    height: 40px;
+    width:40px;
+}
+
+.toolBarChat .userInfo .name{
+    font-weight: 600;
+}
+
+.toolBarChat .settingChat{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:13px;
+    color:hsl(200,80%,40%);
+}
+
+.boxChat{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 20px 10px ;
+    gap:10px;
+    height:70vh;
+    z-index: -1;
+    overflow-y: scroll;
+}
+.boxChat .message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    z-index: inherit;
+}
+
+.boxChat .message.you{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.boxChat .message.me{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.boxChat .message.you .image img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.boxChat .message.you .contentMessage{
+    width: fit-content;
+    height: fit-content;
+    background-color: hsl(255,0%,91%);
+    padding:5px 8px;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
+.boxChat .message.me .contentMessage{
+    width: fit-content;
+    height: fit-content;
+    background-color: hsl(200,100%,40%);
+    padding:5px 8px;
+    font-size: 15px;
+    border-radius: 15px;
+    color:#fff;
+    
+}
+
+.boxSendMessage{
+    padding:10px 10px ;
+    display: flex;
+    flex-direction: row;
+    gap:8px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.boxInputMessage{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    background-color: hsl(0,0%,91%);
+    padding:5px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    margin-right: 10px;
+    padding-left:10px;
+}
+
+.boxInputMessage input{
+    background-color: hsl(0,0%,91%);
+    width: 93%;
+    
+}
+
+input:focus{
+    border: none;
+    outline: none;
+}
+
+.boxNavigation{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:20px 0;
+}
+
+.boxNavigation .img{
+    position: relative;
+    height: 72px;
+    width: 72px;
+}
+
+.boxNavigation .img img{
+
+    border-radius: 50%;
+    height: 72px;
+    width:72px;
+}
+
+.boxNavigation .img span{
+    position: absolute;
+    padding:7px;
+    background-color: rgb(18, 237, 18);
+    font-size: 0;
+    border-radius: 50%;
+    top:55px;
+    left:55px;
+}
+
+.boxNavigation .userName{
+    margin:5px 0 0 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.boxNavigation .activeStatus{
+    font-size: 12px;
+    color:hsl(0,0%,50%);
+}
+
+.boxNavigation .navigationChat{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 20px 0;
+    gap:10px;
+    font-size: 12px ;
+    
+}
+
+.boxNavigation .navigationChat div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    
+}
+
+.boxNavigation .navigationChat .iconProfile{
+    background-color: hsl(0,0%,85%);
+    height: fit-content;
+    width: fit-content;
+    border-radius: 50%;
+    padding:5px;
+}
+
+.boxNavigation .navigationChat .iconNoti{
+    background-color: hsl(0,0%,85%);
+    height: fit-content;
+    width: fit-content;
+    border-radius: 50%;
+    padding:5px;
+}
+
+.boxNavigation .navigationChat div svg{
+    width: 23px!important;
+    height: 23px!important;
+}
+
+.boxNavigation .optionInformationChat{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    padding-bottom: 10px;
+}
+
+.boxNavigation .optionInformationChat .item{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 550;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
