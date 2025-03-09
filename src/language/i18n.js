@@ -14,9 +14,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: localStorage.getItem("language").toString()
-    ? localStorage.getItem("language").toString()
-    : "vi",
+  lng: (localStorage.getItem("language") || "vi").toString(),
   keySeparator: ".",
   interpolation: {
     escapeValue: false,

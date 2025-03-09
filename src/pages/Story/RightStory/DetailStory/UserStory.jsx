@@ -16,7 +16,7 @@ const UserStory = ({
   currentUserIndex,
 }) => {
   useEffect(() => {
-    const swiperInstance = swiperRef.current.swiper;
+    const swiperInstance = swiperRef?.current.swiper;
     if (swiperInstance) {
       swiperInstance.on("reachEnd", () => setUserEnd(true));
       return () => {

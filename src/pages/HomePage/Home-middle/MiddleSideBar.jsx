@@ -18,7 +18,7 @@ const MiddleSideBar = () => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       const locate = JSON.parse(localStorage.getItem("location")); // Parse the location from localStorage
-
+        
       if (!locate || locate[0] !== latitude || locate[1] !== longitude) {
         instance
           .post("/api/save-location", {

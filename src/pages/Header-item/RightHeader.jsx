@@ -3,6 +3,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { BsGrid3X3GapFill } from "react-icons/bs";
 import ChangeDarkMode from "../../hooks/ChangeDarkMode";
 import HeaderAvatar from "./HeaderAvatar/HeaderAvatar";
+import { Link } from "react-router-dom";
 
 const RightHeader = () => {
   return (
@@ -15,9 +16,9 @@ const RightHeader = () => {
       <div className="box-right-top-bar-item dark:bg-[#3A3B3C]  dark:text-white">
         <BsGrid3X3GapFill className="text-xl" />
       </div>
-      <div className="box-right-top-bar-item dark:bg-[#3A3B3C]  dark:text-white">
+      <Link to={"/messenger"} className="box-right-top-bar-item dark:bg-[#3A3B3C]  dark:text-white">
         <FaFacebookMessenger className="text-xl" />
-      </div>
+      </Link>
       <div className="box-right-top-bar-item dark:bg-[#3A3B3C]  dark:text-white">
         <IoMdNotifications className="text-2xl" />
       </div>
